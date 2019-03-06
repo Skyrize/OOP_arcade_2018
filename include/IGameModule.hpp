@@ -22,6 +22,6 @@ class IGameModule {
         virtual const std::string &getName() const = 0;
         
         virtual void run(IDisplayModule *library) = 0;
-}
+};
 
 #endif /* IGAMEMODULE_HPP_ */

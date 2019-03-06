@@ -26,7 +26,7 @@ class IDisplayModule {
        virtual void display() = 0;
 
        virtual void drawText(int x, int y, const std::string &str);
-       virtual void drawShape(int x, int y, std::vector<std::vector<int>> shape);
-}
+       virtual void drawShape(int x, int y, std::vector< std::vector<int> > shape);
+};
 
 #endif /* IDISPLAYMODULE_HPP_ */

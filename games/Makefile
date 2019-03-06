@@ -14,13 +14,18 @@ NO_OF_FILES := $(words $(SRC))
 all:	prepare_lib
 
 prepare_lib:
-	make -C insert_game_folder/
-	cp insert_game_folder/*.so ./
+	make -C pacman/
+	cp pacman/*.so ./
+	make -C snake/
+	cp snake/*.so ./
 
 clean:
-	make clean insert_game_folder/
+	make clean pacman/
+	make clean snake/
 
-fclean:	clean
+fclean:
+	make fclean pacman/
+	make fclean snake/
 	$(RM) ./*.so
 
 re:	fclean all

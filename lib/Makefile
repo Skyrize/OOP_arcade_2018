@@ -26,7 +26,10 @@ clean:
 	make clean nCurses/
 	make clean SFML/
 
-fclean:	clean
+fclean:
+	make fclean libcaca/
+	make fclean nCurses/
+	make fclean SFML/
 	$(RM) ./*.so
 
 re:	fclean all

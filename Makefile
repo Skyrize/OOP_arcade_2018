@@ -10,8 +10,8 @@ RM			=	rm -rf
 all:	graphicals games core
 
 core:
-	make -C arcade/
-	cp arcade/arcade ./
+	make -C core/
+	cp core/arcade ./
 
 games:
 	make -C games/
@@ -22,11 +22,14 @@ graphicals:
 	cp lib/*.so ./
 
 clean:
-	make clean arcade/
+	make clean core/
 	make clean games/
 	make clean lib/
 
-fclean:	clean
+fclean:
+	make fclean core/
+	make fclean games/
+	make fclean lib/
 	$(RM) arcade
 	$(RM) *.so
 
