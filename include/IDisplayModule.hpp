@@ -26,8 +26,8 @@ class IDisplayModule {
         virtual bool isOpen() = 0;
         virtual void display() = 0;
 
-        virtual void drawText(int x, int y, const std::string &str);
-        virtual void drawShape(int x, int y, std::vector< std::vector<int> > shape);
+        virtual void drawText(int x, int y, const std::string &str) const = 0;
+        virtual void drawShape(int x, int y, std::vector< std::vector<int> > shape) const = 0;
         
         virtual std::map<Input, bool> catchInput() = 0;
 };

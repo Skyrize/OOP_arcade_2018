@@ -15,20 +15,20 @@ class DisplayModule : public IDisplayModule {
 		DisplayModule() = default;
 		virtual ~DisplayModule() = default;
 
-        virtual void init();
-        virtual void stop();
-        virtual const std::string &getName() const { return _name; };
+        void init();
+        void stop();
+        const std::string &getName() const { return _name; };
 
         bool isOpen();
         void display();
 
-        void drawText(int x, int y, std::string name) const;
+        void drawText(int x, int y, const std::string &name) const;
         void drawShape(int x, int y, std::vector<std::vector<int> >) const;
         
         std::map<Input, bool> catchInput();
     
     private:
-        const std::string &_name = "nCurses";
+        std::string _name = "nCurses";
 };
 
 #endif /* !NCURSES_HPP_ */
