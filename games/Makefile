@@ -20,12 +20,12 @@ prepare_lib:
 	cp snake/*.so ./
 
 clean:
-	make clean pacman/
-	make clean snake/
+	make clean -C pacman/
+	make clean -C snake/
 
 fclean:
-	make fclean pacman/
-	make fclean snake/
+	make fclean -C pacman/
+	make fclean -C snake/
 	$(RM) ./*.so
 
 re:	fclean all

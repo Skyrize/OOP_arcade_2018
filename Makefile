@@ -22,14 +22,14 @@ graphicals:
 	cp lib/*.so ./
 
 clean:
-	make clean core/
-	make clean games/
-	make clean lib/
+	make clean -C core/
+	make clean -C games/
+	make clean -C lib/
 
 fclean:
-	make fclean core/
-	make fclean games/
-	make fclean lib/
+	make fclean -C core/
+	make fclean -C games/
+	make fclean -C lib/
 	$(RM) arcade
 	$(RM) *.so
 

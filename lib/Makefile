@@ -22,14 +22,14 @@ prepare_lib:
 	cp SFML/*.so ./
 
 clean:
-	make clean libcaca/
-	make clean nCurses/
-	make clean SFML/
+	make clean -C libcaca/
+	make clean -C nCurses/
+	make clean -C SFML/
 
 fclean:
-	make fclean libcaca/
-	make fclean nCurses/
-	make fclean SFML/
+	make fclean -C libcaca/
+	make fclean -C nCurses/
+	make fclean -C SFML/
 	$(RM) ./*.so
 
 re:	fclean all
