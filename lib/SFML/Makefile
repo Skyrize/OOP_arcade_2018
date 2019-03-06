@@ -5,11 +5,11 @@
 ## Makefile
 ##
 
-CXXFLAGS	=	-shared -W -Wall -Wextra -Werror -I../../include -fPIC -g3
+CXXFLAGS	=	-shared -W -Wall -Wextra -Werror -I../../include -I./include -fPIC -g3
 
 CC 			= 	g++
 
-SRC			=	main.cpp
+SRC			=	src/main.cpp
 
 OBJ			=	$(SRC:.cpp=.o)
 
