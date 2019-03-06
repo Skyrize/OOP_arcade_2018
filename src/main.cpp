@@ -5,7 +5,11 @@
 ** main.cpp
 */
 
-int main()
+#include "Core.hpp"
+
+int main(int ac, char **av)
 {
-    return (0);
+    if (ac != 2)
+        return 84;
+    return 0;
 }
