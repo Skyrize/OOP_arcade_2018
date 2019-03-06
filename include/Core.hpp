@@ -13,8 +13,6 @@ class Core {
 		Core();
 		~Core();
 
-	protected:
-	private:
 };
 
 #endif /* !CORE_HPP_ */
