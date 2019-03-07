@@ -47,7 +47,7 @@ void DisplayModule::drawText(int x, int y, const std::string &name) const
     mvprintw(y, x, name.c_str());
 }
 
-void DisplayModule::drawShape(int x, int y, std::vector<std::vector<COLOR> > vec) const
+void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec) const
 {
     for (auto &i : vec) {
         for (auto &j : i) {

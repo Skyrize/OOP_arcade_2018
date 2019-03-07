@@ -25,7 +25,7 @@ class DisplayModule : public IDisplayModule {
         void display();
 
         void drawText(int x, int y, const std::string &name) const;
-        void drawShape(int x, int y, std::vector<std::vector<COLOR> >) const;
+        void drawShape(int x, int y, std::vector<std::vector<Color> >) const;
         
         std::map<Input, bool> catchInput();
     

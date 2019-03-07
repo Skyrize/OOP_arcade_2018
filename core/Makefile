@@ -11,9 +11,9 @@ OBJ			=	$(SRC:.cpp=.o)
 
 NAME		=	arcade
 
-CXXFLAGS	=	 -Wall -Wextra -Werror
+CXXFLAGS	=	 -Wall -Wextra -Werror -I../include/ -I./include/ --std=c++11 -g3
 
-CC			=	g++ -I../include/ -I./include/ --std=c++11 -g
+CC			=	g++
 
 RM			=	rm -rf
 

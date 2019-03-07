@@ -8,7 +8,7 @@
 #ifndef COLOR_HPP_
 #define COLOR_HPP_
 
-enum COLOR {
+enum Color {
     NONE = -1,
     BLACK = 0,
     RED = 1,
