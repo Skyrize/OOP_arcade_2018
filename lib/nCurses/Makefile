@@ -9,7 +9,8 @@ CXXFLAGS	=	--std=c++11 -shared -W -Wall -Wextra -Werror -I../../include -I./incl
 
 CC 			= 	g++
 
-SRC			=	src/main.cpp
+SRC			=	src/main.cpp		\
+				src/nCurses.cpp
 
 OBJ			=	$(SRC:.cpp=.o)
 
@@ -18,7 +19,7 @@ NAME		=	lib_arcade_ncurses.so
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	$(CC) $(CXXFLAGS) -o $(NAME) $(OBJ) -lncurses
 
 clean:
 	rm -f $(OBJ)

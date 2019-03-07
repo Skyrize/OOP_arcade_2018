@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "ncurses.hpp"
+#include "nCurses.hpp"
 
 extern "C" IDisplayModule *entryPoint(void)
 {

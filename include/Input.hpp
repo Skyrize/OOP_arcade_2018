@@ -14,6 +14,7 @@ enum Input {
     UP_ARROW_KEY,
     DOWN_ARROW_KEY,
     SPACE_KEY,
+    RETURN_KEY,
     ESCAPE_KEY,
     A_KEY,
     B_KEY,
