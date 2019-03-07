@@ -12,7 +12,7 @@
 #include <vector>
 #include <map>
 
-#include "Color.hpp"
+#include "Colors.hpp"
 #include "Input.hpp"
 
 class IDisplayModule {
@@ -24,10 +24,11 @@ class IDisplayModule {
         virtual const std::string &getName() const = 0;
 
         virtual bool isOpen() = 0;
+        virtual void clear() = 0;
         virtual void display() = 0;
 
         virtual void drawText(int x, int y, const std::string &str) const = 0;
-        virtual void drawShape(int x, int y, std::vector< std::vector<int> > shape) const = 0;
+        virtual void drawShape(int x, int y, std::vector< std::vector<int> > shape) = 0;
         
         virtual std::map<Input, bool> catchInput() = 0;
 };
