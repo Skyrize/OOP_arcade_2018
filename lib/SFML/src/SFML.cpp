@@ -108,13 +108,12 @@ void DisplayModule::drawText(int x, int y, const std::string &name) const
     (void)name;
 }
 
-void DisplayModule::drawShape(int x, int y, std::vector<std::vector<int> > pixels)
+void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > pixels)
 {
     for (size_t i = 0; i != pixels.size(); i++) {
         for (size_t j = 0; j != pixels[i].size(); j++) {
             this->baseSquare.setPosition((j + 1) * 16 * x, (i + 1) * 16 * y);
-            const sf::Color color = sfColors[(Color)pixels[i][j]];
-            this->baseSquare.setFillColor(color);
+            this->baseSquare.setFillColor(sfColors[pixels[i][j]]);
             this->window->draw(this->baseSquare);
         }
     }

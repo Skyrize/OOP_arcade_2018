@@ -9,6 +9,7 @@ RM			=	rm -rf
 
 all:	graphicals games core
 
+.PHONY:	core
 core:
 	make -C core/
 	cp core/arcade ./

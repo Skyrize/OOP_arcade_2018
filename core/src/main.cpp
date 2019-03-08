@@ -5,11 +5,17 @@
 ** main.cpp
 */
 
+#include <iostream>
 #include "Arcade.hpp"
 
 int main(int ac, char **av)
 {
-    if (ac != 2)
-        return 84;
+    if (ac != 2) {
+        std::cout << "Usage : rentre une lib stp frer" << std::endl;
+        return (0);
+    }
+    Arcade arcade(av[1]);
+
+    arcade.launch();
     return 0;
 }

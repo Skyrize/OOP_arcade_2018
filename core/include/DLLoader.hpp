@@ -8,7 +8,6 @@
 #ifndef DLLOADER_HPP_
 #define DLLOADER_HPP_
 
-#include <string>
 #include <dlfcn.h>
 
 template<typename T>
@@ -16,18 +15,19 @@ class DLLoader {
     private:
         void *handler = nullptr;
         T *(*entryPointPtr)() = nullptr;
+        void *(*trick)(const char *file, int mode) = dlopen;
         T *module = nullptr;
     public:
+    
         DLLoader(const std::string &filename)
         {
-            handler = dlopen(filename.c_str, RTLD_LAZY);
-
+            this->handler = trick(filename.c_str(), RTLD_LAZY);
             if (!handler) {
                 std::cerr << "ERROR: Invalid filename '" + filename + "'. Can't dlopen. (maybe need to throw)" << std::endl;
             }
-            entryPointPtr = (T *(*)())dlsym(handler, "entry_point");
+            entryPointPtr = (T *(*)())dlsym(handler, "entryPoint");
             if (!entryPointPtr) {
-                std::cerr << "ERROR: '" + filename + "' has no method 'entry_point'. (maybe need to throw)" << std::endl;
+                std::cerr << "ERROR: '" + filename + "' has no method 'entryPoint'. (maybe need to throw)" << std::endl;
             } else
                 module = entryPointPtr();
         }
