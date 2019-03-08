@@ -20,6 +20,7 @@ Arcade::Arcade(char *baseDisplayModule)
         libraries[bdmString] = new DLLoader<IDisplayModule>(bdmString);
     }
     this->display = libraries[bdmString]->getInstance();
+    this->game = this->mainMenu;
 }
 
 Arcade::~Arcade()
@@ -29,15 +30,12 @@ Arcade::~Arcade()
 void Arcade::launch()
 {
     this->display->init();
-    int i = 0;
 
-    while(display->isOpen() && i != 100) {
+    while(display->isOpen()) {
 
         display->clear();
-        //game->run(display);
+        game->run(display);
         display->display();
-        i++;
-        std::cout << "debug : sfml working ! need to make interface as GameModule and handle quit in it bcause in fullscreen you can't quit without.. awkward" << std::endl;
     }
 }
 
@@ -91,4 +89,14 @@ IGameModule *Arcade::changeGame(const std::string &name)
     this->game = this->games[name]->getInstance();
     this->game->init();
     return this->game;
+}
+
+IGameModule *Arcade::goToMainMenu()
+{
+    if (this->game != this->mainMenu) {
+        this->game->stop();
+        this->game = this->mainMenu;
+        this->mainMenu->init();
+    }
+    return this->mainMenu;
 }

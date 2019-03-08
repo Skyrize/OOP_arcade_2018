@@ -7,6 +7,7 @@
 
 SRC			=	src/main.cpp	\
 				src/Arcade.cpp	\
+				src/MenuModule.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 

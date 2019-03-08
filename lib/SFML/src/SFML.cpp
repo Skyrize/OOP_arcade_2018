@@ -110,7 +110,7 @@ void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > pix
 {
     for (size_t i = 0; i != pixels.size(); i++) {
         for (size_t j = 0; j != pixels[i].size(); j++) {
-            this->baseSquare.setPosition((j + 1) * 16 * x, (i + 1) * 16 * y);
+            this->baseSquare.setPosition((j + 1) * 16 + x * 16, (i + 1) * 16 + y * 16);
             this->baseSquare.setFillColor(sfColors[pixels[i][j]]);
             this->window->draw(this->baseSquare);
         }

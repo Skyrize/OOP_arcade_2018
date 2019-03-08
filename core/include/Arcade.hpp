@@ -10,6 +10,7 @@
 
 #include "IDisplayModule.hpp"
 #include "IGameModule.hpp"
+#include "MenuModule.hpp"
 #include "DLLoader.hpp"
 
 class Arcade {
@@ -19,6 +20,8 @@ class Arcade {
 
         IDisplayModule *display = nullptr;
         IGameModule *game = nullptr;
+
+        IGameModule *mainMenu = new MenuModule();
 
 	public:
 		Arcade(char *baseDisplayModule);
@@ -30,6 +33,8 @@ class Arcade {
 
         IDisplayModule *changeDisplay(const std::string &name);
         IGameModule *changeGame(const std::string &name);
+
+        IGameModule *goToMainMenu();
 };
 
 #endif /* !ARCADE_HPP_ */
