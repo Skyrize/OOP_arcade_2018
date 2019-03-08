@@ -30,7 +30,7 @@ class DisplayModule : public IDisplayModule {
         void display();
 
         void drawText(int x, int y, const std::string &name) const;
-        void drawShape(int x, int y, std::vector<std::vector<int> >);
+        void drawShape(int x, int y, std::vector<std::vector<Color> >);
         
         std::map<Input, bool> catchInput();
 };
