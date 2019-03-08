@@ -49,6 +49,8 @@ void DisplayModule::drawText(int x, int y, const std::string &name) const
 
 void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec) const
 {
+    int tmp = x;
+
     for (auto &i : vec) {
         for (auto &j : i) {
             if (j == NONE) {
@@ -61,6 +63,7 @@ void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec
             x += 2;
         }
         y += 1;
+        x = tmp;
     }
 }
 
@@ -74,8 +77,10 @@ std::map<Input, bool> DisplayModule::catchInput()
         key = getch();
         if (key == ERR)
             break;
-        if (key == ' ')
-            map[SPACE_KEY] = true;
+        for (auto i: nCursesKeys) {
+            if (i.second == key)
+                map[i.first] == true;
+        }
     }
     return map;
 }

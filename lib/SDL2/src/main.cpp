@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "libcaca.hpp"
+#include "SDL2.hpp"
 
 extern "C" IDisplayModule *entryPoint(void)
 {

@@ -52,8 +52,6 @@ enum Input {
     EIGHT_KEY,
     NINE_KEY,
     ZERO_KEY,
-    CTRL_KEY,
-    ALT_KEY,
 };
 
 #endif /* !INPUT_HPP_ */

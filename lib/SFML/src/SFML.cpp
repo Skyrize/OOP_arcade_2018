@@ -62,8 +62,6 @@ const std::map<Input, sf::Keyboard::Key> sfInputs = {
     {EIGHT_KEY, sf::Keyboard::Key::Num8},
     {NINE_KEY, sf::Keyboard::Key::Num9},
     {ZERO_KEY, sf::Keyboard::Key::Num0},
-    {CTRL_KEY, sf::Keyboard::Key::LControl},
-    {ALT_KEY, sf::Keyboard::Key::LAlt}
 };
 
 DisplayModule::DisplayModule()
@@ -165,9 +163,7 @@ std::map<Input, bool> DisplayModule::catchInput()
     {SEVEN_KEY, false},
     {EIGHT_KEY, false},
     {NINE_KEY, false},
-    {ZERO_KEY, false},
-    {CTRL_KEY, false},
-    {ALT_KEY, false}};
+    {ZERO_KEY, false},};
     
     while (this->window->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
