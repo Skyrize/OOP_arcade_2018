@@ -77,6 +77,7 @@ DisplayModule::~DisplayModule()
 void DisplayModule::init()
 {
     this->window->create(sf::VideoMode(1920, 1080), "SFML", sf::Style::Resize | sf::Style::Fullscreen);
+    this->clock.restart();
 }
 
 void DisplayModule::stop()
@@ -97,6 +98,7 @@ void DisplayModule::display()
 void DisplayModule::clear()
 {
     this->window->clear();
+    this->timer = this->clock.getElapsedTime();
 }
 
 void DisplayModule::drawText(int x, int y, const std::string &name) const
@@ -167,9 +169,14 @@ std::map<Input, bool> DisplayModule::catchInput()
     while (this->window->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             window->close();
-        for (auto e : sfInputs)
-            if (sf::Keyboard::isKeyPressed(e.second))
-                inputs[e.first] = true;
     }
+    for (auto &e : sfInputs)
+        if (sf::Keyboard::isKeyPressed(e.second))
+            inputs[e.first] = true;
     return inputs;
+}
+
+float DisplayModule::getTime()
+{
+    return this->timer.asSeconds();
 }

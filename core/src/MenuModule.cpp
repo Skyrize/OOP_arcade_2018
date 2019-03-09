@@ -32,21 +32,11 @@ const std::string &MenuModule::getName() const
     return _name;
 }
 
-void MenuModule::eventHandler(IDisplayModule *library, std::map<Input, bool> &inputs)
-{
-    if (inputs[Input::ESCAPE_KEY] == true)
-        library->stop();
-}
-
 void MenuModule::run(IDisplayModule *library)
 {
-    std::vector<std::vector<Color> > form{
-        {WHITE, WHITE, RED, WHITE, WHITE},
-        {WHITE, RED, RED, RED, WHITE},
-        {RED, RED, RED, RED, RED}
-    };
     std::map<Input, bool> inputs = library->catchInput();
 
-    eventHandler(library, inputs);
-    library->drawShape(2, 2, form);
+    this->scene.manageEvents(library, inputs);
+    this->scene.update(library);
+    this->scene.display(library);
 }

@@ -30,6 +30,7 @@ class IDisplayModule {
         virtual void drawText(int x, int y, const std::string &str) const = 0;
         virtual void drawShape(int x, int y, std::vector< std::vector<Color> > shape) = 0;
         
+        virtual float getTime() = 0;
         virtual std::map<Input, bool> catchInput() = 0;
 };
 

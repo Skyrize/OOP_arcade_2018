@@ -9,10 +9,12 @@
     #define MENUMODULE_HPP_
 
 #include "IGameModule.hpp"
+#include "MainMenuScene.hpp"
 
 class MenuModule : public IGameModule {
 	private:
         std::string _name = "MainMenu";
+        MainMenuScene scene;
 	public:
 		MenuModule();
 		~MenuModule();
@@ -20,8 +22,6 @@ class MenuModule : public IGameModule {
         virtual void init();
         virtual void stop();
         virtual const std::string &getName() const;
-
-        virtual void eventHandler(IDisplayModule *library, std::map<Input, bool> &inputs);
 
         virtual void run(IDisplayModule *library);
 

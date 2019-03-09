@@ -16,6 +16,8 @@ class DisplayModule : public IDisplayModule {
         sf::RenderWindow *window;
         sf::RectangleShape baseSquare = sf::RectangleShape(sf::Vector2f(16, 16));
         std::string _name = "SFML";
+        sf::Clock clock;
+        sf::Time timer;
 
 	public:
 		DisplayModule();
@@ -32,6 +34,7 @@ class DisplayModule : public IDisplayModule {
         void drawText(int x, int y, const std::string &name) const;
         void drawShape(int x, int y, std::vector<std::vector<Color> >);
         
+        float getTime();
         std::map<Input, bool> catchInput();
 };
 

@@ -8,6 +8,9 @@
 SRC			=	src/main.cpp	\
 				src/Arcade.cpp	\
 				src/MenuModule.cpp	\
+				src/MainMenuScene.cpp	\
+				../src/Scene.cpp	\
+				../src/Object.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 
