@@ -22,8 +22,8 @@ class Scene: public Object {
 		virtual void display(IDisplayModule *display);
 		virtual void update(IDisplayModule *display);
 		Object *getObject(const std::string &name);
-		void addObject(Object *newObject);
-		void addObject(const std::string &name, std::vector<std::vector<Color> > &sprite, std::pair<float, float> position = {0.0, 0.0});
+		Object *addObject(Object *newObject);
+		Object *addObject(const std::string &name, std::vector<std::vector<Color> > &sprite, std::pair<float, float> position = {0.0, 0.0});
 		void removeObject(const std::string &name);
 };
 

@@ -39,18 +39,20 @@ Object *Scene::getObject(const std::string &name)
 	return objects[name];
 }
 
-void Scene::addObject(Object *newObject)
+Object *Scene::addObject(Object *newObject)
 {
 	if (objects[newObject->getName()] != nullptr)
 		delete(objects[newObject->getName()]);
 	objects[newObject->getName()] = newObject;
+    return newObject;
 }
 
-void Scene::addObject(const std::string &name, std::vector<std::vector<Color> > &sprite, std::pair<float, float> position)
+Object *Scene::addObject(const std::string &name, std::vector<std::vector<Color> > &sprite, std::pair<float, float> position)
 {
 	if (objects[name] != nullptr)
 		delete(objects[name]);
 	objects[name] = new Object(name, sprite, position);
+    return objects[name];
 }
 
 void Scene::removeObject(const std::string &name)

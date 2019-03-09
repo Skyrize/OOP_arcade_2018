@@ -37,10 +37,12 @@ class Object {
 		virtual const std::vector<std::vector<Color> > &getSprite() const;
 		virtual const std::string &getName() const;
 		virtual void manageEvents(IDisplayModule *display, std::map<Input, bool> &inputs);
+		virtual const std::pair<float, float> &getSize() const;
 
 	protected:
 		std::string name;
 		std::vector<std::vector<Color> > sprite;
+		std::pair<float, float> size;
 
 		class MovementComponent {
 			public:
@@ -60,6 +62,7 @@ class Object {
 				const std::pair<float, float> &getPosition() const;
 				const std::pair<float, float> &getSpeed() const;
 				const std::pair<float, float> &getDestination() const;
+				bool willColide(float delta, Object *other) const;
 
 			protected:
 				Object &parent;

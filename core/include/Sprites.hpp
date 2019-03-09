@@ -14,8 +14,9 @@
 std::vector<std::vector<Color>> sprite_empty;
 
 std::vector<std::vector<Color> > form {
-    {WHITE, WHITE, RED, WHITE, WHITE},
-    {WHITE, RED, RED, RED, WHITE},
+    {NONE, NONE, RED, NONE, NONE},
+    {NONE, RED, RED, RED, NONE},
+    {RED, RED, RED, RED, RED},
     {RED, RED, RED, RED, RED}
 };
 
