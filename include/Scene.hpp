@@ -16,14 +16,16 @@ class Scene: public Object {
 		std::map<std::string, Object *> objects;
 
 	public:
-		Scene(const std::string &name, std::vector<std::vector<Color> > &sprite, std::pair<float, float> position = {0.0, 0.0});
+		Scene(const std::string &name, Sprite &sprite, std::pair<float, float> position = {0.0, 0.0});
+		Scene(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position = {0.0, 0.0});
 		virtual ~Scene();
 
 		virtual void display(IDisplayModule *display);
 		virtual void update(IDisplayModule *display);
 		Object *getObject(const std::string &name);
 		Object *addObject(Object *newObject);
-		Object *addObject(const std::string &name, std::vector<std::vector<Color> > &sprite, std::pair<float, float> position = {0.0, 0.0});
+		Object *addObject(const std::string &name, Sprite &sprite, std::pair<float, float> position = {0.0, 0.0});
+		Object *addObject(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position = {0.0, 0.0});
 		void removeObject(const std::string &name);
 };
 

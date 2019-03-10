@@ -7,8 +7,13 @@
 
 #include "Scene.hpp"
 
-Scene::Scene(const std::string &name, std::vector<std::vector<Color> > &sprite, std::pair<float, float> position)
+Scene::Scene(const std::string &name, Sprite &sprite, std::pair<float, float> position)
 : Object(name, sprite, position)
+{
+}
+
+Scene::Scene(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position)
+: Object(name, spriteSheet, position)
 {
 }
 
@@ -29,6 +34,7 @@ void Scene::display(IDisplayModule *display)
 
 void Scene::update(IDisplayModule *display)
 {
+    Object::update(display, objects);
 	for (auto &e : objects)
 		if (e.second)
 			e.second->update(display, objects);
@@ -47,11 +53,19 @@ Object *Scene::addObject(Object *newObject)
     return newObject;
 }
 
-Object *Scene::addObject(const std::string &name, std::vector<std::vector<Color> > &sprite, std::pair<float, float> position)
+Object *Scene::addObject(const std::string &name, Sprite &sprite, std::pair<float, float> position)
 {
 	if (objects[name] != nullptr)
 		delete(objects[name]);
 	objects[name] = new Object(name, sprite, position);
+    return objects[name];
+}
+
+Object *Scene::addObject(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position)
+{
+	if (objects[name] != nullptr)
+		delete(objects[name]);
+	objects[name] = new Object(name, spriteSheet, position);
     return objects[name];
 }
 

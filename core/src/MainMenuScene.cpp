@@ -12,7 +12,9 @@
 MainMenuScene::MainMenuScene()
 : Scene("MainMenuScene", sprite_empty)
 {
-    Object *test = this->addObject("test", form);
+    Object *test = this->addObject("test", sheet);
+    test->getAnimation().setNbLoop(3);
+    test->getAnimation().setAnimationSpeed(0.5);
     test->getMovement().setfreeMoving(true);
     test->getMovement().setBlocking(true);
 

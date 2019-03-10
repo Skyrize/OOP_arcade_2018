@@ -25,31 +25,64 @@
 #define GET_X(pair) pair.first
 #define GET_Y(pair) pair.second
 
+typedef std::vector<std::vector<Color>> Sprite;
+typedef std::vector<Sprite> SpriteSheet;
+
 class Object {
 	public:
 		class MovementComponent; /*predefine*/
-		Object(const std::string &name, std::vector<std::vector<Color> > &sprite, std::pair<float, float> position = {0.0, 0.0});
+		class AnimationComponent;
+		Object(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position = {0.0, 0.0});
+		Object(const std::string &name, Sprite &sprite, std::pair<float, float> position = {0.0, 0.0});
 		virtual ~Object() = default;
 
 		virtual void display(IDisplayModule *display);
 		virtual void update(IDisplayModule *display, std::map<std::string, Object *> &objects);
 		virtual MovementComponent &getMovement();
-		virtual const std::vector<std::vector<Color> > &getSprite() const;
+		virtual AnimationComponent &getAnimation();
 		virtual const std::string &getName() const;
 		virtual void manageEvents(IDisplayModule *display, std::map<Input, bool> &inputs);
-		virtual const std::pair<float, float> &getSize() const;
+		virtual void hitEvent(Object *other);
 
 	protected:
 		std::string name;
-		std::vector<std::vector<Color> > sprite;
-		std::pair<float, float> size;
+		float oldTime = 0;
+
+		class AnimationComponent {
+			public:
+				AnimationComponent(Object &parent, SpriteSheet &spriteSheet);
+				AnimationComponent(Object &parent, Sprite &sprite);
+				~AnimationComponent() = default;
+
+				void animate(float delta);
+				const Sprite &getSprite() const;
+				const SpriteSheet &getSpriteSheet() const;
+				const std::pair<float, float> &getSize() const;
+				bool isAnimated() const;
+				void setAnimationSpeed(const float &speed);
+				void setNbLoop(const float &nbLoop);
+				void setLoop(const bool &state);
+				void goNextSprite();
+
+			protected:
+				size_t actual = 0;
+				float animationSpeed = 0;
+				size_t nbLoop = 0;
+				bool infiniteLoop = false;
+				Object &parent;
+				SpriteSheet spriteSheet;
+				std::pair<float, float> size;
+
+				void setSize();
+
+		} sprite;
 
 		class MovementComponent {
 			public:
-				MovementComponent(Object &parent): parent(parent) {}
+				MovementComponent(Object &parent);
 				~MovementComponent() = default;
 
-				void move(float actualTime, std::map<std::string, Object *> &objects);
+				void move(const float &delta, std::map<std::string, Object *> &objects);
 		        bool hasReachDuration(float delta);
 				bool isMoving() const;
 				bool isFreeMoving() const;

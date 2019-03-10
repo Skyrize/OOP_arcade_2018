@@ -11,6 +11,8 @@ SRC			=	src/main.cpp	\
 				src/MainMenuScene.cpp	\
 				../src/Scene.cpp	\
 				../src/Object.cpp	\
+				../src/MovementComponent.cpp	\
+				../src/AnimationComponent.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 
