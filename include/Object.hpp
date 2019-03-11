@@ -63,10 +63,14 @@ class Object {
 				void setNbLoop(const float &nbLoop);
 				void setLoop(const bool &state);
 				void goNextSprite();
+				void goToSprite(const size_t &index);
+				void changeSpriteSheet(SpriteSheet &spriteSheet);
+				void changeSpriteSheet(Sprite &sprite);
 
 			protected:
 				size_t actual = 0;
 				float animationSpeed = 0;
+				float remainingTime = 0;
 				size_t nbLoop = 0;
 				bool infiniteLoop = false;
 				Object &parent;

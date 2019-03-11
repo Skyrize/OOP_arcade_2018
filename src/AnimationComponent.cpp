@@ -22,8 +22,6 @@ Object::AnimationComponent::AnimationComponent(Object &parent, Sprite &sprite)
 
 void Object::AnimationComponent::animate(float delta)
 {
-    static float remainingTime = 0;
-
     if (isAnimated() == true) {
         if (remainingTime <= 0) {
             remainingTime = this->animationSpeed;
@@ -57,6 +55,7 @@ bool Object::AnimationComponent::isAnimated() const
 void Object::AnimationComponent::setAnimationSpeed(const float &speed)
 {
     animationSpeed = speed;
+    remainingTime = speed;
 }
 
 void Object::AnimationComponent::setNbLoop(const float &nbLoop)
@@ -78,6 +77,7 @@ void Object::AnimationComponent::goNextSprite()
     } else {
         actual++;
     }
+    setSize();
 }
 
 
@@ -92,4 +92,32 @@ void Object::AnimationComponent::setSize()
         if (e.size() > nbBlockX)
             nbBlockX = e.size();
     this->size = {nbBlockX, nbBlockY};
+}
+
+void Object::AnimationComponent::goToSprite(const size_t &index)
+{
+    if (index < spriteSheet.size()) {
+        actual = index;
+        setSize();
+    }
+}
+
+void Object::AnimationComponent::changeSpriteSheet(SpriteSheet &spriteSheet)
+{
+    this->spriteSheet = spriteSheet;
+    actual = 0;
+    remainingTime = animationSpeed;
+    setSize();
+}
+
+void Object::AnimationComponent::changeSpriteSheet(Sprite &sprite)
+{
+    SpriteSheet newSpriteSheet;
+
+    newSpriteSheet.push_back(sprite);
+    this->spriteSheet = newSpriteSheet;
+    actual = 0;
+    remainingTime = animationSpeed;
+    setSize();
+
 }

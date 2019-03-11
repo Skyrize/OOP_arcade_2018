@@ -13,6 +13,7 @@ Object::MovementComponent::MovementComponent(Object &parent)
 {
 }
 
+/*
 bool Object::MovementComponent::willColide(float delta, Object *other) const
 {
     if (this->blocking == false || other->getMovement().isBlocking() == false || &parent == other)
@@ -36,6 +37,36 @@ bool Object::MovementComponent::willColide(float delta, Object *other) const
     }
     //std::cout << this->parent.getName() << " doesn't collide " << other->getName() << std::endl<< std::endl;
     return false;
+} */
+
+bool Object::MovementComponent::willColide(float delta, Object *other) const
+{
+    if (this->blocking == false || other->getMovement().isBlocking() == false || &parent == other)
+        return false;
+    const std::pair<float, float> newPos{POS_X + SPEED_X * delta, POS_Y + SPEED_Y * delta};
+    const Sprite &mySprite = parent.sprite.getSprite();
+    const std::pair<float, float> &otherPos = other->getMovement().getPosition();
+    const Sprite &otherSprite = other->sprite.getSprite();
+
+    //std::cout << this->parent.getName() << " is blocking " << other->getName() << std::endl;
+    //std::cout << "actualPos = " << GET_X(position) << ", " << GET_Y(position) << std::endl;
+    //std::cout << "newpos = " << GET_X(newPos) << ", " << GET_Y(newPos) << std::endl;
+    //std::cout << "thisSize = " << GET_X(thisSize) << ", " << GET_Y(thisSize) << std::endl;
+    //std::cout << other->getName() << "otherPos = " << GET_X(otherPos) << ", " << GET_Y(otherPos) << std::endl;
+    //std::cout << "otherSize = " << GET_X(otherSize) << ", " << GET_Y(otherSize) << std::endl << std::endl;
+    for (size_t y = 0; y != mySprite.size(); y++)
+        for (size_t x = 0; x != mySprite[y].size(); x++)
+            for (size_t i = 0; i != otherSprite.size(); i++)
+                for (size_t j = 0; j != otherSprite[i].size(); j++)
+                    if (mySprite[y][x] != NONE && otherSprite[i][j] != NONE &&
+                    (int)GET_X(newPos) + x < (int)GET_X(otherPos) + j + 1 &&
+                    (int)GET_X(newPos) + x + 1 > (int)GET_X(otherPos) + j &&
+                    (int)GET_Y(newPos) + y < (int)GET_Y(otherPos) + i + 1 &&
+                    (int)GET_Y(newPos) + y + 1 > (int)GET_Y(otherPos) + i) {
+                        return true;
+                }
+    //std::cout << this->parent.getName() << " collide " << other->getName() << std::endl<< std::endl;
+    return false;
 }
 
 void Object::MovementComponent::move(const float &delta, std::map<std::string, Object *> &objects)
@@ -57,6 +88,7 @@ void Object::MovementComponent::move(const float &delta, std::map<std::string, O
 	//}
 
     if (isMoving() == true) {
+        // std::cout << parent.getName() << " try to move" << std::endl;
         for (auto &e : objects)
             if (e.second)
                 if (this->willColide(delta, e.second) == true) {
@@ -66,10 +98,14 @@ void Object::MovementComponent::move(const float &delta, std::map<std::string, O
 
         if (collide == false)
             setPosition(GET_X(newPos), GET_Y(newPos));
+        // else
+            // std::cout << parent.getName() << " is blocked" << std::endl;
 
         if (freeMoving == false)
-            if (hasReachDuration(delta) == true)
+            if (hasReachDuration(delta) == true) {
                 setSpeed(0, 0);
+
+            }
     }
     //std::cout << parent.getName() << " has speed " << SPEED_X << ", " << SPEED_Y << std::endl;
 }
@@ -100,7 +136,7 @@ void Object::MovementComponent::setPosition(const float &x, const float &y)
 
 bool Object::MovementComponent::isMoving() const
 {
-	return this->speed.first != 0 || this->speed.second != 0;
+	return (SPEED_X != 0 || SPEED_Y != 0);
 }
 
 bool Object::MovementComponent::isFreeMoving() const
@@ -128,7 +164,9 @@ void Object::MovementComponent::setDestination(const std::pair<float, float> &ne
 {
     remainingTimeMoving = timeToReach;
     SPEED_X = (GET_X(newDest) - POS_X) / timeToReach;
-    SPEED_X = (GET_Y(newDest) - POS_Y) / timeToReach;
+    SPEED_Y = (GET_Y(newDest) - POS_Y) / timeToReach;
+    DEST_X = GET_X(newDest);
+    DEST_Y = GET_Y(newDest);
     freeMoving = false;
 }
 
