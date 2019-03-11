@@ -10,6 +10,7 @@
 
 #include "IDisplayModule.hpp"
 #include <ncurses.h>
+#include <ctime>
 
 class DisplayModule : public IDisplayModule {
 	public:
@@ -25,13 +26,15 @@ class DisplayModule : public IDisplayModule {
         void display();
 
         void drawText(int x, int y, const std::string &name) const;
-        void drawShape(int x, int y, std::vector<std::vector<Color> >) const;
+        void drawShape(int x, int y, std::vector<std::vector<Color> >);
         
+        float getTime();
         std::map<Input, bool> catchInput();
     
     private:
         std::string _name = "nCurses";
         bool _isOpen = false;
+        std::clock_t _clock;
 };
 
 const std::map<Input, int> nCursesKeys = {

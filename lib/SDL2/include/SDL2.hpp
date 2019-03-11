@@ -28,8 +28,9 @@ class DisplayModule : public IDisplayModule {
         void display();
 
         void drawText(int x, int y, const std::string &name) const;
-        void drawShape(int x, int y, std::vector<std::vector<Color> >) const;
+        void drawShape(int x, int y, std::vector<std::vector<Color> >);
         
+        float getTime();
         std::map<Input, bool> catchInput();
 };
 

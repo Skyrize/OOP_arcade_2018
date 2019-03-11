@@ -9,6 +9,9 @@
 
 void DisplayModule::init()
 {
+    std::clock_t begin = std::clock();
+
+    _clock = begin;
     initscr();
     curs_set(0);
 	noecho();
@@ -47,7 +50,7 @@ void DisplayModule::drawText(int x, int y, const std::string &name) const
     mvprintw(y, x, name.c_str());
 }
 
-void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec) const
+void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec)
 {
     int tmp = x;
 
@@ -79,8 +82,16 @@ std::map<Input, bool> DisplayModule::catchInput()
             break;
         for (auto i: nCursesKeys) {
             if (i.second == key)
-                map[i.first] == true;
+                map[i.first] = true;
         }
     }
     return map;
+}
+
+float DisplayModule::getTime()
+{
+    std::clock_t end = std::clock();
+    std::clock_t begin = _clock;
+
+    return float(float(end - begin) / CLOCKS_PER_SEC);
 }
