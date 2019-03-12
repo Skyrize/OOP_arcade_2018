@@ -26,7 +26,6 @@ class Arcade {
         IDisplayModule *display = nullptr;
         IGameModule *game = nullptr;
 
-        IGameModule *mainMenu = new MenuModule();
         std::map<Input, bool> inputs;
 
 	public:

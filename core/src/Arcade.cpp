@@ -117,6 +117,8 @@ void Arcade::event()
 {
     float actual = this->display->getTime();
 
+    if (actual < previous)
+        previous = 0;
     this->inputs = this->display->catchInput();
     remaining -= actual - previous;
     if (remaining <= 0) {
@@ -133,6 +135,7 @@ void Arcade::event()
                 goToMainMenu();
             }
             if (inputs[LEFT_ARROW_KEY] == true) {
+                std::cout << "----------------prevdisplay------------------" << std::endl;
                 prevDisplay();
             } else if (inputs[RIGHT_ARROW_KEY] == true) {
                 nextDisplay();
@@ -165,6 +168,7 @@ IGameModule *Arcade::changeGame(const size_t &index)
     }
     if (this->game) {
         this->game->stop();
+        delete(game);
     }
     this->games[index]->init();
     this->game = this->games[index]->getInstance();
@@ -176,8 +180,8 @@ IGameModule *Arcade::changeGame(const size_t &index)
 IGameModule *Arcade::goToMainMenu()
 {
     this->game->stop();
-    //delete(this->game);
-    this->game = this->mainMenu;
-    this->mainMenu->init();
-    return this->mainMenu;
+    delete(this->game);
+    this->game = new MenuModule();
+    this->game->init();
+    return this->game;
 }

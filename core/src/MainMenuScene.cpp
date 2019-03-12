@@ -138,6 +138,8 @@ MainMenuScene::MainMenuScene()
     test2k->getMovement().setBlocking(true);
     test2k->getAnimation().setLoop(true);
     test2k->getAnimation().setAnimationSpeed(0.2);
+
+    std::cout << "CONSTRUCTED MAINMENUSCENE\n";
 }
 
 MainMenuScene::~MainMenuScene()
