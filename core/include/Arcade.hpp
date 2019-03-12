@@ -15,13 +15,19 @@
 
 class Arcade {
 	private:
-        std::map<std::string, DLLoader<IDisplayModule> *> libraries;
-        std::map<std::string, DLLoader<IGameModule> *> games;
+        size_t actualLib = 0;
+        size_t actualGame = 0;
+        float remaining = 0;
+        float previous = 0;
+
+        std::vector<DLLoader<IDisplayModule> *> libraries;
+        std::vector<DLLoader<IGameModule> *> games;
 
         IDisplayModule *display = nullptr;
         IGameModule *game = nullptr;
 
         IGameModule *mainMenu = new MenuModule();
+        std::map<Input, bool> inputs;
 
 	public:
 		Arcade(char *baseDisplayModule);
@@ -31,10 +37,16 @@ class Arcade {
         void loadLibraries();
         void loadGames();
 
-        IDisplayModule *changeDisplay(const std::string &name);
-        IGameModule *changeGame(const std::string &name);
+        IDisplayModule *changeDisplay(const size_t &index);
+        IGameModule *changeGame(const size_t &index);
 
+        void event();
         IGameModule *goToMainMenu();
+
+        void nextDisplay();
+        void prevDisplay();
+        void nextGame();
+        void prevGame();
 };
 
 #endif /* !ARCADE_HPP_ */

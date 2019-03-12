@@ -16,19 +16,19 @@ all:	prepare_lib
 prepare_lib:
 	#make -C libcaca/
 	#cp libcaca/*.so ./
-	make -C nCurses/
-	cp nCurses/*.so ./
+	#make -C nCurses/
+	#cp nCurses/*.so ./
 	make -C SFML/
 	cp SFML/*.so ./
 
 clean:
 	#make clean -C libcaca/
-	make clean -C nCurses/
+	#make clean -C nCurses/
 	make clean -C SFML/
 
 fclean:
 	#make fclean -C libcaca/
-	make fclean -C nCurses/
+	#make fclean -C nCurses/
 	make fclean -C SFML/
 	$(RM) ./*.so
 

@@ -14,13 +14,12 @@ core:
 	make -C core/
 	cp core/arcade ./
 
+.PHONY:	games
 games:
 	make -C games/
-	cp games/*.so ./
 
 graphicals:
 	make -C lib/
-	cp lib/*.so ./
 
 clean:
 	make clean -C core/
@@ -32,7 +31,6 @@ fclean:
 	make fclean -C games/
 	make fclean -C lib/
 	$(RM) arcade
-	$(RM) *.so
 
 re:	fclean all
 

@@ -41,7 +41,7 @@ class Object {
 		virtual MovementComponent &getMovement();
 		virtual AnimationComponent &getAnimation();
 		virtual const std::string &getName() const;
-		virtual void manageEvents(IDisplayModule *display, std::map<Input, bool> &inputs);
+		virtual void manageEvents(std::map<Input, bool> &inputs);
 		virtual void hitEvent(Object *other);
 
 	protected:

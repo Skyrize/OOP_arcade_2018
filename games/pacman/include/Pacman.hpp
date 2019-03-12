@@ -10,24 +10,6 @@
 
 #include "Object.hpp"
 
-SpriteSheet pacmanSheet {
-    {
-        {NONE, YELLOW, YELLOW, YELLOW, NONE},
-        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
-        {YELLOW, YELLOW, YELLOW, NONE, NONE},
-        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
-        {NONE, YELLOW, YELLOW, YELLOW, NONE}
-    },
-    {
-        {NONE, YELLOW, YELLOW, YELLOW, NONE},
-        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
-        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
-        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
-        {NONE, YELLOW, YELLOW, YELLOW, NONE}
-    },
-};
-
-
 class Pacman : public Object {
 	public:
 		Pacman();

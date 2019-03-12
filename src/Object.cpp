@@ -39,9 +39,8 @@ void Object::update(IDisplayModule *display, std::map<std::string, Object *> &ob
 	//std::cout << std::endl <<std::endl;
 }
 
-void Object::manageEvents(IDisplayModule *display, std::map<Input, bool> &inputs)
+void Object::manageEvents(std::map<Input, bool> &inputs)
 {
-	(void)display;
 	(void)inputs;
 }
 
