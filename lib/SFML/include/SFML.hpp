@@ -18,6 +18,8 @@ class DisplayModule : public IDisplayModule {
         std::string _name = "SFML";
         sf::Clock clock;
         sf::Time timer;
+        sf::Font font;
+        sf::Text text;
 
 	public:
 		DisplayModule();
@@ -31,10 +33,11 @@ class DisplayModule : public IDisplayModule {
         void clear();
         void display();
 
-        void drawText(int x, int y, const std::string &name) const;
+        void drawText(int x, int y, const std::string &name, int fontSize, Color color);
         void drawShape(int x, int y, std::vector<std::vector<Color> >);
         
         float getTime();
+        void restartTime();
         std::map<Input, bool> catchInput();
 };
 

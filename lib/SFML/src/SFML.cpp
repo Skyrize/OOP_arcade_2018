@@ -68,6 +68,8 @@ const std::map<Input, sf::Keyboard::Key> sfInputs = {
 DisplayModule::DisplayModule()
 {
     this->window = new sf::RenderWindow();
+    font.loadFromFile("./resources/font.ttf");
+    text.setFont(font);
 }
 
 DisplayModule::~DisplayModule()
@@ -102,11 +104,13 @@ void DisplayModule::clear()
     this->timer = this->clock.getElapsedTime();
 }
 
-void DisplayModule::drawText(int x, int y, const std::string &name) const
+void DisplayModule::drawText(int x, int y, const std::string &name, int fontSize, Color color)
 {
-    (void)x;
-    (void)y;
-    (void)name;
+    this->text.setString(name);
+    this->text.setCharacterSize(fontSize);
+    this->text.setPosition(x * 16, y * 16);
+    this->text.setColor(sfColors[color]);
+    this->window->draw(text);
 }
 
 void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > pixels)
@@ -180,4 +184,10 @@ std::map<Input, bool> DisplayModule::catchInput()
 float DisplayModule::getTime()
 {
     return this->timer.asSeconds();
+}
+
+void DisplayModule::restartTime()
+{
+    this->clock.restart();
+    this->timer = clock.getElapsedTime();
 }

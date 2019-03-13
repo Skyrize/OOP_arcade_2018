@@ -25,8 +25,7 @@ Arcade::Arcade(char *baseDisplayModule)
     }
     changeDisplay(libraries.size() - 1);
     actualLib = libraries.size() - 1;
-    changeGame(0);
-    //this->game = this->mainMenu;
+    this->game = new MenuModule;
 }
 
 Arcade::~Arcade()
@@ -163,6 +162,7 @@ IDisplayModule *Arcade::changeDisplay(const size_t &index)
 
 IGameModule *Arcade::changeGame(const size_t &index)
 {
+    this->display->restartTime();
     if (this->games.size() == 0) {
         return goToMainMenu();
     }
@@ -179,6 +179,7 @@ IGameModule *Arcade::changeGame(const size_t &index)
 
 IGameModule *Arcade::goToMainMenu()
 {
+    this->display->restartTime();
     this->game->stop();
     delete(this->game);
     this->game = new MenuModule();

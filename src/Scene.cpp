@@ -6,6 +6,7 @@
 */
 
 #include "Scene.hpp"
+#include <iostream>
 
 Scene::Scene(const std::string &name, Sprite &sprite, std::pair<float, float> position)
 : Object(name, sprite, position)
@@ -32,12 +33,14 @@ void Scene::display(IDisplayModule *display)
 			e.second->display(display);
 }
 
-void Scene::update(IDisplayModule *display)
+float Scene::update(IDisplayModule *display)
 {
-    Object::update(display, objects);
+    float delta = Object::update(display, objects);
+
 	for (auto &e : objects)
 		if (e.second)
 			e.second->update(display, objects);
+	return delta;
 }
 
 Object *Scene::getObject(const std::string &name)
@@ -72,7 +75,12 @@ Object *Scene::addObject(const std::string &name, SpriteSheet &spriteSheet, std:
 void Scene::removeObject(const std::string &name)
 {
 	if (objects[name] != nullptr) {
-		delete(objects[name]);
+		toRemove.push_back(objects[name]);
 		objects[name] = nullptr;
 	}
+}
+
+void Scene::removeObjects()
+{
+	this->toRemove.clear();
 }

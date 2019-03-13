@@ -13,6 +13,9 @@ SRC			=	src/main.cpp	\
 				../src/Object.cpp	\
 				../src/MovementComponent.cpp	\
 				../src/AnimationComponent.cpp	\
+				../src/Invader.cpp	\
+				../src/ShootComponent.cpp	\
+				../src/Projectile.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 
