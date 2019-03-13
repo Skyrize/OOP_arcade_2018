@@ -15,7 +15,7 @@ void DisplayModule::init()
     _isOpen = true;
     SDL_Init(SDL_INIT_VIDEO);
     _win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-        1632, 880, SDL_WINDOW_SHOWN);
+        1600, 912, SDL_WINDOW_SHOWN);
     _render = SDL_CreateRenderer(_win, -1, SDL_RENDERER_ACCELERATED);
 }
 

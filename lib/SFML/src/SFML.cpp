@@ -79,7 +79,7 @@ DisplayModule::~DisplayModule()
 
 void DisplayModule::init()
 {
-    this->window->create(sf::VideoMode(1920, 1080), "SFML", sf::Style::Resize | sf::Style::Fullscreen);
+    this->window->create(sf::VideoMode(1600, 912), "SFML");
     this->clock.restart();
 }
 
