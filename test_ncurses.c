@@ -7,26 +7,38 @@
 
 #include <ncurses.h>
 #include <unistd.h>
-// #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+
+char *int_to_str(int nb)
+{
+	char *str;
+	int i = 1;
+	int j = 0;
+	int tmp = nb;
+
+	while (tmp > 9) {
+		tmp /= 10;
+		i++;
+	}
+	str = malloc(sizeof(char) * i + 1);
+	if (!str)
+		return (NULL);
+	j = i;
+	while (i > 0) {
+		str[i - 1] = nb % 10 + 48;
+		nb /= 10;
+		i--;
+	}
+	str[j] = '\0';
+	return (str);
+}
 
 int main(void)
 {
     initscr();
     curs_set(0);
 	noecho();
-    // cbreak();
-    // use_default_colors();
-    // keypad(stdscr, TRUE);
-    // nodelay(stdscr, TRUE);
-    // start_color();
-    // init_pair(0, COLOR_BLACK, COLOR_BLACK);
-    // init_pair(1, COLOR_RED, COLOR_BLACK);
-    // init_pair(2, COLOR_GREEN, COLOR_BLACK);
-    // init_pair(3, COLOR_YELLOW, COLOR_BLACK);
-    // init_pair(4, COLOR_BLUE, COLOR_BLACK);
-    // init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
-    // init_pair(6, COLOR_CYAN, COLOR_BLACK);
-    // init_pair(7, COLOR_WHITE, COLOR_BLACK);
 
     while (1) {
         clear();
@@ -34,7 +46,8 @@ int main(void)
         int key = getch();
         if (key == 'q')
             break;
-        mvprintw(2, 2, "Hello World!");
+        mvprintw(2, 2, int_to_str(COLS));
+        mvprintw(3, 3, int_to_str(LINES));
         refresh();
     }
     erase();
