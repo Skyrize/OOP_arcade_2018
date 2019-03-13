@@ -11,14 +11,21 @@
 Object::Object(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position)
 : name(name), sprite(*this, spriteSheet), movement(*this)
 {
+	std::cout << "constructed " + name << std::endl;
 	this->movement.setPosition(position.first, position.second);
 }
 
 Object::Object(const std::string &name, Sprite &sprite, std::pair<float, float> position)
 : name(name), sprite(*this, sprite), movement(*this)
 {
+	std::cout << "constructed " + name << std::endl;
 	this->movement.setPosition(position.first, position.second);
 }
+
+Object::~Object()
+{
+	std::cout << "destructed " + name << std::endl;
+};
 
 void Object::display(IDisplayModule *display)
 {
@@ -30,18 +37,20 @@ void Object::display(IDisplayModule *display)
 void Object::update(IDisplayModule *display, std::map<std::string, Object *> &objects)
 {
     float actualTime = display->getTime();
+    if (actualTime < oldTime)
+        oldTime = actualTime;
     float delta = actualTime - oldTime;
     
-    //std::cout << this->name << " delta = " << delta << std::endl;
+	if (name == "testcouille")
+		std::cout << "actual = " << actualTime << std::endl;
 	movement.move(delta, objects);
     sprite.animate(delta);
     oldTime = actualTime;
 	//std::cout << std::endl <<std::endl;
 }
 
-void Object::manageEvents(IDisplayModule *display, std::map<Input, bool> &inputs)
+void Object::manageEvents(std::map<Input, bool> &inputs)
 {
-	(void)display;
 	(void)inputs;
 }
 

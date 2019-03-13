@@ -15,7 +15,7 @@ class MainMenuScene : public Scene {
 		MainMenuScene();
 		~MainMenuScene();
         
-		virtual void manageEvents(IDisplayModule *display, std::map<Input, bool> &inputs);
+		virtual void manageEvents(std::map<Input, bool> &inputs);
 
 	protected:
 	private:

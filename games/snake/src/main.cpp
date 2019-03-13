@@ -5,7 +5,9 @@
 ** main.cpp
 */
 
-int main()
+#include "SnakeModule.hpp"
+
+extern "C" IGameModule *entryPoint(void)
 {
-    return 0;
+    return new SnakeModule();
 }

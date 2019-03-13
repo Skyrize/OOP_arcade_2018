@@ -13,14 +13,20 @@
 Arcade::Arcade(char *baseDisplayModule)
 {
     std::string bdmString(baseDisplayModule);
+    bool hasFind = false;
 
     loadLibraries();
     loadGames();
-    if (!libraries[bdmString]) {
-        libraries[bdmString] = new DLLoader<IDisplayModule>(bdmString);
+    for (size_t i = 0; i != libraries.size(); i++)
+        if (libraries[i]->getFileName() == bdmString)
+            hasFind = true;
+    if (hasFind == false) {
+        libraries.push_back(new DLLoader<IDisplayModule>(bdmString));
     }
-    this->display = libraries[bdmString]->getInstance();
-    this->game = this->mainMenu;
+    changeDisplay(libraries.size() - 1);
+    actualLib = libraries.size() - 1;
+    changeGame(0);
+    //this->game = this->mainMenu;
 }
 
 Arcade::~Arcade()
@@ -32,8 +38,9 @@ void Arcade::launch()
     this->display->init();
 
     while (display->isOpen()) {
+        event();
         display->clear();
-        game->run(display);
+        game->run(display, this->inputs);
         display->display();
     }
 }
@@ -49,7 +56,7 @@ void Arcade::loadLibraries()
         while ((file = readdir(dir)) != NULL) {
             std::string fileName(file->d_name);
             if (fileName.find(".so") != std::string::npos) {
-                libraries[fileName] = new DLLoader<IDisplayModule>("lib/" + fileName);
+                libraries.push_back(new DLLoader<IDisplayModule>("lib/" + fileName));
                 std::cout << "create lib loader for " + fileName << std::endl;
             }
         }
@@ -67,35 +74,114 @@ void Arcade::loadGames()
         while ((file = readdir(dir)) != NULL) {
             std::string fileName(file->d_name);
             if (fileName.find(".so") != std::string::npos) {
-                games[fileName] = new DLLoader<IGameModule>("games/" + fileName);
+                games.push_back(new DLLoader<IGameModule>("games/" + fileName));
                 std::cout << "create game loader for " + fileName << std::endl;
             }
         }
     }
 }
 
-IDisplayModule *Arcade::changeDisplay(const std::string &name)
+void Arcade::nextDisplay()
 {
-    this->display->stop();
-    this->display = this->libraries[name]->getInstance();
+    if (this->actualLib == this->libraries.size() - 1) {
+        changeDisplay(0);
+    } else
+        changeDisplay(actualLib + 1);
+}
+
+void Arcade::prevDisplay()
+{
+    if (this->actualLib == 0) {
+        changeDisplay(this->libraries.size() - 1);
+    } else
+        changeDisplay(actualLib - 1);
+}
+
+void Arcade::nextGame()
+{
+    if (this->actualGame == this->games.size() - 1) {
+        changeGame(0);
+    } else
+        changeGame(actualGame + 1);
+}
+
+void Arcade::prevGame()
+{
+    if (this->actualGame == 0) {
+        changeGame(this->games.size() - 1);
+    } else
+        changeGame(actualGame - 1);
+}
+
+void Arcade::event()
+{
+    float actual = this->display->getTime();
+
+    if (actual < previous)
+        previous = 0;
+    this->inputs = this->display->catchInput();
+    remaining -= actual - previous;
+    if (remaining <= 0) {
+        if (inputs[DOWN_ARROW_KEY] == true ||
+        inputs[UP_ARROW_KEY] == true ||
+        inputs[M_KEY] == true ||
+        inputs[LEFT_ARROW_KEY] == true ||
+        inputs[RIGHT_ARROW_KEY] == true) {
+            if (inputs[DOWN_ARROW_KEY] == true) {
+                prevGame();
+            } else if (inputs[UP_ARROW_KEY] == true) {
+                nextGame();
+            } else if (inputs[M_KEY] == true) {
+                goToMainMenu();
+            }
+            if (inputs[LEFT_ARROW_KEY] == true) {
+                std::cout << "----------------prevdisplay------------------" << std::endl;
+                prevDisplay();
+            } else if (inputs[RIGHT_ARROW_KEY] == true) {
+                nextDisplay();
+            }
+            remaining = 1;
+        }
+    }
+    if (inputs[ESCAPE_KEY] == true)
+        this->display->stop();
+    previous = actual;
+}
+IDisplayModule *Arcade::changeDisplay(const size_t &index)
+{
+    if (this->display) {
+        this->display->stop();
+        delete(this->display);
+    }
+    this->libraries[actualLib]->stop();
+    this->libraries[index]->init();
+    this->display = this->libraries[index]->getInstance();
     this->display->init();
+    this->actualLib = index;
     return this->display;
 }
 
-IGameModule *Arcade::changeGame(const std::string &name)
+IGameModule *Arcade::changeGame(const size_t &index)
 {
-    this->game->stop();
-    this->game = this->games[name]->getInstance();
+    if (this->games.size() == 0) {
+        return goToMainMenu();
+    }
+    if (this->game) {
+        this->game->stop();
+        delete(game);
+    }
+    this->games[index]->init();
+    this->game = this->games[index]->getInstance();
     this->game->init();
+    this->actualGame = index;
     return this->game;
 }
 
 IGameModule *Arcade::goToMainMenu()
 {
-    if (this->game != this->mainMenu) {
-        this->game->stop();
-        this->game = this->mainMenu;
-        this->mainMenu->init();
-    }
-    return this->mainMenu;
+    this->game->stop();
+    delete(this->game);
+    this->game = new MenuModule();
+    this->game->init();
+    return this->game;
 }

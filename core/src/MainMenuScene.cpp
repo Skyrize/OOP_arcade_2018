@@ -12,6 +12,7 @@
 MainMenuScene::MainMenuScene()
 : Scene("MainMenuScene", sprite_empty)
 {
+    std::cout << "scene created" << std::endl;
     Object *test = this->addObject("test", pacmanSheet);
     test->getAnimation().setLoop(true);
     test->getAnimation().setAnimationSpeed(0.2);
@@ -137,21 +138,18 @@ MainMenuScene::MainMenuScene()
     test2k->getMovement().setBlocking(true);
     test2k->getAnimation().setLoop(true);
     test2k->getAnimation().setAnimationSpeed(0.2);
+
+    std::cout << "CONSTRUCTED MAINMENUSCENE\n";
 }
 
 MainMenuScene::~MainMenuScene()
 {
-
+    std::cout << "scene destroyed" << std::endl;
 }
 
-void MainMenuScene::manageEvents(IDisplayModule *display, std::map<Input, bool> &inputs)
+void MainMenuScene::manageEvents(std::map<Input, bool> &inputs)
 {
     Object::MovementComponent &test = objects["test"]->getMovement();
-    Object::MovementComponent &test2 = objects["testcouille"]->getMovement();
-    if (inputs[Input::ESCAPE_KEY] == true) {
-        display->stop();
-        return;
-    }
     if (inputs[Input::A_KEY] == true) {
         objects["test"]->getAnimation().changeSpriteSheet(pacmanSheet2);
         objects["testcouille"]->getAnimation().changeSpriteSheet(pacmanSheet2);
@@ -172,24 +170,6 @@ void MainMenuScene::manageEvents(IDisplayModule *display, std::map<Input, bool> 
             test.setSpeed(0, test.getSpeed().second);
     } else {
         test.setSpeed(0, 0);
-    }
-    if (inputs[Input::UP_ARROW_KEY] == true || inputs[Input::LEFT_ARROW_KEY] == true || 
-    inputs[Input::DOWN_ARROW_KEY] == true || inputs[Input::RIGHT_ARROW_KEY] == true) {
-        if (inputs[Input::UP_ARROW_KEY] == true)
-            test2.setSpeed(test2.getSpeed().first, -40);
-        else if (inputs[Input::DOWN_ARROW_KEY] == true)
-            test2.setSpeed(test2.getSpeed().first, 40);
-        else
-            test2.setSpeed(test2.getSpeed().first, 0);
-        if (inputs[Input::LEFT_ARROW_KEY] == true)
-            test2.setSpeed(-40, test2.getSpeed().second);
-        else if (inputs[Input::RIGHT_ARROW_KEY] == true)
-            test2.setSpeed(40, test2.getSpeed().second);
-        else
-            test2.setSpeed(0, test2.getSpeed().second);
-    } else {
-        if (test2.isFreeMoving() == true)
-        test2.setSpeed(0, 0);
     }
     
 }

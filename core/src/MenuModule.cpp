@@ -32,14 +32,9 @@ const std::string &MenuModule::getName() const
     return _name;
 }
 
-void MenuModule::run(IDisplayModule *library)
+void MenuModule::run(IDisplayModule *library, std::map<Input, bool> &inputs)
 {
-    std::map<Input, bool> inputs = library->catchInput();
-
-    this->scene.manageEvents(library, inputs);
-    if (!library->isOpen()) {
-        return;
-    }
+    this->scene.manageEvents(inputs);
     this->scene.update(library);
     this->scene.display(library);
 }

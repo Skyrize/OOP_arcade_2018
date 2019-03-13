@@ -6,6 +6,7 @@
 */
 
 #include "SFML.hpp"
+#include <iostream>
 
 std::map<Color, sf::Color> sfColors = {
     {NONE, sf::Color::Transparent},

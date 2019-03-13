@@ -23,7 +23,7 @@ class MenuModule : public IGameModule {
         virtual void stop();
         virtual const std::string &getName() const;
 
-        virtual void run(IDisplayModule *library);
+        virtual void run(IDisplayModule *library, std::map<Input, bool> &inputs);
 
 	protected:
 };

@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2019
 ** OOP_arcade_2018
 ** File description:
-** Pacman
+** Snake
 */
 
-#ifndef PACMANMODULE_HPP_
-    #define PACMANMODULE_HPP_
+#ifndef SNAKEMODULE_HPP_
+    #define SNAKEMODULE_HPP_
 
 #include "IGameModule.hpp"
 #include "Scene.hpp"
 
-class PacmanModule : public IGameModule {
+class SnakeModule : public IGameModule {
 	public:
-		PacmanModule();
-		~PacmanModule();
+		SnakeModule();
+		~SnakeModule();
 
         virtual void init();
         virtual void stop();
@@ -23,10 +23,10 @@ class PacmanModule : public IGameModule {
         virtual void run(IDisplayModule *library, std::map<Input, bool> &inputs);
 
 	protected:
-        std::string _name = "PacmanModule";
+        std::string _name = "SnakeModule";
 		Scene scene;
 	private:
 };
 
-#endif /* !PACMANMODULE_HPP_ */
+#endif /* !SNAKEMODULE_HPP_ */
 

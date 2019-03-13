@@ -15,35 +15,46 @@ class DLLoader {
     private:
         void *handler = nullptr;
         T *(*entryPointPtr)() = nullptr;
-        void *(*trick)(const char *file, int mode) = dlopen;
-        T *module = nullptr;
+        std::string fileName;
     public:
     
         DLLoader(const std::string &filename)
-        {
-            this->handler = trick(filename.c_str(), RTLD_LAZY);
-            if (!handler) {
-                std::cerr << "ERROR: Invalid filename '" + filename + "'. Can't dlopen. (maybe need to throw)" << std::endl;
-            }
-            entryPointPtr = (T *(*)())dlsym(handler, "entryPoint");
-            if (!entryPointPtr) {
-                std::cerr << "ERROR: '" + filename + "' has no method 'entryPoint'. (maybe need to throw)" << std::endl;
-            } else
-                module = entryPointPtr();
-        }
+        : fileName(filename)
+        {}
 
         ~DLLoader()
         {
-            delete(module);
-            dlclose(this->handler);
-            module = nullptr;
+        }
+
+        void init()
+        {
+            this->handler = dlopen(fileName.c_str(), RTLD_LAZY);
+            if (!handler) {
+                std::cerr << "ERROR: Invalid filename '" + fileName + "'. Can't dlopen. (maybe need to throw)" << std::endl;
+            }
+            entryPointPtr = (T *(*)())dlsym(handler, "entryPoint");
+            if (!entryPointPtr) {
+                std::cerr << "ERROR: '" + fileName + "' has no method 'entryPoint'. (maybe need to throw)" << std::endl;
+            }
+        }
+
+        void stop()
+        {
+            if (this->handler)
+                dlclose(this->handler);
             handler = nullptr;
             entryPointPtr = nullptr;
         }
 
+
         T *getInstance()
         {
-            return module;
+            return this->entryPointPtr();
+        }
+
+        const std::string &getFileName()
+        {
+            return fileName;
         }
 };
 

@@ -6,11 +6,38 @@
 */
 
 #include "PacmanModule.hpp"
+#include "Pacman.hpp"
+
+Sprite none;
 
 PacmanModule::PacmanModule()
+: scene("PacmanScene", none)
 {
+    this->scene.addObject(new Pacman);
 }
 
 PacmanModule::~PacmanModule()
 {
+}
+
+void PacmanModule::init()
+{
+
+}
+
+void PacmanModule::stop()
+{
+
+}
+
+const std::string &PacmanModule::getName() const
+{
+    return _name;
+}
+
+void PacmanModule::run(IDisplayModule *library, std::map<Input, bool> &inputs)
+{
+    this->scene.manageEvents(inputs);
+    this->scene.update(library);
+    this->scene.display(library);
 }

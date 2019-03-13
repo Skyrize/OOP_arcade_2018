@@ -5,7 +5,7 @@
 ** main.cpp
 */
 
-#include "Pacman.hpp"
+#include "PacmanModule.hpp"
 
 extern "C" IGameModule *entryPoint(void)
 {
