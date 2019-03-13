@@ -31,8 +31,7 @@ void Arcade::launch()
 {
     this->display->init();
 
-    while(display->isOpen()) {
-
+    while (display->isOpen()) {
         display->clear();
         game->run(display);
         display->display();

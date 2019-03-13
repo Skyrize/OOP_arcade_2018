@@ -37,6 +37,9 @@ void MenuModule::run(IDisplayModule *library)
     std::map<Input, bool> inputs = library->catchInput();
 
     this->scene.manageEvents(library, inputs);
+    if (!library->isOpen()) {
+        return;
+    }
     this->scene.update(library);
     this->scene.display(library);
 }

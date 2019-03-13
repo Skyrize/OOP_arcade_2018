@@ -29,7 +29,7 @@ MainMenuScene::MainMenuScene()
     test2->getMovement().setBlocking(true);
     test2->getAnimation().setLoop(true);
     test2->getAnimation().setAnimationSpeed(0.2);
-    Object *test21 = this->addObject("test3", sheet, std::pair<float, float>{13.1, 10.0});
+    Object *test21 = this->addObject("test3", sheet, std::pair<float, float>{13.0, 10.0});
     test21->getMovement().setBlocking(true);
     test21->getAnimation().setLoop(true);
     test21->getAnimation().setAnimationSpeed(0.2);
@@ -148,8 +148,10 @@ void MainMenuScene::manageEvents(IDisplayModule *display, std::map<Input, bool> 
 {
     Object::MovementComponent &test = objects["test"]->getMovement();
     Object::MovementComponent &test2 = objects["testcouille"]->getMovement();
-    if (inputs[Input::ESCAPE_KEY] == true)
+    if (inputs[Input::ESCAPE_KEY] == true) {
         display->stop();
+        return;
+    }
     if (inputs[Input::A_KEY] == true) {
         objects["test"]->getAnimation().changeSpriteSheet(pacmanSheet2);
         objects["testcouille"]->getAnimation().changeSpriteSheet(pacmanSheet2);
