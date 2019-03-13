@@ -43,12 +43,12 @@ class DisplayModule : public IDisplayModule {
 
 const int RGBA[8][3] = {
     {0, 0, 0},         //BLACK
-    {230, 25, 75},     //RED
-    {60, 180, 75},     //GREEN
-    {255, 225, 25},    //YELLOW
-    {0, 130, 200},     //BLUE
-    {240, 50, 230},    //MAGENTA
-    {70, 240, 240},    //CYAN
+    {255, 0, 0},     //RED
+    {0, 255, 0},     //GREEN
+    {255, 255, 0},    //YELLOW
+    {0, 0, 255},     //BLUE
+    {255, 0, 255},    //MAGENTA
+    {0, 255, 255},    //CYAN
     {255, 255, 255},   //WHITE
 };
 

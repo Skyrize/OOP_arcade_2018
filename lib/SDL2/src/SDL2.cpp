@@ -55,8 +55,10 @@ void DisplayModule::drawText(int x, int y, const std::string &str, int fontSize,
 void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > pixels)
 {
     SDL_Rect rec;
-    int tmp = x;
+    int tmp = x * 16;
 
+    y *= 16;
+    x *= 16;
     if (!_isOpen)
         return;
     for (auto &i: pixels) {
@@ -104,7 +106,7 @@ std::map<Input, bool> DisplayModule::catchInput()
     if (event.type == SDL_QUIT) {
         this->stop();
         return map;
-    } else if (event.type == SDL_KEYDOWN)
+    } else if (event.type != SDL_KEYDOWN)
         return map;
     for (auto &i: SDL_Key) {
         if (event.key.keysym.sym == i.second)
