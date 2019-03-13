@@ -11,6 +11,9 @@
 #include "IDisplayModule.hpp"
 #include <ncurses.h>
 #include <ctime>
+#include <iostream>
+#include <unistd.h>
+#include <chrono>
 
 class DisplayModule : public IDisplayModule {
 	public:
@@ -34,7 +37,8 @@ class DisplayModule : public IDisplayModule {
     private:
         std::string _name = "nCurses";
         bool _isOpen = false;
-        std::clock_t _clock;
+        std::chrono::steady_clock::time_point _clock;
+        WINDOW *_win = nullptr;
 };
 
 const std::map<Input, int> nCursesKeys = {
