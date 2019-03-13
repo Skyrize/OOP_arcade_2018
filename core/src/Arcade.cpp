@@ -13,18 +13,19 @@
 Arcade::Arcade(char *baseDisplayModule)
 {
     std::string bdmString(baseDisplayModule);
-    bool hasFind = false;
+    int hasFind = -1;
 
     loadLibraries();
     loadGames();
     for (size_t i = 0; i != libraries.size(); i++)
-        if (libraries[i]->getFileName() == bdmString)
-            hasFind = true;
-    if (hasFind == false) {
+        if (libraries[i]->getFileName() == bdmString || libraries[i]->getFileName() == "./" + bdmString)
+            hasFind = i;
+    if (hasFind == -1) {
         libraries.push_back(new DLLoader<IDisplayModule>(bdmString));
+        changeDisplay(libraries.size() - 1);
+    } else {
+        changeDisplay(hasFind);
     }
-    changeDisplay(libraries.size() - 1);
-    actualLib = libraries.size() - 1;
     this->game = new MenuModule;
 }
 
