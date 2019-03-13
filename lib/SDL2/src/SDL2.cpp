@@ -41,11 +41,13 @@ void DisplayModule::clear()
     SDL_RenderClear(_render);
 }
 
-void DisplayModule::drawText(int x, int y, const std::string &str) const
+void DisplayModule::drawText(int x, int y, const std::string &str, int fontSize, Color color)
 {
     (void)x;
     (void)y;
     (void)str;
+    (void)fontSize;
+    (void)color;
     if (!_isOpen)
         return;
 }
@@ -84,6 +86,11 @@ float DisplayModule::getTime()
     if (!_isOpen)
         return 0;
     return double(double(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()) / 1000000);
+}
+
+void DisplayModule::restartTime()
+{
+    _clock = std::chrono::steady_clock::now();
 }
 
 std::map<Input, bool> DisplayModule::catchInput()

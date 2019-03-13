@@ -53,8 +53,10 @@ void DisplayModule::clear()
     wclear(_win);
 }
 
-void DisplayModule::drawText(int x, int y, const std::string &name) const
+void DisplayModule::drawText(int x, int y, const std::string &name, int fontSize, Color color)
 {
+    (void)fontSize;
+    (void)color;
     if (!_isOpen)
         return;
     mvwprintw(_win, y, x, name.c_str());
@@ -111,4 +113,9 @@ float DisplayModule::getTime()
     if (!_isOpen)
         return 0;
     return double(double(std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()) / 1000000);
+}
+
+void DisplayModule::restartTime()
+{
+    _clock = std::chrono::steady_clock::now();
 }
