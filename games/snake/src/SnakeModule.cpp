@@ -7,13 +7,12 @@
 
 #include "SnakeModule.hpp"
 #include "Snake.hpp"
+#include <iostream>
 
 Sprite none;
 
 SnakeModule::SnakeModule()
-: scene("SnakeScene", none)
 {
-    this->scene.addObject(new Snake);
 }
 
 SnakeModule::~SnakeModule()

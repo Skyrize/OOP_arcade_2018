@@ -9,13 +9,18 @@
     #define SNAKE_HPP_
 
 #include "Object.hpp"
+#include "SnakePart.hpp"
+#include "SnakeTail.hpp"
 
 class Snake : public Object {
 	public:
 		Snake();
 		~Snake();
 
+		virtual void manageEvents(std::map<Input, bool> &inputs);
 	protected:
+        SnakeTail tail;
+        std::vector<SnakePart *> parts;
 	private:
 };
 

@@ -9,7 +9,7 @@
     #define SNAKEMODULE_HPP_
 
 #include "IGameModule.hpp"
-#include "Scene.hpp"
+#include "SnakeScene.hpp"
 
 class SnakeModule : public IGameModule {
 	public:
@@ -24,7 +24,7 @@ class SnakeModule : public IGameModule {
 
 	protected:
         std::string _name = "SnakeModule";
-		Scene scene;
+		SnakeScene scene;
 	private:
 };
 

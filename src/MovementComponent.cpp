@@ -94,15 +94,16 @@ void Object::MovementComponent::move(const float &delta, std::map<std::string, O
 	//	tmpY = lerp(oldPos.second, newPos.second, i / 16 * blocks);
 	//}
 
-        // std::cout << parent.getName() << " try to move" << std::endl;
-    if (isBlocking() == true && isMoving() == true) {
-        for (auto &e : objects)
-            if (e.second)
-                if (this->willColide(delta, e.second) == true) {
-                    collide = true;
-                    parent.hitEvent(e.second);
+    if (isMoving() == true) {
+        //std::cout << parent.getName() << " try to move" << std::endl;
+        if (isBlocking() == true) {
+            for (auto &e : objects)
+                if (e.second)
+                    if (this->willColide(delta, e.second) == true) {
+                        collide = true;
+                        parent.hitEvent(e.second);
                 }
-
+        }
         if (collide == false)
             setPosition(GET_X(newPos), GET_Y(newPos));
         // else

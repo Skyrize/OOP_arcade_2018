@@ -37,8 +37,8 @@ class Object {
 		Object(const std::string &name, Sprite &sprite, const std::pair<float, float> &position = {0.0, 0.0});
 		virtual ~Object();
 
-		virtual void display(IDisplayModule *display);
 		virtual float update(IDisplayModule *display, std::map<std::string, Object *> &objects);
+		virtual void display(IDisplayModule *display);
 		virtual MovementComponent &getMovement();
 		virtual AnimationComponent &getAnimation();
 		virtual const std::string &getName() const;

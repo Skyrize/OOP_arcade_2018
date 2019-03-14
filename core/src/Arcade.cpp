@@ -131,7 +131,7 @@ void Arcade::event()
                 prevGame();
             } else if (inputs[O_KEY] == true) {
                 nextGame();
-            } else if (inputs[M_KEY] == true) {
+            } else if (inputs[P_KEY] == true) {
                 goToMainMenu();
             }
             if (inputs[K_KEY] == true) {
