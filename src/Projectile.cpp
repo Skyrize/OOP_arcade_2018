@@ -28,6 +28,7 @@ Projectile::Projectile(Invader &parent, const std::pair<float, float> &speed, co
 
     sprite.setAnimationSpeed(0.2);
     sprite.setLoop(true);
+    movement.setBlocking(true);
     this->movement.setDestination(dest, lifetime);
 
 }

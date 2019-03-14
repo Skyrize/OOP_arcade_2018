@@ -8,13 +8,13 @@
 #include "Object.hpp"
 #include <iostream>
 
-Object::Object(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position)
+Object::Object(const std::string &name, SpriteSheet &spriteSheet, const std::pair<float, float> &position)
 : name(name), sprite(*this, spriteSheet), movement(*this)
 {
 	this->movement.setPosition(position.first, position.second);
 }
 
-Object::Object(const std::string &name, Sprite &sprite, std::pair<float, float> position)
+Object::Object(const std::string &name, Sprite &sprite, const std::pair<float, float> &position)
 : name(name), sprite(*this, sprite), movement(*this)
 {
 	this->movement.setPosition(position.first, position.second);
@@ -33,6 +33,7 @@ void Object::display(IDisplayModule *display)
 
 float Object::update(IDisplayModule *display, std::map<std::string, Object *> &objects)
 {
+
     float actualTime = display->getTime();
     if (actualTime < oldTime || oldTime == 0)
         oldTime = actualTime;

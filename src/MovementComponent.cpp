@@ -41,8 +41,9 @@ bool Object::MovementComponent::willColide(float delta, Object *other) const
 
 bool Object::MovementComponent::willColide(float delta, Object *other) const
 {
-    if (this->blocking == false || other->getMovement().isBlocking() == false || &parent == other)
+    if (this->blocking == false || other->getMovement().isBlocking() == false || &parent == other) {
         return false;
+    }
     const std::pair<float, float> newPos{POS_X + SPEED_X * delta, POS_Y + SPEED_Y * delta};
     const Sprite &mySprite = parent.sprite.getSprite();
     const std::pair<float, float> &otherPos = other->getMovement().getPosition();
@@ -54,18 +55,24 @@ bool Object::MovementComponent::willColide(float delta, Object *other) const
     //std::cout << "thisSize = " << GET_X(thisSize) << ", " << GET_Y(thisSize) << std::endl;
     //std::cout << other->getName() << "otherPos = " << GET_X(otherPos) << ", " << GET_Y(otherPos) << std::endl;
     //std::cout << "otherSize = " << GET_X(otherSize) << ", " << GET_Y(otherSize) << std::endl << std::endl;
-    for (size_t y = 0; y != mySprite.size(); y++)
-        for (size_t x = 0; x != mySprite[y].size(); x++)
-            for (size_t i = 0; i != otherSprite.size(); i++)
-                for (size_t j = 0; j != otherSprite[i].size(); j++)
-                    if (mySprite[y][x] != NONE && otherSprite[i][j] != NONE &&
-                    (int)GET_X(newPos) + x < (int)GET_X(otherPos) + j + 1 &&
-                    (int)GET_X(newPos) + x + 1 > (int)GET_X(otherPos) + j &&
-                    (int)GET_Y(newPos) + y < (int)GET_Y(otherPos) + i + 1 &&
-                    (int)GET_Y(newPos) + y + 1 > (int)GET_Y(otherPos) + i) {
-                        return true;
+    for (size_t y = 0; y != mySprite.size(); y++) {
+        for (size_t x = 0; x != mySprite[y].size(); x++) {
+            if (mySprite[y][x] != NONE) {
+                for (size_t i = 0; i != otherSprite.size(); i++) {
+                    for (size_t j = 0; j != otherSprite[i].size(); j++) {
+                        if (otherSprite[i][j] != NONE &&
+                        (int)GET_X(newPos) + x < (int)GET_X(otherPos) + j + 1 &&
+                        (int)GET_X(newPos) + x + 1 > (int)GET_X(otherPos) + j &&
+                        (int)GET_Y(newPos) + y < (int)GET_Y(otherPos) + i + 1 &&
+                        (int)GET_Y(newPos) + y + 1 > (int)GET_Y(otherPos) + i) {
+                            //std::cout << this->parent.getName() << " collide " << other->getName() << std::endl<< std::endl;
+                            return true;
+                        }
+                    }
                 }
-    //std::cout << this->parent.getName() << " collide " << other->getName() << std::endl<< std::endl;
+            }
+        }
+    }
     return false;
 }
 
@@ -87,8 +94,8 @@ void Object::MovementComponent::move(const float &delta, std::map<std::string, O
 	//	tmpY = lerp(oldPos.second, newPos.second, i / 16 * blocks);
 	//}
 
-    if (isMoving() == true) {
         // std::cout << parent.getName() << " try to move" << std::endl;
+    if (isBlocking() == true && isMoving() == true) {
         for (auto &e : objects)
             if (e.second)
                 if (this->willColide(delta, e.second) == true) {

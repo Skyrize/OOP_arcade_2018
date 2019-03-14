@@ -28,13 +28,15 @@ SpriteSheet invaderSpriteSheet {
     },
 };
 
-Invader::Invader(Scene &parent)
-: Object("SpaceInvader", invaderSpriteSheet, std::pair<float, float>{58, 60}),
+Invader::Invader(Scene &parent, const std::pair<float, float> &pos)
+: Object("SpaceInvader", invaderSpriteSheet, pos),
 parent(parent),
-gun(*this, true, 1, 100, 0.2, 0.5, 1)
+gun(*this, true, 1, 200, 0.2, 0.5, 1)
 {
     movement.setfreeMoving(true);
+    movement.setBlocking(true);
     sprite.setAnimationSpeed(0.4);
+    sprite.setLoop(true);
 }
 
 Invader::~Invader()
@@ -62,15 +64,15 @@ void Invader::manageEvents(std::map<Input, bool> &inputs)
     if (inputs[Input::Z_KEY] == true || inputs[Input::Q_KEY] == true || 
     inputs[Input::S_KEY] == true || inputs[Input::D_KEY] == true) {
         if (inputs[Input::Z_KEY] == true)
-            movement.setSpeed(movement.getSpeed().first, -60);
+            movement.setSpeed(movement.getSpeed().first, -100);
         else if (inputs[Input::S_KEY] == true)
-            movement.setSpeed(movement.getSpeed().first, 60);
+            movement.setSpeed(movement.getSpeed().first, 100);
         else
             movement.setSpeed(movement.getSpeed().first, 0);
         if (inputs[Input::Q_KEY] == true)
-            movement.setSpeed(-60, movement.getSpeed().second);
+            movement.setSpeed(-100, movement.getSpeed().second);
         else if (inputs[Input::D_KEY] == true)
-            movement.setSpeed(60, movement.getSpeed().second);
+            movement.setSpeed(100, movement.getSpeed().second);
         else
             movement.setSpeed(0, movement.getSpeed().second);
     } else {

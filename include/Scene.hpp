@@ -29,6 +29,8 @@ class Scene: public Object {
 		Object *addObject(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position = {0.0, 0.0});
 		void removeObject(const std::string &name);
 		void removeObjects();
+
+		std::map<std::string, Object *> &getObjects();
 };
 
 #endif /* SRC_SCENE_HPP_ */

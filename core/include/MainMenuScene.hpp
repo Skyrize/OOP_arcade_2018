@@ -16,8 +16,17 @@ class MainMenuScene : public Scene {
 		~MainMenuScene();
         
 		virtual void manageEvents(std::map<Input, bool> &inputs);
+		void previousPannel();
+		void nextPannel();
+		Scene *getActualPannel();
 
+		virtual void display(IDisplayModule *display);
+		virtual float update(IDisplayModule *display);
 	protected:
+		size_t actualPannel = 0;
+		std::vector<Scene *> pannels;
+
+		std::string playerName;
 	private:
 };
 

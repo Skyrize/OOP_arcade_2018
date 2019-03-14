@@ -16,7 +16,7 @@ class Invader : public Object{
     class ShootComponent;
 
 	public:
-		Invader(Scene &parent);
+		Invader(Scene &parent, const std::pair<float, float> &pos);
 		~Invader();
 
         virtual void manageEvents(std::map<Input, bool> &inputs);

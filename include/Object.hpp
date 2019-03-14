@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <utility>
+#include <iostream>
 #include "Colors.hpp"
 #include "IDisplayModule.hpp"
 
@@ -32,8 +33,8 @@ class Object {
 	public:
 		class MovementComponent; /*predefine*/
 		class AnimationComponent;
-		Object(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position = {0.0, 0.0});
-		Object(const std::string &name, Sprite &sprite, std::pair<float, float> position = {0.0, 0.0});
+		Object(const std::string &name, SpriteSheet &spriteSheet, const std::pair<float, float> &position = {0.0, 0.0});
+		Object(const std::string &name, Sprite &sprite, const std::pair<float, float> &position = {0.0, 0.0});
 		virtual ~Object();
 
 		virtual void display(IDisplayModule *display);

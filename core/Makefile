@@ -16,6 +16,10 @@ SRC			=	src/main.cpp	\
 				../src/Invader.cpp	\
 				../src/ShootComponent.cpp	\
 				../src/Projectile.cpp	\
+				../src/Button.cpp	\
+				../src/BackButton.cpp	\
+				../src/NextButton.cpp	\
+				../src/MainButton.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 

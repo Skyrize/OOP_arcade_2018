@@ -84,3 +84,8 @@ void Scene::removeObjects()
 {
 	this->toRemove.clear();
 }
+
+std::map<std::string, Object *> &Scene::getObjects()
+{
+	return this->objects;
+}
