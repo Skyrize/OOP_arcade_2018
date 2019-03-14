@@ -122,22 +122,21 @@ void Arcade::event()
     this->inputs = this->display->catchInput();
     remaining -= actual - previous;
     if (remaining <= 0) {
-        if (inputs[DOWN_ARROW_KEY] == true ||
-        inputs[UP_ARROW_KEY] == true ||
-        inputs[M_KEY] == true ||
-        inputs[LEFT_ARROW_KEY] == true ||
-        inputs[RIGHT_ARROW_KEY] == true) {
-            if (inputs[DOWN_ARROW_KEY] == true) {
+        if (inputs[L_KEY] == true ||
+        inputs[O_KEY] == true ||
+        inputs[P_KEY] == true ||
+        inputs[K_KEY] == true ||
+        inputs[M_KEY] == true) {
+            if (inputs[L_KEY] == true) {
                 prevGame();
-            } else if (inputs[UP_ARROW_KEY] == true) {
+            } else if (inputs[O_KEY] == true) {
                 nextGame();
             } else if (inputs[M_KEY] == true) {
                 goToMainMenu();
             }
-            if (inputs[LEFT_ARROW_KEY] == true) {
-                std::cout << "----------------prevdisplay------------------" << std::endl;
+            if (inputs[K_KEY] == true) {
                 prevDisplay();
-            } else if (inputs[RIGHT_ARROW_KEY] == true) {
+            } else if (inputs[M_KEY] == true) {
                 nextDisplay();
             }
             remaining = 1;

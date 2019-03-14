@@ -61,17 +61,17 @@ void Invader::manageEvents(std::map<Input, bool> &inputs)
 {
     if (inputs[Input::SPACE_KEY] == true && gun.hasShot() == false)
         gun.shoot(std::pair<float, float>{0, -1});
-    if (inputs[Input::Z_KEY] == true || inputs[Input::Q_KEY] == true || 
-    inputs[Input::S_KEY] == true || inputs[Input::D_KEY] == true) {
-        if (inputs[Input::Z_KEY] == true)
+    if (inputs[Input::UP_ARROW_KEY] == true || inputs[Input::LEFT_ARROW_KEY] == true || 
+    inputs[Input::DOWN_ARROW_KEY] == true || inputs[Input::RIGHT_ARROW_KEY] == true) {
+        if (inputs[Input::UP_ARROW_KEY] == true)
             movement.setSpeed(movement.getSpeed().first, -100);
-        else if (inputs[Input::S_KEY] == true)
+        else if (inputs[Input::DOWN_ARROW_KEY] == true)
             movement.setSpeed(movement.getSpeed().first, 100);
         else
             movement.setSpeed(movement.getSpeed().first, 0);
-        if (inputs[Input::Q_KEY] == true)
+        if (inputs[Input::LEFT_ARROW_KEY] == true)
             movement.setSpeed(-100, movement.getSpeed().second);
-        else if (inputs[Input::D_KEY] == true)
+        else if (inputs[Input::RIGHT_ARROW_KEY] == true)
             movement.setSpeed(100, movement.getSpeed().second);
         else
             movement.setSpeed(0, movement.getSpeed().second);
