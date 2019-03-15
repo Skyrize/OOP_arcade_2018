@@ -22,6 +22,7 @@ class SnakePart : public Object {
 		void replaceInBlock();
 
 	protected:
+		std::pair<float, float> fullPos;
 		Snake &head;
 		SnakePart *nextPart;
 	private:

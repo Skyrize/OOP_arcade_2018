@@ -18,6 +18,7 @@ SnakePart::SnakePart(Snake &head, SnakePart *next, const std::pair<float, float>
 head(head),
 nextPart(next)
 {
+    fullPos = movement.getPosition();
 }
 
 SnakePart::~SnakePart()
@@ -28,8 +29,10 @@ bool SnakePart::fullyInBlock()
 {
     const std::pair<float, float> &pos = movement.getPosition();
 
-    if ((int)(GET_X(pos) + 1) % 3 == 0 && (int)(GET_Y(pos) - 1) % 3 == 0)
+    if ((int)(GET_X(pos) + 1) % 3 == 0 && (int)(GET_Y(pos) - 1) % 3 == 0) {
+        fullPos = movement.getPosition();
         return true;
+    }
     return false;
 }
 

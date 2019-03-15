@@ -49,6 +49,8 @@ class DLLoader {
 
         T *getInstance()
         {
+            if (!entryPointPtr)
+            std::cout << fileName << std::endl;
             return this->entryPointPtr();
         }
 

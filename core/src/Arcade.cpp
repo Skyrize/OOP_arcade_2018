@@ -35,8 +35,6 @@ Arcade::~Arcade()
 
 void Arcade::launch()
 {
-    this->display->init();
-
     while (display->isOpen()) {
         event();
         display->clear();
