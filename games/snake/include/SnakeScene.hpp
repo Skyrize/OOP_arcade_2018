@@ -15,7 +15,7 @@ class SnakeScene : public Scene {
 		SnakeScene();
 		~SnakeScene();
 
-	virtual void manageEvents(std::map<Input, bool> &inputs);
+		virtual void manageEvents(std::map<Input, bool> &inputs);
 	protected:
 	private:
 };

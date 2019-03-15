@@ -14,6 +14,9 @@
 #include "Colors.hpp"
 #include "IDisplayModule.hpp"
 
+#define WIN_X 100
+#define WIN_Y 57
+
 #define SPEED_X this->speed.first
 #define SPEED_Y this->speed.second
 

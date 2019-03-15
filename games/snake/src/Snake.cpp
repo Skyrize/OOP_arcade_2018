@@ -41,35 +41,97 @@ Snake::Snake()
 {
     this->movement.setfreeMoving(true);
     movement.setBlocking(true);
+    movement.setPosition(47, 37);
 
-    //this->parts.push_back(new SnakePart);
 }
 
 Snake::~Snake()
 {
 }
 
+void Snake::eatFruit()
+{
+
+}
+
+void Snake::addPart()
+{
+    if (parts.size() > 0) {
+
+    } else {
+        parts.push_back(new SnakePart(*this, nullptr, std::pair<float, float>{0, 0}));
+    }
+}
+
+void Snake::moveParts()
+{
+}
+
+size_t Snake::getNbParts()
+{
+    return parts.size();
+}
+
+bool Snake::fullyInBlock()
+{
+    const std::pair<float, float> &pos = movement.getPosition();
+
+    if ((int)(GET_X(pos) + 1) % 3 == 0 && (int)(GET_Y(pos) - 1) % 3 == 0)
+        return true;
+    return false;
+}
+
+void Snake::replaceInBlock()
+{
+    const std::pair<float, float> &pos = movement.getPosition();
+}
+
+void Snake::up()
+{
+    if (actualDirection == SPRITE_DOWN)
+        return;
+    movement.setSpeed(0, -speed);
+    sprite.goToSprite(SPRITE_UP);
+    actualDirection = SPRITE_UP;
+}
+
+void Snake::down()
+{
+    if (actualDirection == SPRITE_UP)
+        return;
+    movement.setSpeed(0, speed);
+    sprite.goToSprite(SPRITE_DOWN);
+    actualDirection = SPRITE_DOWN;
+}
+
+void Snake::left()
+{
+    if (actualDirection == SPRITE_RIGHT)
+        return;
+    movement.setSpeed(-speed, 0);
+    sprite.goToSprite(SPRITE_LEFT);
+    actualDirection = SPRITE_LEFT;
+}
+
+void Snake::right()
+{
+    if (actualDirection == SPRITE_LEFT)
+        return;
+    movement.setSpeed(speed, 0);
+    sprite.goToSprite(SPRITE_RIGHT);
+    actualDirection = SPRITE_RIGHT;
+}
+
 void Snake::manageEvents(std::map<Input, bool> &inputs)
 {
-    if (inputs[Input::UP_ARROW_KEY] == true || inputs[Input::LEFT_ARROW_KEY] == true || 
-    inputs[Input::DOWN_ARROW_KEY] == true || inputs[Input::RIGHT_ARROW_KEY] == true) {
-        if (inputs[Input::UP_ARROW_KEY] == true) {
-            movement.setSpeed(movement.getSpeed().first, -100);
-            sprite.goToSprite(SPRITE_UP);
-        } else if (inputs[Input::DOWN_ARROW_KEY] == true) {
-            movement.setSpeed(movement.getSpeed().first, 100);
-            sprite.goToSprite(SPRITE_DOWN);
-        } else
-            movement.setSpeed(movement.getSpeed().first, 0);
-        if (inputs[Input::LEFT_ARROW_KEY] == true) {
-            movement.setSpeed(-100, movement.getSpeed().second);
-            sprite.goToSprite(SPRITE_LEFT);
-        } else if (inputs[Input::RIGHT_ARROW_KEY] == true) {
-            movement.setSpeed(100, movement.getSpeed().second);
-            sprite.goToSprite(SPRITE_RIGHT);
-        } else
-            movement.setSpeed(0, movement.getSpeed().second);
-    } else {
-        movement.setSpeed(0, 0);
+    std::cout << fullyInBlock() << std::endl;
+    if (inputs[Input::UP_ARROW_KEY] == true) {
+        up();
+    } else if (inputs[Input::DOWN_ARROW_KEY] == true) {
+        down();
+    } else if (inputs[Input::LEFT_ARROW_KEY] == true) {
+        left();
+    } else if (inputs[Input::RIGHT_ARROW_KEY] == true) {
+        right();
     }
 }
