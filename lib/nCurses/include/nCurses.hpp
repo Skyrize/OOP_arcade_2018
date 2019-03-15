@@ -49,6 +49,7 @@ const std::map<Input, int> nCursesKeys = {
     {DOWN_ARROW_KEY,    258},
     {SPACE_KEY,         32},
     {RETURN_KEY,        10},
+    {ERASE_KEY,         198},
     {ESCAPE_KEY,        27},
     {A_KEY,             97},
     {B_KEY,             98},

@@ -140,8 +140,9 @@ void Arcade::event()
             remaining = 1;
         }
     }
-    if (inputs[ESCAPE_KEY] == true)
+    if (inputs[ESCAPE_KEY] == true) {
         this->display->stop();
+    }
     previous = actual;
 }
 IDisplayModule *Arcade::changeDisplay(const size_t &index)
