@@ -9,13 +9,21 @@
     #define SNAKEPART_HPP_
 
 #include "Object.hpp"
+#include "Snake.hpp"
+
+class Snake;
 
 class SnakePart : public Object {
 	public:
-		SnakePart(const std::string &name, const std::pair<float, float> &position);
+		SnakePart(Snake &head, SnakePart *next, const std::pair<float, float> &position);
 		~SnakePart();
 
+		bool fullyInBlock();
+		void replaceInBlock();
+
 	protected:
+		Snake &head;
+		SnakePart *nextPart;
 	private:
 };
 
