@@ -19,6 +19,7 @@ void DisplayModule::init()
     _win = newwin(0, 0, 0, 0);
     use_default_colors();
     nodelay(_win, TRUE);
+    keypad(_win, TRUE);
     _isOpen = true;
     start_color();
     init_pair(0, COLOR_BLACK, COLOR_BLACK);
@@ -50,6 +51,7 @@ void DisplayModule::clear()
 {
     if (!_isOpen)
         return;
+    usleep(10000);
     wclear(_win);
 }
 
@@ -93,10 +95,7 @@ std::map<Input, bool> DisplayModule::catchInput()
 
     if (!_isOpen)
         return map;
-    while (1) {
-        key = wgetch(_win);
-        if (key == ERR)
-            break;
+    while ((key = wgetch(_win)) != ERR) {
         for (auto i: nCursesKeys) {
             if (i.second == key)
                 map[i.first] = true;

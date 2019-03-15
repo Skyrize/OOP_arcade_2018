@@ -39,17 +39,18 @@ int main(void)
     initscr();
     curs_set(0);
 	noecho();
+	WINDOW *win = newwin(0, 0, 0, 0);
+	nodelay(win, true);
+	keypad(win, true);
 
     while (1) {
-        clear();
-        timeout(1);
-        int key = getch();
+        werase(win);
+        int key = wgetch(win);
         if (key == 'q')
             break;
-        mvprintw(2, 2, int_to_str(COLS));
-        mvprintw(3, 3, int_to_str(LINES));
-        refresh();
+        wrefresh(win);
     }
-    erase();
+    werase(win);
+	delwin(win);
     endwin();
 }
