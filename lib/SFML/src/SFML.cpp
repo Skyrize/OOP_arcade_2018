@@ -174,10 +174,10 @@ std::map<Input, bool> DisplayModule::catchInput()
     while (this->window->pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             window->close();
+        for (auto &e : sfInputs)
+            if (sf::Keyboard::isKeyPressed(e.second))
+                inputs[e.first] = true;
     }
-    for (auto &e : sfInputs)
-        if (sf::Keyboard::isKeyPressed(e.second))
-            inputs[e.first] = true;
     return inputs;
 }
 

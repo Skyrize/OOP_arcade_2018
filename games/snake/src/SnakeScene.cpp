@@ -5,6 +5,7 @@
 ** SnakeScene
 */
 
+#include <cstdlib>
 #include "SnakeScene.hpp"
 #include "Snake.hpp"
 
@@ -158,13 +159,13 @@ static SpriteSheet verticalBorderSprite{
 };
 static SpriteSheet horizontalBorderSprite{
 {
-    { RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED},
+    { RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED,  RED, RED,  RED,  RED,  RED,  RED,  RED},
 },
 {
-    { YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW},
+    { YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW, YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW,  YELLOW},
 },
 {
-    { WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE},
+    { WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE, WHITE,  WHITE,  WHITE,  WHITE,  WHITE,  WHITE},
 }
 };
 
@@ -225,6 +226,10 @@ static Sprite slabSprite {
     {BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE, BLUE, BLUE, BLUE, NONE, NONE, NONE},
 };
 
+static Sprite fruitSprite {
+    {RED},
+};
+
 /*
 
 écran = 100 / 57
@@ -241,12 +246,19 @@ static Sprite slabSprite {
 SnakeScene::SnakeScene()
 : Scene("SnakeScene", none)
 {
-    this->addObject(new Snake);
-    addObject(new Object("BorderLeft", verticalBorderSprite, std::pair<float, float>{7, 9}))->getMovement().setBlocking(true);
-    addObject(new Object("BorderRight", verticalBorderSprite, std::pair<float, float>{92, 9}))->getMovement().setBlocking(true);
+    score = new Text("Score", "Score = 0", 16, WHITE, none, std::pair<float, float>{7, 2});
+
+    this->addObject(new Snake(*this));
+    addObject(new Object("BorderLeft", verticalBorderSprite, std::pair<float, float>{7, 10}))->getMovement().setBlocking(true);
+    addObject(new Object("BorderRight", verticalBorderSprite, std::pair<float, float>{92, 10}))->getMovement().setBlocking(true);
     addObject(new Object("BorderTop", horizontalBorderSprite, std::pair<float, float>{7, 9}))->getMovement().setBlocking(true);
     addObject(new Object("BorderBot", horizontalBorderSprite, std::pair<float, float>{7, 55}))->getMovement().setBlocking(true);
-    addObject(new Object("Slabs", slabSprite, std::pair<float, float>{8, 10}));
+    fruit = addObject(new Object("Fruit", fruitSprite));
+    fruit->getMovement().setBlocking(true);
+    replaceFruit();
+    addObject(score);
+
+    //addObject(new Object("Slabs", slabSprite, std::pair<float, float>{8, 10}));
 }
 
 SnakeScene::~SnakeScene()
@@ -255,5 +267,30 @@ SnakeScene::~SnakeScene()
 
 void SnakeScene::manageEvents(std::map<Input, bool> &inputs)
 {
-    objects["Snake"]->manageEvents(inputs);
+    if (objects["Snake"])
+        objects["Snake"]->manageEvents(inputs);
+}
+
+void SnakeScene::eventFruitEaten()
+{
+    replaceFruit();
+    addPoints();
+}
+
+void SnakeScene::addPoints()
+{
+    scoreValue += 10;
+    score->setText("Score = " + std::to_string(scoreValue));
+}
+
+void SnakeScene::replaceFruit()
+{
+    fruit->getMovement().setPosition(rand() % 84 + 8, rand() % 47 + 10);
+
+    for (auto &e : objects) {
+        if (e.second)
+            if (fruit->getMovement().willColide(0, e.second) == true) {
+                replaceFruit();
+            }
+    }
 }

@@ -178,6 +178,8 @@ IGameModule *Arcade::changeGame(const size_t &index)
 
 IGameModule *Arcade::goToMainMenu()
 {
+    if (this->game->getName() == "MainMenu")
+        return this->game;
     this->display->restartTime();
     this->game->stop();
     delete(this->game);

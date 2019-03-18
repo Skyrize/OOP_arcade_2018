@@ -12,10 +12,9 @@ CC 			= 	g++
 SRC			=	src/main.cpp	\
 				src/Snake.cpp	\
 				src/SnakeScene.cpp	\
-				src/SnakePart.cpp	\
-				src/SnakeTail.cpp	\
 				src/SnakeModule.cpp	\
 				../../src/Object.cpp	\
+				../../src/Text.cpp	\
 				../../src/AnimationComponent.cpp	\
 				../../src/MovementComponent.cpp	\
 				../../src/Scene.cpp	\

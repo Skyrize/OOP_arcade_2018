@@ -9,17 +9,18 @@
     #define SNAKE_HPP_
 
 #include "Object.hpp"
-#include "SnakePart.hpp"
-#include "SnakeTail.hpp"
+#include "SnakeScene.hpp"
 
 class SnakePart;
 
 class Snake : public Object {
 	public:
-		Snake();
+		Snake(SnakeScene &parent);
 		~Snake();
 
 		virtual void manageEvents(std::map<Input, bool> &inputs);
+		virtual float update(IDisplayModule *display, std::map<std::string, Object *> &objects);
+		virtual void hitEvent(Object *other);
 
 		void left();
 		void right();
@@ -31,14 +32,19 @@ class Snake : public Object {
 
 		size_t getNbParts();
 
-		bool fullyInBlock();
-		void replaceInBlock();
+		void die(float delta);
+
+
+		//bool fullyInBlock();
 
 	protected:
-        SnakeTail tail;
-        std::vector<SnakePart *> parts;
+		std::pair<float, float> oldPos;
+		SnakeScene &parent;
+        Object *tail;
+        std::vector<Object *> body;
 		int actualDirection = 0;
-		int speed = 1;
+		int speed = 20;
+		bool isDead = false;
 	private:
 };
 

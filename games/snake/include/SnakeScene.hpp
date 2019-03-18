@@ -9,6 +9,7 @@
     #define SNAKESCENE_HPP_
 
 #include "Scene.hpp"
+#include "Text.hpp"
 
 class SnakeScene : public Scene {
 	public:
@@ -16,7 +17,14 @@ class SnakeScene : public Scene {
 		~SnakeScene();
 
 		virtual void manageEvents(std::map<Input, bool> &inputs);
+
+		void eventFruitEaten();
+		void replaceFruit();
+		void addPoints();
 	protected:
+		Object *fruit;
+		Text *score;
+		int scoreValue = 0;
 	private:
 };
 
