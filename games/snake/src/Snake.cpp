@@ -47,6 +47,12 @@ Sprite snakeTailSprite {
     {CYAN},
 };
 
+Sprite deadPart {
+    {WHITE, NONE, WHITE},
+    {NONE, NONE, NONE},
+    {WHITE, NONE, WHITE},
+};
+
 Snake::Snake(SnakeScene &parent)
 : Object("Snake", snakeHeadSprite),
 parent(parent)
@@ -61,10 +67,7 @@ parent(parent)
     body.push_back(new Object("SnakePart-" + std::to_string(body.size()), snakePartSprite, std::pair<float, float>{47, 39}));
     body[body.size() - 1]->getMovement().setBlocking(true);
     parent.addObject(body[body.size() - 1]);
-    body.push_back(new Object("SnakePart-" + std::to_string(body.size()), snakePartSprite, std::pair<float, float>{47, 40}));
-    body[body.size() - 1]->getMovement().setBlocking(true);
-    parent.addObject(body[body.size() - 1]);
-    body.push_back(new Object("SnakeTail" + std::to_string(body.size()), snakeTailSprite, std::pair<float, float>{47, 41}));
+    body.push_back(new Object("SnakeTail" + std::to_string(body.size()), snakeTailSprite, std::pair<float, float>{47, 40}));
     body[body.size() - 1]->getMovement().setBlocking(true);
     parent.addObject(body[body.size() - 1]);
 }
@@ -94,34 +97,56 @@ void Snake::hitEvent(Object *other)
     if (other->getName() == "Fruit") {
         eatFruit();
     } else {
-        for (auto &e : body)
-            if (other == e) {
-                isDead = true;
-                movement.setSpeed(0, 0);
-
-            }
+        isDead = true;
+        movement.setSpeed(0, 0);
     }
 }
 
 void Snake::eatFruit()
 {
+    std::map<std::string, Object *> &map = parent.getObjects();
+
     parent.eventFruitEaten();
     addPart();
+    for (auto &e : map) {
+        if (e.second) {
+            e.second->getAnimation().setAnimationSpeed(0.2);
+            e.second->getAnimation().setNbLoop(3);
+        }
+    }
 }
 
 void Snake::die(float delta)
 {
     static float start = 0;
+    static bool changed = false;
 
     start += delta;
-    if (start >= 0.2) {
-        if (body.size() != 0) {
-            parent.removeObject(body[body.size() - 1]->getName());
-            body.pop_back();
-        } else {
-            parent.removeObject(this->name);
+    if (start >= 0.1) {
+        
+        if (changed == false) {
+            if (body.size() != 0) {
+                const std::pair<float, float> &pos = body[body.size() - 1]->getMovement().getPosition();
+                body[body.size() - 1]->getMovement().setPosition(GET_X(pos) - 1, GET_Y(pos) - 1);
+                body[body.size() - 1]->getAnimation().changeSpriteSheet(deadPart);
+                changed = true;
+            } else {
+                const std::pair<float, float> &pos = this->getMovement().getPosition();
+                this->getMovement().setPosition(GET_X(pos) - 1, GET_Y(pos) - 1);
+                this->getAnimation().changeSpriteSheet(deadPart);
+                changed = true;
+            }
         }
-        start = 0;
+        if (start >= 0.2) {
+            if (body.size() != 0) {
+                parent.removeObject(body[body.size() - 1]->getName());
+                body.pop_back();
+            } else {
+                parent.killSnake();
+            }
+            start = 0;
+            changed = false;
+        }
     }
 }
 
