@@ -294,3 +294,8 @@ void SnakeScene::replaceFruit()
             }
     }
 }
+
+void SnakeScene::killSnake()
+{
+    removeObject("Snake");
+}

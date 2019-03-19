@@ -21,6 +21,8 @@ class SnakeScene : public Scene {
 		void eventFruitEaten();
 		void replaceFruit();
 		void addPoints();
+
+		void killSnake();
 	protected:
 		Object *fruit;
 		Text *score;
