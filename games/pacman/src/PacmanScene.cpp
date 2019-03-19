@@ -6,7 +6,6 @@
 */
 
 #include "PacmanScene.hpp"
-#include "Pacman.hpp"
 
 static Sprite none {{}};
 
@@ -71,11 +70,19 @@ static Sprite mapSprite
     {NONE, NONE, NONE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, BLUE, NONE, NONE, NONE},
 };
 
+static Sprite blackSquare = {
+    {BLACK, BLACK, BLACK},
+    {BLACK, BLACK, BLACK},
+    {BLACK, BLACK, BLACK},
+};
+
 PacmanScene::PacmanScene()
 : Scene("PacmanScene", none)
 {
     this->addObject(new Pacman(this));
     this->addObject("PacmanMap", mapSprite)->getMovement().setBlocking(true);
+    this->addObject(new Teleporter("Teleporter1", blackSquare, {61, 27}, {-3, 27}))->getMovement().setBlocking(true);
+    this->addObject(new Teleporter("Teleporter2", blackSquare, {-1, 27}, {63, 27}))->getMovement().setBlocking(true);
 }
 
 PacmanScene::~PacmanScene()

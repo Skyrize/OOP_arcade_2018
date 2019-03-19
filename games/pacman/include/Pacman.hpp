@@ -25,6 +25,8 @@ class Pacman : public Object {
 		Pacman(Scene *scene);
 		~Pacman();
 		void manageEvents(std::map<Input, bool> &inputs) override;
+		float update(IDisplayModule *display, std::map<std::string, Object *> &objects) override;
+		void hitEvent(Object *other) override;
 
 	private:
 		void up();

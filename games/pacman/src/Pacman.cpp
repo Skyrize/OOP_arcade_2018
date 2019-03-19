@@ -156,3 +156,16 @@ void Pacman::manageEvents(std::map<Input, bool> &inputs)
     else if (buffer == RIGHT)
         right();
 }
+
+void Pacman::hitEvent(Object *other)
+{
+    other->hitEvent(this);
+    return;
+}
+
+float Pacman::update(IDisplayModule *display, std::map<std::string, Object *> &objects)
+{
+    float delta = Object::update(display, objects);
+
+    return delta;
+}

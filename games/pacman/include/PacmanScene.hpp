@@ -9,6 +9,8 @@
     #define PACMANSCENE_HPP_
 
 #include "Scene.hpp"
+#include "Teleporter.hpp"
+#include "Pacman.hpp"
 
 class PacmanScene : public Scene {
 	public:
