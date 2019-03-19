@@ -70,6 +70,7 @@ class Object {
 				void goToSprite(const size_t &index);
 				void changeSpriteSheet(SpriteSheet &spriteSheet);
 				void changeSpriteSheet(Sprite &sprite);
+				const size_t &getActual(void) const;
 
 			protected:
 				size_t actual = 0;

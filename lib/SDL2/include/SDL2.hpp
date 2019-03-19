@@ -15,8 +15,8 @@
 
 class DisplayModule : public IDisplayModule {
 	public:
-		DisplayModule() = default;
-		virtual ~DisplayModule() = default;
+		DisplayModule();
+		virtual ~DisplayModule();
 
         void init();
         void stop();

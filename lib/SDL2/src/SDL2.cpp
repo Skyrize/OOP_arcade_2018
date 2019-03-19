@@ -7,13 +7,23 @@
 
 #include "SDL2.hpp"
 
-void DisplayModule::init()
+DisplayModule::DisplayModule()
 {
     auto start = std::chrono::steady_clock::now();
 
     _clock = start;
     _isOpen = true;
     SDL_Init(SDL_INIT_VIDEO);
+}
+
+DisplayModule::~DisplayModule()
+{
+    SDL_Quit();
+}
+
+void DisplayModule::init()
+{
+    restartTime();
     _win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
         1600, 912, SDL_WINDOW_SHOWN);
     _render = SDL_CreateRenderer(_win, -1, SDL_RENDERER_ACCELERATED);
@@ -23,7 +33,6 @@ void DisplayModule::stop()
 {
     _isOpen = false;
     SDL_DestroyWindow(_win);
-    SDL_Quit();
 }
 
 void DisplayModule::display()

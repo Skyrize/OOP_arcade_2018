@@ -37,6 +37,11 @@ const Sprite &Object::AnimationComponent::getSprite() const
     return spriteSheet[actual];
 }
 
+const size_t &Object::AnimationComponent::getActual() const
+{
+    return actual;
+}
+
 const SpriteSheet &Object::AnimationComponent::getSpriteSheet() const
 {
     return spriteSheet;

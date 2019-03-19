@@ -9,7 +9,7 @@
     #define PACMANMODULE_HPP_
 
 #include "IGameModule.hpp"
-#include "Scene.hpp"
+#include "PacmanScene.hpp"
 
 class PacmanModule : public IGameModule {
 	public:
@@ -24,8 +24,7 @@ class PacmanModule : public IGameModule {
 
 	protected:
         std::string _name = "PacmanModule";
-		Scene scene;
-	private:
+		PacmanScene scene;
 };
 
 #endif /* !PACMANMODULE_HPP_ */

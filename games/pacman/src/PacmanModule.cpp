@@ -11,9 +11,7 @@
 Sprite none;
 
 PacmanModule::PacmanModule()
-: scene("PacmanScene", none)
 {
-    this->scene.addObject(new Pacman);
 }
 
 PacmanModule::~PacmanModule()

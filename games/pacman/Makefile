@@ -9,13 +9,14 @@ CXXFLAGS	=	--std=c++11 -shared -W -Wall -Wextra -Werror -I../../include -I./incl
 
 CC 			= 	g++
 
-SRC			=	src/main.cpp	\
-				src/Pacman.cpp	\
-				src/PacmanModule.cpp	\
-				../../src/Object.cpp	\
+SRC			=	src/main.cpp						\
+				src/Pacman.cpp						\
+				src/PacmanModule.cpp				\
+				src/PacmanScene.cpp					\
+				../../src/Object.cpp				\
 				../../src/AnimationComponent.cpp	\
-				../../src/MovementComponent.cpp	\
-				../../src/Scene.cpp	\
+				../../src/MovementComponent.cpp		\
+				../../src/Scene.cpp					\
 				
 
 OBJ			=	$(SRC:.cpp=.o)

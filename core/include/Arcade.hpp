@@ -14,38 +14,38 @@
 #include "DLLoader.hpp"
 
 class Arcade {
-	private:
-        size_t actualLib = 0;
-        size_t actualGame = 0;
-        float remaining = 0;
-        float previous = 0;
+        private:
+                size_t actualLib = 0;
+                size_t actualGame = 0;
+                float remaining = 0;
+                float previous = 0;
 
-        std::vector<DLLoader<IDisplayModule> *> libraries;
-        std::vector<DLLoader<IGameModule> *> games;
+                std::vector<DLLoader<IDisplayModule> *> libraries;
+                std::vector<DLLoader<IGameModule> *> games;
 
-        IDisplayModule *display = nullptr;
-        IGameModule *game = nullptr;
+                IDisplayModule *display = nullptr;
+                IGameModule *game = nullptr;
 
-        std::map<Input, bool> inputs;
+                std::map<Input, bool> inputs;
 
 	public:
 		Arcade(char *baseDisplayModule);
 		~Arcade();
 
-        void launch();
-        void loadLibraries();
-        void loadGames();
+                void launch();
+                void loadLibraries();
+                void loadGames();
 
-        IDisplayModule *changeDisplay(const size_t &index);
-        IGameModule *changeGame(const size_t &index);
+                IDisplayModule *changeDisplay(const size_t &index);
+                IGameModule *changeGame(const size_t &index);
 
-        void event();
-        IGameModule *goToMainMenu();
+                void event();
+                IGameModule *goToMainMenu();
 
-        void nextDisplay();
-        void prevDisplay();
-        void nextGame();
-        void prevGame();
+                void nextDisplay();
+                void prevDisplay();
+                void nextGame();
+                void prevGame();
 };
 
 #endif /* !ARCADE_HPP_ */
