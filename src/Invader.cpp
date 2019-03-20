@@ -33,7 +33,7 @@ Invader::Invader(Scene &parent, const std::pair<float, float> &pos)
 parent(parent),
 gun(*this, true, 1, 200, 0.2, 0.5, 1)
 {
-    movement.setfreeMoving(true);
+    movement.setFreeMoving(true);
     movement.setBlocking(true);
     sprite.setAnimationSpeed(0.4);
     sprite.setLoop(true);

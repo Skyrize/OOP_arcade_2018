@@ -42,12 +42,15 @@ int main(void)
 	WINDOW *win = newwin(0, 0, 0, 0);
 	nodelay(win, true);
 	keypad(win, true);
+	int x = 0;
 
     while (1) {
         werase(win);
         int key = wgetch(win);
         if (key == 'q')
             break;
+		mvwprintw(win, x, x , int_to_str(key));
+		x++;
         wrefresh(win);
     }
     werase(win);

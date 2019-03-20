@@ -158,7 +158,7 @@ bool Object::MovementComponent::isBlocking() const
 }
 
 
-void Object::MovementComponent::setfreeMoving(const bool &state)
+void Object::MovementComponent::setFreeMoving(const bool &state)
 {
     freeMoving = state;
 }

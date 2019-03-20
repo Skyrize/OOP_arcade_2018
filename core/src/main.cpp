@@ -15,7 +15,7 @@ int main(int ac, char **av)
         return (0);
     }
     Arcade arcade(av[1]);
-
+    srand(time(NULL));
     arcade.launch();
     return 0;
 }

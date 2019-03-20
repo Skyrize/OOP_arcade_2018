@@ -11,6 +11,7 @@ CC 			= 	g++
 
 SRC			=	src/main.cpp						\
 				src/Pacman.cpp						\
+				src/Ghost.cpp						\
 				src/PacmanModule.cpp				\
 				src/PacmanScene.cpp					\
 				../../src/Object.cpp				\

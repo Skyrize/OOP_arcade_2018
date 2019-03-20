@@ -57,7 +57,7 @@ Snake::Snake(SnakeScene &parent)
 : Object("Snake", snakeHeadSprite),
 parent(parent)
 {
-    this->movement.setfreeMoving(true);
+    this->movement.setFreeMoving(true);
     movement.setBlocking(true);
     movement.setPosition(47, 37);
 
