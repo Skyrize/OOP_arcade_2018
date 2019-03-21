@@ -17,7 +17,6 @@ void DisplayModule::init()
 	noecho();
     cbreak();
     _win = newwin(0, 0, 0, 0);
-    use_default_colors();
     nodelay(_win, TRUE);
     keypad(_win, TRUE);
     _isOpen = true;

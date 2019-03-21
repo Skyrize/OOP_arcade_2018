@@ -98,7 +98,7 @@ class Object {
 				bool isBlocking() const;
 				void setSpeed(const float &x, const float &y);
 				void setPosition(const float &x, const float &y);
-		        void setfreeMoving(const bool &state);
+		        void setFreeMoving(const bool &state);
 		        void setBlocking(const bool &state);
 		        void setDestination(const std::pair<float, float> &newDest, const float &timeToReach);
 				const std::pair<float, float> &getPosition() const;

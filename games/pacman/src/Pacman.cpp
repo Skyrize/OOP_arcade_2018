@@ -60,10 +60,10 @@ SpriteSheet pacmanUpSheet {
 };
 
 
-Pacman::Pacman(Scene *scene)
-: Object("Pacman", pacmanRightSheet, {6.0, 3.0}), scene(scene)
+Pacman::Pacman(Scene *parent)
+: Object("Pacman", pacmanRightSheet, {6.0, 3.0}), _parent(parent)
 {
-    this->movement.setfreeMoving(true);
+    this->movement.setFreeMoving(true);
     this->sprite.setLoop(true);
     this->sprite.setAnimationSpeed(0.3);
     this->movement.setBlocking(true);
@@ -77,12 +77,12 @@ void Pacman::up()
 {
     size_t prevPosition = sprite.getActual();
     std::pair<int, int> pos = std::pair<int, int>(movement.getPosition());
-    Sprite map = this->scene->getObject("PacmanMap")->getAnimation().getSprite();
+    Sprite map = this->_parent->getObject("PacmanMap")->getAnimation().getSprite();
 
-    this->buffer = UP;
+    this->_buffer = UP;
     if (pos.first % 3 != 0 || map[pos.second - 3][pos.first] == BLUE)
         return;
-    this->buffer = NONE;
+    this->_buffer = NONE;
     movement.setSpeed(0, -_speed);
     if (sprite.getSpriteSheet() != pacmanUpSheet)
         sprite.changeSpriteSheet(pacmanUpSheet);
@@ -93,12 +93,12 @@ void Pacman::down()
 {
     size_t prevPosition = sprite.getActual();
     std::pair<int, int> pos = std::pair<int, int>(movement.getPosition());
-    Sprite map = this->scene->getObject("PacmanMap")->getAnimation().getSprite();
+    Sprite map = this->_parent->getObject("PacmanMap")->getAnimation().getSprite();
 
-    this->buffer = DOWN;
+    this->_buffer = DOWN;
     if (pos.first % 3 != 0 || map[pos.second + 3][pos.first] == BLUE)
         return;
-    this->buffer = NONE;
+    this->_buffer = NONE;
     movement.setSpeed(0, _speed);
     if (sprite.getSpriteSheet() != pacmanDownSheet)
         sprite.changeSpriteSheet(pacmanDownSheet);
@@ -109,12 +109,12 @@ void Pacman::left()
 {
     size_t prevPosition = sprite.getActual();
     std::pair<int, int> pos = std::pair<int, int>(movement.getPosition());
-    Sprite map = this->scene->getObject("PacmanMap")->getAnimation().getSprite();
+    Sprite map = this->_parent->getObject("PacmanMap")->getAnimation().getSprite();
 
-    this->buffer = LEFT;
+    this->_buffer = LEFT;
     if (pos.second % 3 != 0 || map[pos.second][pos.first - 3] == BLUE)
         return;
-    this->buffer = NONE;
+    this->_buffer = NONE;
     movement.setSpeed(-_speed, 0);
     if (sprite.getSpriteSheet() != pacmanLeftSheet)
         sprite.changeSpriteSheet(pacmanLeftSheet);
@@ -125,12 +125,12 @@ void Pacman::right()
 {
     size_t prevPosition = sprite.getActual();
     std::pair<int, int> pos = std::pair<int, int>(movement.getPosition());
-    Sprite map = this->scene->getObject("PacmanMap")->getAnimation().getSprite();
+    Sprite map = this->_parent->getObject("PacmanMap")->getAnimation().getSprite();
 
-    this->buffer = RIGHT;
+    this->_buffer = RIGHT;
     if (pos.second % 3 != 0 || map[pos.second][pos.first + 3] == BLUE)
         return;
-    this->buffer = NONE;
+    this->_buffer = NONE;
     movement.setSpeed(_speed, 0);
     if (sprite.getSpriteSheet() != pacmanRightSheet)
         sprite.changeSpriteSheet(pacmanRightSheet);
@@ -147,12 +147,29 @@ void Pacman::manageEvents(std::map<Input, bool> &inputs)
         left();
     else if (inputs[Input::RIGHT_ARROW_KEY])
         right();
-    else if (buffer == UP)
+    else if (_buffer == UP)
         up();
-    else if (buffer == DOWN)
+    else if (_buffer == DOWN)
         down();
-    else if (buffer == LEFT)
+    else if (_buffer == LEFT)
         left();
-    else if (buffer == RIGHT)
+    else if (_buffer == RIGHT)
         right();
+}
+
+void Pacman::hitEvent(Object *other)
+{
+    if (other->getName().find("Teleporter", 0) != std::string::npos)
+        other->hitEvent(this);
+    if (other->getName().find("PacGum") == std::string::npos)
+        return;
+    this->_parent->removeObject(other->getName());
+    return;
+}
+
+float Pacman::update(IDisplayModule *display, std::map<std::string, Object *> &objects)
+{
+    float delta = Object::update(display, objects);
+
+    return delta;
 }
