@@ -96,14 +96,15 @@ void Object::MovementComponent::move(const float &delta, std::map<std::string, O
 
     if (isMoving() == true) {
         //std::cout << parent.getName() << " try to move" << std::endl;
-        if (isBlocking() == true) {
-            for (auto &e : objects)
-                if (e.second)
-                    if (this->willColide(delta, e.second) == true) {
+        for (auto &e : objects)
+            if (e.second)
+                if (this->willColide(delta, e.second) == true) {
+
+                    if (isBlocking() == true) {
                         collide = true;
-                        parent.hitEvent(e.second);
-                }
-        }
+                    }
+                    parent.hitEvent(e.second);
+            }
         if (collide == false)
             setPosition(GET_X(newPos), GET_Y(newPos));
         // else
