@@ -41,7 +41,7 @@ bool Object::MovementComponent::willColide(float delta, Object *other) const
 
 bool Object::MovementComponent::willColide(float delta, Object *other) const
 {
-    if (this->blocking == false || other->getMovement().isBlocking() == false || &parent == other) {
+    if (&parent == other) {
         return false;
     }
     const std::pair<float, float> newPos{POS_X + SPEED_X * delta, POS_Y + SPEED_Y * delta};
