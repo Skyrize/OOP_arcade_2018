@@ -238,7 +238,7 @@ void SnakeScene::replaceFruit()
 void SnakeScene::killSnake()
 {
     removeObject("Snake");
-    endMenu();
+    //endMenu();
 }
 
 void SnakeScene::launchSnake()
