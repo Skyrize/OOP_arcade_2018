@@ -9,6 +9,7 @@
 #define SDL2_HPP_
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "IDisplayModule.hpp"
 #include <iostream>
 #include <chrono>
@@ -39,17 +40,19 @@ class DisplayModule : public IDisplayModule {
         bool _isOpen = false;
         SDL_Window *_win = nullptr;
         SDL_Renderer *_render = nullptr;
+        TTF_Font *_font = nullptr;
+
 };
 
-const int RGBA[8][3] = {
-    {0, 0, 0},         //BLACK
-    {255, 0, 0},     //RED
-    {0, 255, 0},     //GREEN
-    {255, 255, 0},    //YELLOW
-    {0, 0, 255},     //BLUE
-    {255, 0, 255},    //MAGENTA
-    {0, 255, 255},    //CYAN
-    {255, 255, 255},   //WHITE
+const int RGB[8][3] = {
+    {0, 0, 0},          //BLACK
+    {255, 0, 0},        //RED
+    {0, 255, 0},        //GREEN
+    {255, 255, 0},      //YELLOW
+    {0, 0, 255},        //BLUE
+    {255, 0, 255},      //MAGENTA
+    {0, 255, 255},      //CYAN
+    {255, 255, 255},    //WHITE
 };
 
 const std::map<Input, SDL_Keycode> SDL_Key = {

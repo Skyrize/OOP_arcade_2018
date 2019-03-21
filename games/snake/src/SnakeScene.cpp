@@ -225,7 +225,7 @@ void SnakeScene::addPoints()
 
 void SnakeScene::replaceFruit()
 {
-    fruit->getMovement().setPosition(rand() % 84 + 8, rand() % 47 + 10);
+    fruit->getMovement().setPosition(rand() % 84 + 8, rand() % 44 + 11);
 
     for (auto &e : objects) {
         if (e.second)
