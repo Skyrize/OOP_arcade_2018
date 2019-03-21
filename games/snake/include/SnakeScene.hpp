@@ -22,6 +22,8 @@ class SnakeScene : public Scene {
 		void replaceFruit();
 		void addPoints();
 
+    	void openEndMenu();
+		void launchSnake();
 		void killSnake();
 	protected:
 		Object *fruit;
