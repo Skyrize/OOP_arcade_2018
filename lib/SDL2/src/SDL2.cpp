@@ -14,11 +14,13 @@ DisplayModule::DisplayModule()
     _clock = start;
     _isOpen = true;
     SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
 }
 
 DisplayModule::~DisplayModule()
 {
     SDL_Quit();
+    TTF_Quit();
 }
 
 void DisplayModule::init()
@@ -27,11 +29,13 @@ void DisplayModule::init()
     _win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
         1600, 912, SDL_WINDOW_SHOWN);
     _render = SDL_CreateRenderer(_win, -1, SDL_RENDERER_ACCELERATED);
+    _font = TTF_OpenFont("./resources/font.ttf", 100);
 }
 
 void DisplayModule::stop()
 {
     _isOpen = false;
+    TTF_CloseFont(_font);
     SDL_DestroyWindow(_win);
 }
 
@@ -52,13 +56,23 @@ void DisplayModule::clear()
 
 void DisplayModule::drawText(int x, int y, const std::string &str, int fontSize, Color color)
 {
-    (void)x;
-    (void)y;
-    (void)str;
-    (void)fontSize;
-    (void)color;
+    SDL_Color colorSdl;
+    SDL_Surface *surface;
+    SDL_Texture *texture;
+    SDL_Rect rec;
+    int w, h = 0;
+
     if (!_isOpen)
         return;
+    colorSdl = {(uint8_t)RGB[color][0], (uint8_t)RGB[color][1], (uint8_t)RGB[color][2], 255};
+    surface = TTF_RenderText_Solid(_font, str.c_str(), colorSdl);
+    texture = SDL_CreateTextureFromSurface(_render, surface);
+    SDL_QueryTexture(texture, NULL, NULL, &w, &h);
+    rec.x = x * 16;
+    rec.y = y * 16;
+    rec.w = w * fontSize / 100;
+    rec.h = h * fontSize / 100;
+    SDL_RenderCopy(_render, texture, NULL, &rec);
 }
 
 void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > pixels)
@@ -80,7 +94,7 @@ void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > pix
             rec.y = y;
             rec.h = 16;
             rec.w = 16;
-            SDL_SetRenderDrawColor(_render, RGBA[j][0], RGBA[j][1], RGBA[j][2], 255);
+            SDL_SetRenderDrawColor(_render, RGB[j][0], RGB[j][1], RGB[j][2], 255);
             SDL_RenderFillRect(_render, &rec);
             x += 16;
         }

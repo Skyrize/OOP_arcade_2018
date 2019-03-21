@@ -7,7 +7,8 @@
 
 #include "Ghost.hpp"
 
-Ghost::Ghost(const std::string &name, Sprite sprite, Scene *parent, const std::pair<float, float> &position) : Object(name, sprite, position), _parent(parent)
+Ghost::Ghost(const std::string &name, Sprite sprite, Scene *parent, const std::pair<float, float> &position) : Object(name, sprite, position),
+_parent(parent), _destination((std::pair<int, int>)position)
 {
     this->movement.setBlocking(false);
     this->movement.setFreeMoving(true);
@@ -65,7 +66,6 @@ int Ghost::right()
 
 void Ghost::hitEvent(Object *other)
 {
-    std::cout << "test" << std::endl;
     (void)other;
 }
 
@@ -89,21 +89,60 @@ int Ghost::callDirectionHandler(int direction)
     return 1;
 }
 
+void Ghost::setDestination(direction_t direction)
+{
+    std::pair<int, int> actualPos = (std::pair<int, int>)this->movement.getPosition();
+
+    switch (direction) {
+        case UP:
+            _destination.first = actualPos.first;
+            _destination.second = actualPos.second - 3;
+            _reverseDirection = DOWN;
+            break;
+        case DOWN:
+            _destination.first = actualPos.first;
+            _destination.second = actualPos.second + 3;
+            _reverseDirection = UP;
+            break;
+        case LEFT:
+            _destination.first = actualPos.first - 3;
+            _destination.second = actualPos.second;
+            _reverseDirection = RIGHT;
+            break;
+        case RIGHT:
+            _destination.first = actualPos.first + 3;
+            _destination.second = actualPos.second;
+            _reverseDirection = LEFT;
+            break;
+        default:
+            break;
+    }
+    _direction = (direction_t)direction;
+}
+
 float Ghost::update(IDisplayModule *display, std::map<std::string, Object *> &objects)
 {
     float delta = Object::update(display, objects);
     int direction = 0;
 
     if (int(this->movement.getPosition().first) % 3 != 0
-    || int(this->movement.getPosition().second) % 3 != 0)
+    || int(this->movement.getPosition().second) % 3 != 0
+    || int(this->movement.getPosition().first) != _destination.first
+    || int(this->movement.getPosition().second) != _destination.second)
         return delta;
     direction = rand() % 4;
     for (int i = 0; i < 4; i++) {
-        if (!callDirectionHandler(direction))
+        if (_reverseDirection != (direction_t)direction
+        && !callDirectionHandler(direction))
             break;
         direction++;
         if (direction == 4)
             direction = 0;
+        if (i == 3) {
+            direction = _reverseDirection;
+            callDirectionHandler(direction);
+        }
     }
+    setDestination((direction_t)direction);
     return delta;
 }
