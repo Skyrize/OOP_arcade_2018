@@ -100,7 +100,7 @@ void Object::MovementComponent::move(const float &delta, std::map<std::string, O
             if (e.second)
                 if (this->willColide(delta, e.second) == true) {
 
-                    if (isBlocking() == true) {
+                    if (e.second->getMovement().isBlocking() == true) {
                         collide = true;
                     }
                     parent.hitEvent(e.second);
