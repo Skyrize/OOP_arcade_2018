@@ -14,6 +14,7 @@ SRC			=	src/main.cpp						\
 				src/Ghost.cpp						\
 				src/PacmanModule.cpp				\
 				src/PacmanScene.cpp					\
+				src/EndMenu.cpp						\
 				../../src/Object.cpp				\
 				../../src/AnimationComponent.cpp	\
 				../../src/MovementComponent.cpp		\
