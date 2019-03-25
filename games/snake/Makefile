@@ -13,6 +13,8 @@ SRC			=	src/main.cpp	\
 				src/Snake.cpp	\
 				src/SnakeScene.cpp	\
 				src/SnakeModule.cpp	\
+				src/StartPannel.cpp	\
+				src/EndPannel.cpp	\
 				../../src/Object.cpp	\
 				../../src/Text.cpp	\
 				../../src/AnimationComponent.cpp	\

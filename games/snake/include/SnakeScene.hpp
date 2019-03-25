@@ -22,10 +22,11 @@ class SnakeScene : public Scene {
 		void replaceFruit();
 		void addPoints();
 
-    	void openEndMenu();
 		void launchSnake();
 		void killSnake();
 	protected:
+		Object *startMenu;
+		Object *endMenu;
 		Object *fruit;
 		Text *score;
 		int scoreValue = 0;

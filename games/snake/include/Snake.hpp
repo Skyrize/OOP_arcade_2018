@@ -34,7 +34,9 @@ class Snake : public Object {
 
 		void die(float delta);
 
-
+		void setSpeed(int newSpeed);
+		void setAnimation(float speed, int nbLoop);
+		void setSprite(int index);
 		//bool fullyInBlock();
 
 	protected:
@@ -44,6 +46,8 @@ class Snake : public Object {
         std::vector<Object *> body;
 		int actualDirection = 0;
 		int speed = 20;
+		float boostTimer = 0;
+		float boostCooldown = 0;
 		bool isDead = false;
 	private:
 };
