@@ -17,8 +17,6 @@ class Arcade {
         private:
                 size_t actualLib = 0;
                 size_t actualGame = 0;
-                float remaining = 0;
-                float previous = 0;
 
                 std::vector<DLLoader<IDisplayModule> *> libraries;
                 std::vector<DLLoader<IGameModule> *> games;

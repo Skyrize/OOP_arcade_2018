@@ -78,35 +78,20 @@ bool Object::MovementComponent::willColide(float delta, Object *other) const
 
 void Object::MovementComponent::move(const float &delta, std::map<std::string, Object *> &objects)
 {
-	std::pair<float, float> newPos;
     bool collide = false;
-    //if (parent.getName() == "test") {
-    //    std::cout << "prevpos = " << this->position.first << ", " << position.second << " |||| newpos = " << newPos.first << ", " << newPos.second << std::endl;
-    //    std::cout << "delta = " << delta << std::endl;
-    //    std::cout << "speed = " << SPEED_X << ", " << SPEED_Y << std::endl << std::endl;
-    //}
-	//std::pair<float, float> oldPos = this->position;
-	//float tmpX = 0;
-	//float tmpY = 0;
-	//int blocks = (newPos.first - oldPos.first) + (newPos.second - oldPos.second);
-	//for (int i = 1; i != 16 * blocks; i++) {
-	//	tmpX = lerp(oldPos.first, newPos.first, i / 16 * blocks);
-	//	tmpY = lerp(oldPos.second, newPos.second, i / 16 * blocks);
-	//}
 
     if (isMoving() == true) {
         //std::cout << parent.getName() << " try to move" << std::endl;
         for (auto &e : objects) {
             if (e.second && this->willColide(delta, e.second) == true) {
-                if (e.second->getMovement().isBlocking() == true) {
+                if (e.second->getMovement().isBlocking() == true && this->blocking == true) {
                     collide = true;
                 }
                 parent.hitEvent(e.second);
             }
         }
         if (collide == false) {
-            newPos = {POS_X + SPEED_X * delta, POS_Y + SPEED_Y * delta};
-            setPosition(GET_X(newPos), GET_Y(newPos));
+            setPosition(POS_X + SPEED_X * delta, POS_Y + SPEED_Y * delta);
         }
         // else
             // std::cout << parent.getName() << " is blocked" << std::endl;

@@ -216,7 +216,7 @@ MainMenuScene::MainMenuScene()
 
 
 	this->pannels.push_back(new Scene("mainPannel", none));
-    pannels[0]->addObject(new MainButton(*this, "mainPannel-MainButton", std::pair<float, float>{30, 10}));
+    pannels[0]->addObject(new MainButton(*this, "mainPannel-MainButton", std::pair<float, float>{34, 6}));
 	this->pannels.push_back(new Scene("namePannel", none));
     pannels[1]->addObject(new BackButton(*this, "namePannel-BackButton", std::pair<float, float>{10, 10}));
     pannels[1]->addObject(new NextButton(*this, "namePannel-NextButton", std::pair<float, float>{80, 10}));

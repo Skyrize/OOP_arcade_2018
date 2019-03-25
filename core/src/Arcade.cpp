@@ -113,37 +113,28 @@ void Arcade::prevGame()
 
 void Arcade::event()
 {
-    float actual = this->display->getTime();
-
-    if (actual < previous)
-        previous = 0;
     this->inputs = this->display->catchInput();
-    remaining -= actual - previous;
-    if (remaining <= 0) {
-        if (inputs[L_KEY] == true ||
-        inputs[O_KEY] == true ||
-        inputs[P_KEY] == true ||
-        inputs[K_KEY] == true ||
-        inputs[M_KEY] == true) {
-            if (inputs[L_KEY] == true) {
-                prevGame();
-            } else if (inputs[O_KEY] == true) {
-                nextGame();
-            } else if (inputs[P_KEY] == true) {
-                goToMainMenu();
-            }
-            if (inputs[K_KEY] == true) {
-                prevDisplay();
-            } else if (inputs[M_KEY] == true) {
-                nextDisplay();
-            }
-            remaining = 1;
+    if (inputs[L_KEY] == true ||
+    inputs[O_KEY] == true ||
+    inputs[P_KEY] == true ||
+    inputs[K_KEY] == true ||
+    inputs[M_KEY] == true) {
+        if (inputs[L_KEY] == true) {
+            prevGame();
+        } else if (inputs[O_KEY] == true) {
+            nextGame();
+        } else if (inputs[P_KEY] == true) {
+            goToMainMenu();
+        }
+        if (inputs[K_KEY] == true) {
+            prevDisplay();
+        } else if (inputs[M_KEY] == true) {
+            nextDisplay();
         }
     }
     if (inputs[ESCAPE_KEY] == true) {
         this->display->stop();
     }
-    previous = actual;
 }
 IDisplayModule *Arcade::changeDisplay(const size_t &index)
 {
