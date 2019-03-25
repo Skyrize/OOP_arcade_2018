@@ -68,10 +68,10 @@ void PacmanScene::initPacGums(void)
 
 void PacmanScene::initGhosts()
 {
-    this->addObject(new Ghost("GhostRed", redGhost, this, {9 * 3, 9 * 3}));
-    this->addObject(new Ghost("GhostYellow", yellowGhost, this, {10 * 3, 9 * 3}));
-    this->addObject(new Ghost("GhostCyan", cyanGhost, this, {11 * 3, 9 * 3}));
-    this->addObject(new Ghost("GhostMagenta", magentaGhost, this, {10 * 3, 10 * 3}));
+    this->addObject(new Ghost("ZGhostRed", redGhost, this, {9 * 3, 9 * 3}));
+    this->addObject(new Ghost("ZGhostYellow", yellowGhost, this, {10 * 3, 9 * 3}));
+    this->addObject(new Ghost("ZGhostCyan", cyanGhost, this, {11 * 3, 9 * 3}));
+    this->addObject(new Ghost("ZGhostMagenta", magentaGhost, this, {10 * 3, 10 * 3}));
 }
 
 void PacmanScene::initGame()
@@ -112,7 +112,7 @@ void PacmanScene::manageEvents(std::map<Input, bool> &inputs)
 void PacmanScene::affraidGhosts()
 {
     for (auto &i : this->objects) {
-        if (i.first.find("Ghost", 0) != std::string::npos
+        if (i.first.find("Ghost") != std::string::npos
         && i.second
         && ((Ghost *)i.second)->isAlive()) {
             ((Ghost *)i.second)->affraid();
@@ -123,7 +123,7 @@ void PacmanScene::affraidGhosts()
 void PacmanScene::unaffraidGhosts()
 {
     for (auto &i : this->objects) {
-        if (i.first.find("Ghost", 0) != std::string::npos
+        if (i.first.find("Ghost") != std::string::npos
         && ((Ghost *)i.second)->isAlive()) {
             ((Ghost *)i.second)->unaffraid();
         }
@@ -148,7 +148,7 @@ bool PacmanScene::ghostsInBox()
             pos = (std::pair<int, int>)i.second->getMovement().getPosition();
         else
             continue;
-        if (i.first.find("Ghost", 0) != std::string::npos
+        if (i.first.find("Ghost") != std::string::npos
         && (collide(pos, {3, 3}, {9 * 3, 9 * 3}, {9, 6})
         || collide(pos, {3, 3}, {10 * 3, 8 * 3}, {3, 3}))) {
             return true;
@@ -198,7 +198,7 @@ void PacmanScene::updateRestart(float delta)
         this->initGame();
         ((Pacman *)this->getObject("Pacman"))->setSpeed(oldSpeed * 1.3);
         for (auto &i: objects) {
-            if (i.first.find("Ghost", 0) != std::string::npos)
+            if (i.first.find("Ghost") != std::string::npos)
                 ((Ghost *)i.second)->setSpeed(oldSpeed * 1.3);
         }
         _restartSecondsRemaining = 3;
