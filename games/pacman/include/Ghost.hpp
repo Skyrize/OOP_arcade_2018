@@ -39,6 +39,7 @@ class Ghost : public Object {
         void unaffraid();
         void revive();
         bool isAlive() const { return _alive; };
+        state_t getState() { return _state; };
 
     private:
         int up();
