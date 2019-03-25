@@ -25,14 +25,18 @@ class PacmanScene : public Scene {
 		void affraidGhosts();
 		void unaffraidGhosts();
 		void setNeedToOpen(bool need) { _needToOpen = need; };
+		void initGame();
 
 	private:
 		void initPacGums(void);
+		void initGhosts(void);
 		bool ghostsInBox();
 		int _score = 0;
 		float _gateSecondsRemaining = 0;
 		bool _needToClose = false;
 		bool _needToOpen = true;
+		bool _startMenu = 1;
+		bool _endMenu = 0;
 };
 
 #endif /* !PACMANSCENE_HPP_ */

@@ -28,6 +28,7 @@ class Scene: public Object {
 		Object *addObject(const std::string &name, Sprite &sprite, std::pair<float, float> position = {0.0, 0.0});
 		Object *addObject(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position = {0.0, 0.0});
 		void removeObject(const std::string &name);
+		void removeAllObjects();
 		void removeObjects();
 
 		std::map<std::string, Object *> &getObjects();

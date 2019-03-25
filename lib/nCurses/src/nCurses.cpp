@@ -60,7 +60,7 @@ void DisplayModule::drawText(int x, int y, const std::string &name, int fontSize
     (void)color;
     if (!_isOpen)
         return;
-    mvwprintw(_win, y * 2, x * 2, name.c_str());
+    mvwprintw(_win, y, x * 2, name.c_str());
 }
 
 void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec)

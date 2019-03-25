@@ -143,6 +143,162 @@ static Sprite normalGate = {
     {BLUE, BLUE, BLUE},  
 };
 
+static SpriteSheet LeftBigPacMan = {
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+};
+
+static SpriteSheet RightBigPacMan = {
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+    {
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW},
+        {NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE},
+        {NONE, NONE, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, NONE, NONE},
+    },
+};
+
+PacmanScene::PacmanScene()
+: Scene("PacmanScene", none)
+{
+    Object *rightPacMan = this->addObject("PacmanRight", RightBigPacMan, {81, 27});
+    Object *leftPacMan = this->addObject("PacmanLeft", LeftBigPacMan, {10, 27});
+    
+    this->addObject(new Text("PacmanTitle", "PacMan", 100, YELLOW, none, {37, 6}));
+    this->addObject(new Text("Info", "Press Enter to Start", 70, WHITE, none, {24, 27}));
+    rightPacMan->getAnimation().setLoop(true);
+    rightPacMan->getAnimation().setAnimationSpeed(0.1);
+    leftPacMan->getAnimation().setLoop(true);
+    leftPacMan->getAnimation().setAnimationSpeed(0.1);
+}
+
+PacmanScene::~PacmanScene()
+{
+}
+
 static void initGum(Object *gum)
 {
     gum->getMovement().setBlocking(false);
@@ -182,30 +338,38 @@ void PacmanScene::initPacGums(void)
     initGum(gum4);
 }
 
-PacmanScene::PacmanScene()
-: Scene("PacmanScene", none)
+void PacmanScene::initGhosts()
 {
+    this->addObject(new Ghost("GhostRed", redGhost, this, {9 * 3, 9 * 3}));
+    this->addObject(new Ghost("GhostYellow", yellowGhost, this, {10 * 3, 9 * 3}));
+    this->addObject(new Ghost("GhostCyan", cyanGhost, this, {11 * 3, 9 * 3}));
+    this->addObject(new Ghost("GhostMagenta", magentaGhost, this, {10 * 3, 10 * 3}));
+}
+
+void PacmanScene::initGame()
+{
+    this->removeAllObjects();
     this->addObject(new Pacman(this));
     this->addObject("PacmanMap", mapSprite)->getMovement().setBlocking(true);
     this->addObject(new Teleporter("Teleporter1", blackSquare, {61, 27}, {-3, 27}));
     this->addObject(new Teleporter("Teleporter2", blackSquare, {-1, 27}, {63, 27})); 
     initPacGums();
-    this->addObject(new Ghost("GhostRed", redGhost, this, {9 * 3, 9 * 3}));
-    this->addObject(new Ghost("GhostYellow", yellowGhost, this, {10 * 3, 9 * 3}));
-    this->addObject(new Ghost("GhostCyan", cyanGhost, this, {11 * 3, 9 * 3}));
-    this->addObject(new Ghost("GhostMagenta", magentaGhost, this, {10 * 3, 10 * 3}));
+    initGhosts();
     this->addObject(new Text("Score", "Score: " + std::to_string(_score), 40, WHITE, none, {22 * 3, 3 * 3}));
     this->addObject("Gate", normalGate, {10 * 3, 8 * 3})->getMovement().setBlocking(true);
     _gateSecondsRemaining = 5;
 }
 
-PacmanScene::~PacmanScene()
-{
-}
-
 void PacmanScene::manageEvents(std::map<Input, bool> &inputs)
 {
-    objects["Pacman"]->manageEvents(inputs);
+    if (!_startMenu && !_endMenu)
+        objects["Pacman"]->manageEvents(inputs);
+    if (_startMenu) {
+        if (inputs[RETURN_KEY]) {
+            _startMenu = false;
+            initGame();
+        }
+    }
 }
 
 void PacmanScene::affraidGhosts()
@@ -258,6 +422,8 @@ float PacmanScene::update(IDisplayModule *displays)
 {
     float delta = Scene::update(displays);
 
+    if (_startMenu)
+        return delta;
     if (_needToClose == true && !ghostsInBox()) {
         this->addObject("Gate", normalGate, {10 * 3, 8 * 3})->getMovement().setBlocking(true);
         _needToClose = false;

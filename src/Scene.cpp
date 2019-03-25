@@ -80,6 +80,14 @@ void Scene::removeObject(const std::string &name)
 	}
 }
 
+void Scene::removeAllObjects()
+{
+	for (auto &i: this->objects) {
+		toRemove.push_back(i.second);
+		i.second = nullptr;
+	}
+}
+
 void Scene::removeObjects()
 {
 	this->toRemove.clear();
