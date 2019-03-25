@@ -59,14 +59,13 @@ SpriteSheet pacmanUpSheet {
     },
 };
 
-
 Pacman::Pacman(Scene *parent)
 : Object("Pacman", pacmanRightSheet, {10.0 * 3, 15.0 * 3}), _parent(parent)
 {
     this->movement.setFreeMoving(true);
     this->sprite.setLoop(true);
     this->sprite.setAnimationSpeed(0.3);
-    this->movement.setBlocking(false);
+    this->movement.setBlocking(true);
 }
 
 Pacman::~Pacman()
@@ -161,7 +160,7 @@ void Pacman::hitEvent(Object *other)
 {
     if (other->getName().find("Teleporter", 0) != std::string::npos)
         other->hitEvent(this);
-    if (other->getName().find("Ghost", 0) != std::string::npos) {
+    if (other->getName().find("Ghost") != std::string::npos) {
         if (_state == BEASTMODE && ((Ghost *)other)->isAlive()) {
             ((Ghost *)other)->kill();
             this->_beastMode.ghostKilled += 1;

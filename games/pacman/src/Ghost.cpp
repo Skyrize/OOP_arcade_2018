@@ -158,7 +158,7 @@ void Ghost::kill()
     _destination = {10 * 3, 10 * 3};
     _oldSpeed = _speed;
     this->getAnimation().changeSpriteSheet(deadGhost);
-    this->movement.setDestination({10 * 3, 10 * 3}, 4);
+    this->movement.setDestination({10 * 3, 10 * 3}, 3);
 }
 
 void Ghost::revive()
