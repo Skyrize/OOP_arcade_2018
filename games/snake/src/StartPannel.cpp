@@ -54,9 +54,14 @@ static Sprite none {{}};
 StartPannel::StartPannel()
 : Object("StartMenu", startMenuSprite, std::pair<float, float>{30, 13})
 {
-    this->text1 = new Text("text1", "WELCOME TO MY NIBBLER", 16, BLACK, none, std::pair<float, float>{40, 20});
-    this->text2 = new Text("text2", "- use arrows to move the snake", 16, BLACK, none, std::pair<float, float>{40, 25});
-    this->text3 = new Text("text3", "PRESS START TO PLAY", 16, BLACK, none, std::pair<float, float>{45, 45});
+    this->text1 = new Text("text1", "WELCOME TO MY NIBBLER", 16, BLACK, none, std::pair<float, float>{38, 20});
+    this->text2 = new Text("text2", "- use arrows to move the snake", 16, BLACK, none, std::pair<float, float>{42, 25});
+    this->text3 = new Text("text3", "- use A and E to change map", 16, BLACK, none, std::pair<float, float>{42, 28});
+    this->text4 = new Text("text4", "- press spacebar to boost you up", 16, BLACK, none, std::pair<float, float>{42, 31});
+    this->text5 = new Text("text5", "- eating a fruit gives you 10 points", 16, BLACK, none, std::pair<float, float>{42, 34});
+    this->text6 = new Text("text5", "- a golden fruit give you 50 points", 16, BLACK, none, std::pair<float, float>{42, 37});
+    this->text7 = new Text("text5", "- Do not hit walls or Snake", 16, BLACK, none, std::pair<float, float>{42, 40});
+    this->text8 = new Text("text6", "PRESS START TO PLAY", 16, BLACK, none, std::pair<float, float>{45, 45});
 }
 
 void StartPannel::display(IDisplayModule *display)
@@ -65,4 +70,9 @@ void StartPannel::display(IDisplayModule *display)
     this->text1->display(display);
     this->text2->display(display);
     this->text3->display(display);
+    this->text4->display(display);
+    this->text5->display(display);
+    this->text6->display(display);
+    this->text7->display(display);
+    this->text8->display(display);
 }

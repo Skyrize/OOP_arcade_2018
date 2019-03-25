@@ -35,9 +35,6 @@
 #define SNAKE_RIGHT 2
 #define SNAKE_LEFT 3
 
-#define SPEED_BASE 20
-#define SPEED_BOOST 40
-
 #define BOOST_TIMER 1
 #define BOOST_CD 1
 
@@ -112,7 +109,7 @@ float Snake::update(IDisplayModule *display, std::map<std::string, Object *> &ob
             if (boostTimer <= 0) {
                 setAnimation(0, -2);
                 setSprite(1);
-                setSpeed(SPEED_BASE);
+                setSpeed(baseSpeed);
                 boostCooldown = BOOST_CD;
                 boostTimer = 0;
             }
@@ -132,7 +129,7 @@ float Snake::update(IDisplayModule *display, std::map<std::string, Object *> &ob
 
 void Snake::hitEvent(Object *other)
 {
-    if (other->getName() == "Fruit") {
+    if (other->getName() == "SnakeFruit") {
         eatFruit();
     } else {
         isDead = true;
@@ -142,9 +139,16 @@ void Snake::hitEvent(Object *other)
 
 void Snake::eatFruit()
 {
+    int nbPartAdded = rand() % 5 + 1;
+
+    for (int i = 0; i != nbPartAdded; i++)
+        addPart();
+    if (speedMode == true) {
+        setSpeed(this->speed + 2);
+        boostSpeed += 2;
+        baseSpeed += 2;
+    }
     parent.eventFruitEaten();
-    addPart();
-    setAnimation(0, 0);
 }
 
 void Snake::die(float delta)
@@ -153,7 +157,7 @@ void Snake::die(float delta)
     static bool changed = false;
 
     start += delta;
-    if (start >= 0.1) {
+    if (start >= 0.3 / (body.size() + 1)) {
         
         if (changed == false) {
             if (body.size() != 0) {
@@ -168,7 +172,7 @@ void Snake::die(float delta)
                 changed = true;
             }
         }
-        if (start >= 0.2) {
+        if (start >= 0.6 / (body.size() + 1)) {
             if (body.size() != 0) {
                 parent.removeObject(body[body.size() - 1]->getName());
                 body.pop_back();
@@ -295,6 +299,11 @@ void Snake::setSprite(int index)
         e->getAnimation().goToSprite(index);
 }
 
+void Snake::setSpeedMode(bool state)
+{
+    this->speedMode = state;
+}
+
 void Snake::manageEvents(std::map<Input, bool> &inputs)
 {
     if (isDead == false) {
@@ -307,8 +316,8 @@ void Snake::manageEvents(std::map<Input, bool> &inputs)
         } else if (inputs[Input::RIGHT_ARROW_KEY] == true) {
             right();
         }
-        if (inputs[SPACE_KEY] == true && speed == 20 && boostCooldown == 0) {
-            setSpeed(40);
+        if (inputs[SPACE_KEY] == true && speed != boostSpeed && boostCooldown == 0) {
+            setSpeed(boostSpeed);
             boostTimer = BOOST_TIMER;
             setAnimation(0.2, -1);
         }

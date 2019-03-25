@@ -24,12 +24,24 @@ class SnakeScene : public Scene {
 
 		void launchSnake();
 		void killSnake();
+		void changeMode();
+
+		void previousMap();
+		void nextMap();
+		void unloadMap();
+		void loadMap();
 	protected:
 		Object *startMenu;
 		Object *endMenu;
 		Object *fruit;
 		Text *score;
 		int scoreValue = 0;
+		Text *speedMode;
+		bool speedModeValue = false;
+
+		size_t actualMap = 0;
+		Text *displayedMap;
+		std::vector<std::vector<Object *>> maps;
 	private:
 };
 
