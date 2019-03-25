@@ -37,6 +37,7 @@ class Snake : public Object {
 		void setSpeed(int newSpeed);
 		void setAnimation(float speed, int nbLoop);
 		void setSprite(int index);
+		void setSpeedMode(bool state);
 		//bool fullyInBlock();
 
 	protected:
@@ -49,6 +50,10 @@ class Snake : public Object {
 		float boostTimer = 0;
 		float boostCooldown = 0;
 		bool isDead = false;
+
+		int boostSpeed = 40;
+		int baseSpeed = 20;
+		bool speedMode = false;
 	private:
 };
 

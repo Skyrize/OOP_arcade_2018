@@ -55,8 +55,8 @@ EndPannel::EndPannel(const int &scoreRef)
 : Object("EndMenu", endMenuSprite, std::pair<float, float>{30, 13}),
 scoreRef(scoreRef)
 {
-    this->text1 = new Text("text1", "YOU LOSE !", 16, BLACK, none, std::pair<float, float>{45, 20});
-    this->text2 = new Text("text2", "Your end score was : ", 16, BLACK, none, std::pair<float, float>{45, 25});
+    this->text1 = new Text("text1", "YOU LOSE !", 16, BLACK, none, std::pair<float, float>{38, 20});
+    this->text2 = new Text("text2", "Your end score : ", 16, BLACK, none, std::pair<float, float>{42, 31});
     this->text3 = new Text("text3", "PRESS START TO PLAY", 16, BLACK, none, std::pair<float, float>{45, 45});
 }
 
@@ -64,7 +64,7 @@ void EndPannel::display(IDisplayModule *display)
 {
     Object::display(display);
     this->text1->display(display);
-    this->text2->setText("Your end score was : " + std::to_string(this->scoreRef));
+    this->text2->setText("Your end score : " + std::to_string(this->scoreRef));
     this->text2->display(display);
     this->text3->display(display);
 }
