@@ -20,20 +20,10 @@ Button::Button(MainMenuScene &parent, const std::string &name, Sprite &sprite, c
     this->movement.setBlocking(true);
 }
 
-void Button::hitEvent(Object *other)
+void Button::eventHit(Object *other)
 {
-    std::map<std::string, Object *> merge = this->parent.getObjects();
-    std::map<std::string, Object *> objects = parent.getActualPannel()->getObjects();    
-
-	merge.insert(objects.begin(), objects.end());
-
+    parent.eventButtonTriggered();
     (void)other;
-    for (auto &e : merge) {
-        if (e.second) {
-            e.second->getAnimation().setAnimationSpeed(0.1);
-            e.second->getAnimation().setNbLoop(4);
-        }
-    }
     this->hit = true;
 }
 

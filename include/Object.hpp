@@ -46,7 +46,8 @@ class Object {
 		virtual AnimationComponent &getAnimation();
 		virtual const std::string &getName() const;
 		virtual void manageEvents(std::map<Input, bool> &inputs);
-		virtual void hitEvent(Object *other);
+		virtual void eventHit(Object *other);
+		virtual void eventReachedDestination();
 
 	protected:
 		std::string name;

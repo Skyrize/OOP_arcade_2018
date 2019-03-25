@@ -87,7 +87,7 @@ void Object::MovementComponent::move(const float &delta, std::map<std::string, O
                 if (e.second->getMovement().isBlocking() == true && this->blocking == true) {
                     collide = true;
                 }
-                parent.hitEvent(e.second);
+                parent.eventHit(e.second);
             }
         }
         if (collide == false) {
@@ -99,7 +99,7 @@ void Object::MovementComponent::move(const float &delta, std::map<std::string, O
         if (freeMoving == false)
             if (hasReachDuration(delta) == true) {
                 setSpeed(0, 0);
-
+                parent.eventReachedDestination();
             }
     }
     //std::cout << parent.getName() << " has speed " << SPEED_X << ", " << SPEED_Y << std::endl;

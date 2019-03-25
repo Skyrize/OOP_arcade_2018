@@ -21,7 +21,7 @@ class Projectile : public Object {
 
 
 		virtual float update(IDisplayModule *display, std::map<std::string, Object *> &objects);
-		virtual void hitEvent(Object *other);
+		virtual void eventHit(Object *other);
 
 		virtual int getId();
 

@@ -13,13 +13,14 @@ SRC			=	src/main.cpp	\
 				../src/Object.cpp	\
 				../src/MovementComponent.cpp	\
 				../src/AnimationComponent.cpp	\
-				../src/Invader.cpp	\
-				../src/ShootComponent.cpp	\
-				../src/Projectile.cpp	\
+				src/Invader.cpp	\
+				src/ShootComponent.cpp	\
+				src/Projectile.cpp	\
 				src/Button.cpp	\
 				src/BackButton.cpp	\
 				src/NextButton.cpp	\
 				src/MainButton.cpp	\
+				src/Star.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 

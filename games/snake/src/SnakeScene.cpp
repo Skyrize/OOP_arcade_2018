@@ -394,7 +394,7 @@ void SnakeScene::eventFruitEaten()
     for (auto &e : objects) {
         if (e.second && e.second->getName().find("Snake") == std::string::npos) {
             e.second->getAnimation().setAnimationSpeed(0.2);
-            e.second->getAnimation().setNbLoop(3);
+            e.second->getAnimation().setNbLoop(2);
         }
     }
     addPoints();

@@ -127,7 +127,7 @@ float Snake::update(IDisplayModule *display, std::map<std::string, Object *> &ob
     return delta;
 }
 
-void Snake::hitEvent(Object *other)
+void Snake::eventHit(Object *other)
 {
     if (other->getName() == "SnakeFruit") {
         eatFruit();

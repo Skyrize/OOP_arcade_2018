@@ -17,7 +17,7 @@ class Button : public Object {
 		Button(MainMenuScene &parent, const std::string &name, Sprite &sprite, const std::pair<float, float> &position = {0.0, 0.0});
 
 		virtual ~Button() = default;
-		void hitEvent(Object *other);
+		void eventHit(Object *other);
 		float update(IDisplayModule *display, std::map<std::string, Object *> &objects);
 		virtual void buttonEvent() = 0;
 	protected:

@@ -156,10 +156,10 @@ void Pacman::manageEvents(std::map<Input, bool> &inputs)
         right();
 }
 
-void Pacman::hitEvent(Object *other)
+void Pacman::eventHit(Object *other)
 {
     if (other->getName().find("Teleporter", 0) != std::string::npos)
-        other->hitEvent(this);
+        other->eventHit(this);
     if (other->getName().find("Ghost") != std::string::npos) {
         if (_state == BEASTMODE && ((Ghost *)other)->isAlive()) {
             ((Ghost *)other)->kill();

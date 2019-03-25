@@ -20,7 +20,7 @@ class Snake : public Object {
 
 		virtual void manageEvents(std::map<Input, bool> &inputs);
 		virtual float update(IDisplayModule *display, std::map<std::string, Object *> &objects);
-		virtual void hitEvent(Object *other);
+		virtual void eventHit(Object *other);
 
 		void left();
 		void right();

@@ -11,7 +11,11 @@
 #include "BackButton.hpp"
 #include "NextButton.hpp"
 #include "MainButton.hpp"
+#include "Star.hpp"
 #include <iostream>
+
+#define NB_STARS 10
+#define SPAWN_STAR_TIMER 0.2
 
 static Sprite none{{}};
 static SpriteSheet verticalBorderSprite{
@@ -208,10 +212,10 @@ static SpriteSheet horizontalBorderSprite{
 MainMenuScene::MainMenuScene()
 : Scene("MainMenuScene", none)
 {
-    addObject(new Object("BorderLeft", verticalBorderSprite))->getMovement().setBlocking(true);
-    addObject(new Object("BorderRight", verticalBorderSprite, std::pair<float, float>{99, 0}))->getMovement().setBlocking(true);
-    addObject(new Object("BorderTop", horizontalBorderSprite))->getMovement().setBlocking(true);
-    addObject(new Object("BorderBot", horizontalBorderSprite, std::pair<float, float>{0, 56}))->getMovement().setBlocking(true);
+    //addObject(new Object("BorderLeft", verticalBorderSprite))->getMovement().setBlocking(true);
+    //addObject(new Object("BorderRight", verticalBorderSprite, std::pair<float, float>{99, 0}))->getMovement().setBlocking(true);
+    //addObject(new Object("BorderTop", horizontalBorderSprite))->getMovement().setBlocking(true);
+    //addObject(new Object("BorderBot", horizontalBorderSprite, std::pair<float, float>{0, 56}))->getMovement().setBlocking(true);
     addObject(new Invader(*this, std::pair<float, float>{30, 30}));
 
 
@@ -248,6 +252,11 @@ float MainMenuScene::update(IDisplayModule *display)
 	for (auto &e : merge)
 		if (e.second)
 			e.second->update(display, merge);
+    if (nbStars != NB_STARS && (this->starSpawnTimer -= delta) <= 0) {
+        starSpawnTimer = SPAWN_STAR_TIMER;
+        addObject(new Star("AStar-" + std::to_string(nbStars)));
+        nbStars++;
+    }
 	return delta;
 }
 
@@ -275,4 +284,22 @@ void MainMenuScene::nextPannel()
         this->actualPannel++;
     }
     objects["SpaceInvader"]->getAnimation().setAnimationSpeed(0.4);
+}
+
+void MainMenuScene::eventButtonTriggered()
+{
+    std::map<std::string, Object *> &pannelObjects = pannels[actualPannel]->getObjects();    
+
+    for (auto &e : objects) {
+        if (e.second) {
+            e.second->getAnimation().setAnimationSpeed(0.1);
+            e.second->getAnimation().setNbLoop(4);
+        }
+    }
+    for (auto &e : pannelObjects) {
+        if (e.second) {
+            e.second->getAnimation().setAnimationSpeed(0.1);
+            e.second->getAnimation().setNbLoop(4);
+        }
+    }
 }

@@ -25,6 +25,7 @@ class Invader : public Object{
         virtual Scene &getParent();
 	protected:
         Scene &parent;
+        float moveTrick = 0;
 
         class ShootComponent {
             protected:
@@ -50,7 +51,7 @@ class Invader : public Object{
                 ShootComponent(Invader &parent, const float &maxAmmo, const float &ammoLifetime, const float &ammoSpeed, const float &fireRate, const float &reloadTime, const float &damages);
                 ~ShootComponent() = default;
 
-                void shoot(const std::pair<float, float> &speed);
+                void shoot(const std::pair<float, float> &speed, const std::pair<float, float> shootFrom);
                 void reload();
 
                 bool hasInfiniteAmmo();

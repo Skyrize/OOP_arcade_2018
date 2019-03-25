@@ -22,7 +22,10 @@ class MainMenuScene : public Scene {
 
 		virtual void display(IDisplayModule *display);
 		virtual float update(IDisplayModule *display);
+		void eventButtonTriggered();
 	protected:
+		float starSpawnTimer = 0;
+		int nbStars = 0;
 		size_t actualPannel = 0;
 		std::vector<Scene *> pannels;
 

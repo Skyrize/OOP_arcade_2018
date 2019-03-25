@@ -32,7 +32,7 @@ class Ghost : public Object {
 		~Ghost();
         float getSpeed() const { return _speed; };
         void setSpeed(float speed) { _speed = speed; };
-        void hitEvent(Object *other) override;
+        void eventHit(Object *other) override;
         float update(IDisplayModule *display, std::map<std::string, Object *> &objects) override;
         void kill();
         void affraid();

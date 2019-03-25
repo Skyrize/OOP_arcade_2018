@@ -34,18 +34,15 @@ damages(damages)
 {
 }
 
-void Invader::ShootComponent::shoot(const std::pair<float, float> &speed)
+void Invader::ShootComponent::shoot(const std::pair<float, float> &speed, const std::pair<float, float> shootFrom)
 {
-    const std::pair<float, float> &parentPos = parent.getMovement().getPosition();
-    const std::pair<float, float> newPos{parentPos.first + 2, parentPos.second - 2};
-
     if (this->fireTimer <= 0) {
         if (this->infiniteAmmo == true) {
-            parent.getParent().addObject(new Projectile(parent, speed, newPos));
+            parent.getParent().addObject(new Projectile(parent, speed, shootFrom));
             this->fireTimer = fireRate;
             this->setHasShot(true);
         } else if (actualAmmo > 0) {
-            parent.getParent().addObject(new Projectile(parent, speed, newPos));
+            parent.getParent().addObject(new Projectile(parent, speed, shootFrom));
             this->fireTimer = fireRate;
             actualAmmo--;
             this->setHasShot(true);

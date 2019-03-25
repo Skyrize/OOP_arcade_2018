@@ -55,8 +55,8 @@ float Projectile::update(IDisplayModule *display, std::map<std::string, Object *
     return delta;
 }
 
-void Projectile::hitEvent(Object *other)
+void Projectile::eventHit(Object *other)
 {
-    other->hitEvent(this);
+    other->eventHit(this);
     space.removeObject(name);
 }

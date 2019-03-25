@@ -90,10 +90,10 @@ int Ghost::right()
     return 0;
 }
 
-void Ghost::hitEvent(Object *other)
+void Ghost::eventHit(Object *other)
 {
     if (other->getName().find("Teleporter", 0) != std::string::npos) {
-        other->hitEvent(this);
+        other->eventHit(this);
         if (movement.getPosition() == (std::pair<float, float>){61, 27})
             _destination = {60, 27};
         else

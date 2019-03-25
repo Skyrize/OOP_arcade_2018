@@ -37,7 +37,7 @@ class Pacman : public Object {
 		~Pacman();
 		void manageEvents(std::map<Input, bool> &inputs) override;
 		float update(IDisplayModule *display, std::map<std::string, Object *> &objects) override;
-		void hitEvent(Object *other) override;
+		void eventHit(Object *other) override;
 		void setState(state_t state) { _state = state; };
 		bool isAlive() { return _alive; };
 		float getSpeed() const { return _speed; };

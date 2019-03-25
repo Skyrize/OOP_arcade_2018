@@ -19,7 +19,7 @@ class Teleporter : public Object {
                 this->getMovement().setBlocking(false);
             };
 		~Teleporter() = default;
-        void hitEvent(Object *other) override
+        void eventHit(Object *other) override
         {
             other->getMovement().setPosition(_teleportPosition.first, _teleportPosition.second);
         };

@@ -50,9 +50,13 @@ void Object::manageEvents(std::map<Input, bool> &inputs)
 	(void)inputs;
 }
 
-void Object::hitEvent(Object *other)
+void Object::eventHit(Object *other)
 {
 	(void)other;
+}
+
+void Object::eventReachedDestination()
+{
 }
 
 Object::MovementComponent &Object::getMovement()
