@@ -30,9 +30,15 @@ class Ghost : public Object {
 	public:
 		Ghost(const std::string &name, Sprite sprite, Scene *parent, const std::pair<float, float> &position = {0.0, 0.0});
 		~Ghost();
+        float getSpeed() const { return _speed; };
         void setSpeed(float speed) { _speed = speed; };
         void hitEvent(Object *other) override;
         float update(IDisplayModule *display, std::map<std::string, Object *> &objects) override;
+        void kill();
+        void affraid();
+        void unaffraid();
+        void revive();
+        bool isAlive() const { return _alive; };
 
     private:
         int up();
@@ -48,6 +54,9 @@ class Ghost : public Object {
         float _speed = 10;
         Scene *_parent = nullptr;
         std::pair<int, int> _destination;
+        bool _alive = true;
+        Sprite _oldSprite;
+        float _oldSpeed;
 };
 
 #endif /* !GHOST_HPP_ */

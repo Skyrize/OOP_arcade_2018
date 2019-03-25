@@ -15,7 +15,6 @@ class Text : public Object {
 		Text(const std::string &name, const std::string &text, int fontSize, Color color, SpriteSheet &backgroundSheet, const std::pair<float, float> &position = {0.0, 0.0});
 		Text(const std::string &name, const std::string &text, int fontSize, Color color, Sprite &backgroundSheetsprite, const std::pair<float, float> &position = {0.0, 0.0});
 		~Text();
-
         virtual void display(IDisplayModule *display);
         virtual void setText(const std::string &newText);
 

@@ -16,7 +16,7 @@ class Teleporter : public Object {
             const std::pair<float, float> &teleportPosition,
             const std::pair<float, float> &position = {0.0, 0.0})
             : Object(name, sprite, position), _teleportPosition(teleportPosition) {
-                this->getMovement().setBlocking(true);
+                this->getMovement().setBlocking(false);
             };
 		~Teleporter() = default;
         void hitEvent(Object *other) override

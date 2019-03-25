@@ -21,7 +21,7 @@ void DisplayModule::init()
     keypad(_win, TRUE);
     _isOpen = true;
     start_color();
-    init_pair(0, COLOR_BLACK, COLOR_BLACK);
+    init_pair(0, COLOR_BLACK, COLOR_WHITE);
     init_pair(1, COLOR_RED, COLOR_BLACK);
     init_pair(2, COLOR_GREEN, COLOR_BLACK);
     init_pair(3, COLOR_YELLOW, COLOR_BLACK);
@@ -60,7 +60,7 @@ void DisplayModule::drawText(int x, int y, const std::string &name, int fontSize
     (void)color;
     if (!_isOpen)
         return;
-    mvwprintw(_win, y, x, name.c_str());
+    mvwprintw(_win, y * 2, x * 2, name.c_str());
 }
 
 void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec)

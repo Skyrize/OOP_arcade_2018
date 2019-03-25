@@ -7,8 +7,28 @@
 
 #include "Ghost.hpp"
 
-Ghost::Ghost(const std::string &name, Sprite sprite, Scene *parent, const std::pair<float, float> &position) : Object(name, sprite, position),
-_parent(parent), _destination((std::pair<int, int>)position)
+static SpriteSheet affraidSprite = {
+    {
+        {WHITE, BLUE, WHITE,},
+        {BLUE, BLUE, BLUE,},
+        {BLUE, NONE, BLUE,},
+    },
+    {
+        {BLUE, WHITE, BLUE,},
+        {WHITE, WHITE, WHITE,},
+        {WHITE, NONE, WHITE,},
+    },
+};
+
+static Sprite deadGhost = {
+    {WHITE, NONE, WHITE,},  
+    {BLACK, NONE, BLACK,},  
+    {NONE, NONE, NONE,},  
+};
+
+Ghost::Ghost(const std::string &name, Sprite sprite, Scene *parent, const std::pair<float, float> &position) :
+    Object(name, sprite, position), _parent(parent),
+    _destination((std::pair<int, int>)position), _oldSprite(sprite)
 {
     this->movement.setBlocking(false);
     this->movement.setFreeMoving(true);
@@ -25,7 +45,10 @@ int Ghost::up()
     std::pair<int, int> pos = std::pair<int, int>(movement.getPosition());
     Sprite map = this->_parent->getObject("PacmanMap")->getAnimation().getSprite();
 
-    if (map[pos.second - 3][pos.first] == BLUE)
+    if (map[pos.second - 3][pos.first] == BLUE
+    || (_parent->getObject("Gate")
+    &&_parent->getObject("Gate")->getMovement().getPosition().first == pos.first
+    && _parent->getObject("Gate")->getMovement().getPosition().second == pos.second - 3))
         return 1;
     movement.setSpeed(0, -_speed);
     return 0;
@@ -36,7 +59,10 @@ int Ghost::down()
     std::pair<int, int> pos = std::pair<int, int>(movement.getPosition());
     Sprite map = this->_parent->getObject("PacmanMap")->getAnimation().getSprite();
 
-    if (map[pos.second + 3][pos.first] == BLUE)
+    if (map[pos.second + 3][pos.first] == BLUE
+    || (_parent->getObject("Gate")
+    && _parent->getObject("Gate")->getMovement().getPosition().first == pos.first
+    && _parent->getObject("Gate")->getMovement().getPosition().second == pos.second + 3))
         return 1;
     movement.setSpeed(0, _speed);
     return 0;
@@ -66,7 +92,13 @@ int Ghost::right()
 
 void Ghost::hitEvent(Object *other)
 {
-    (void)other;
+    if (other->getName().find("Teleporter", 0) != std::string::npos) {
+        other->hitEvent(this);
+        if (movement.getPosition() == (std::pair<float, float>){61, 27})
+            _destination = {60, 27};
+        else
+            _destination = {0, 27};
+    }
 }
 
 int Ghost::callDirectionHandler(int direction)
@@ -120,15 +152,39 @@ void Ghost::setDestination(direction_t direction)
     _direction = (direction_t)direction;
 }
 
+void Ghost::kill()
+{
+    _alive = false;
+    _destination = {10 * 3, 10 * 3};
+    _oldSpeed = _speed;
+    this->getAnimation().changeSpriteSheet(deadGhost);
+    this->movement.setDestination({10 * 3, 10 * 3}, 4);
+}
+
+void Ghost::revive()
+{
+    _alive = true;
+    _speed = _oldSpeed;
+    ((PacmanScene *)this->_parent)->setNeedToOpen(true);
+    this->getAnimation().changeSpriteSheet(_oldSprite);
+    this->movement.setBlocking(false);
+    this->movement.setFreeMoving(true);
+    this->sprite.setLoop(true);
+    this->sprite.setAnimationSpeed(0.3);
+}
+
 float Ghost::update(IDisplayModule *display, std::map<std::string, Object *> &objects)
 {
     float delta = Object::update(display, objects);
+    std::pair<int, int> actualPos = (std::pair<int, int>)this->movement.getPosition();
     int direction = 0;
 
-    if (int(this->movement.getPosition().first) % 3 != 0
-    || int(this->movement.getPosition().second) % 3 != 0
-    || int(this->movement.getPosition().first) != _destination.first
-    || int(this->movement.getPosition().second) != _destination.second)
+    if (!_alive && actualPos == _destination)
+        revive();
+    if (!_alive)
+        return delta;
+    if (actualPos.first % 3 != 0 || actualPos.second % 3 != 0
+    || actualPos != _destination)
         return delta;
     direction = rand() % 4;
     for (int i = 0; i < 4; i++) {
@@ -145,4 +201,20 @@ float Ghost::update(IDisplayModule *display, std::map<std::string, Object *> &ob
     }
     setDestination((direction_t)direction);
     return delta;
+}
+
+void Ghost::affraid()
+{
+    this->setSpeed(_speed * 0.8);
+    this->_state = AFFRAID;
+    this->getAnimation().changeSpriteSheet(affraidSprite);
+    this->getAnimation().setAnimationSpeed(0.5);
+}
+
+void Ghost::unaffraid()
+{
+    this->setSpeed(_speed / 0.8);
+    this->_state = NORMAL;
+    this->getAnimation().changeSpriteSheet(_oldSprite);
+    this->getAnimation().setAnimationSpeed(0.3);
 }

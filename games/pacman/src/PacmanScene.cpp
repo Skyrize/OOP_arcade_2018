@@ -145,17 +145,17 @@ static Sprite normalGate = {
 
 static void initGum(Object *gum)
 {
-    gum->getMovement().setBlocking(true);
+    gum->getMovement().setBlocking(false);
     gum->getAnimation().setAnimationSpeed(0.2);
     gum->getAnimation().setLoop(true);
 }
 
 void PacmanScene::initPacGums(void)
 {
-    Object *gum1 = this->addObject("BigPacGum1", bigPacGum, {2 * 3, 2 * 3});
-    Object *gum2 = this->addObject("BigPacGum2", bigPacGum, {18 * 3, 2 * 3});
-    Object *gum3 = this->addObject("BigPacGum3", bigPacGum, {5 * 3, 15 * 3});
-    Object *gum4 = this->addObject("BigPacGum4", bigPacGum, {15 * 3, 15 * 3});
+    Object *gum1 = this->addObject("BigAPacGum1", bigPacGum, {2 * 3, 2 * 3});
+    Object *gum2 = this->addObject("BigAPacGum2", bigPacGum, {18 * 3, 2 * 3});
+    Object *gum3 = this->addObject("BigAPacGum3", bigPacGum, {5 * 3, 15 * 3});
+    Object *gum4 = this->addObject("BigAPacGum4", bigPacGum, {15 * 3, 15 * 3});
 
     for (int j = 0; j < 19 * 3; j++) {
         for (int i = 0; i < 20 * 3; i++) {
@@ -173,7 +173,7 @@ void PacmanScene::initPacGums(void)
                 continue;
             if (mapSprite[j][i] == NONE && i > 3 && i < 19 * 3
             && i % 3 == 0 && j % 3 == 0)
-                this->addObject("PacGum" + std::to_string(i) + std::to_string(j), pacGum, {i, j})->getMovement().setBlocking(true);
+                this->addObject("APacGum" + std::to_string(i) + std::to_string(j), pacGum, {i, j})->getMovement().setBlocking(false);
         }
     }
     initGum(gum1);
@@ -194,6 +194,9 @@ PacmanScene::PacmanScene()
     this->addObject(new Ghost("GhostYellow", yellowGhost, this, {10 * 3, 9 * 3}));
     this->addObject(new Ghost("GhostCyan", cyanGhost, this, {11 * 3, 9 * 3}));
     this->addObject(new Ghost("GhostMagenta", magentaGhost, this, {10 * 3, 10 * 3}));
+    this->addObject(new Text("Score", "Score: " + std::to_string(_score), 40, WHITE, none, {22 * 3, 3 * 3}));
+    this->addObject("Gate", normalGate, {10 * 3, 8 * 3})->getMovement().setBlocking(true);
+    _gateSecondsRemaining = 5;
 }
 
 PacmanScene::~PacmanScene()
@@ -203,4 +206,75 @@ PacmanScene::~PacmanScene()
 void PacmanScene::manageEvents(std::map<Input, bool> &inputs)
 {
     objects["Pacman"]->manageEvents(inputs);
+}
+
+void PacmanScene::affraidGhosts()
+{
+    for (auto &i : this->objects) {
+        if (i.first.find("Ghost", 0) != std::string::npos) {
+            ((Ghost *)i.second)->affraid();
+        }
+    }
+}
+
+void PacmanScene::unaffraidGhosts()
+{
+    for (auto &i : this->objects) {
+        if (i.first.find("Ghost", 0) != std::string::npos
+        && ((Ghost *)i.second)->isAlive()) {
+            ((Ghost *)i.second)->unaffraid();
+        }
+    }
+}
+
+static bool collide(std::pair<int, int> pos1, std::pair<int, int> size1,
+    std::pair<int, int> pos2, std::pair<int, int> size2)
+{
+    return pos1.first < pos2.first + size2.first
+    && pos1.first + size1.first > pos2.first
+    && pos1.second < pos2.second + size2.second
+    && pos1.second + size1.second > pos2.second;
+}
+
+bool PacmanScene::ghostsInBox()
+{
+    std::pair<int, int> pos;
+
+    for (auto &i : this->objects) {
+        if (i.second)
+            pos = (std::pair<int, int>)i.second->getMovement().getPosition();
+        else
+            continue;
+        if (i.first.find("Ghost", 0) != std::string::npos
+        && (collide(pos, {3, 3}, {9 * 3, 9 * 3}, {9, 6})
+        || collide(pos, {3, 3}, {10 * 3, 8 * 3}, {3, 3}))) {
+            return true;
+        }
+    }
+    return false;
+}
+
+float PacmanScene::update(IDisplayModule *displays)
+{
+    float delta = Scene::update(displays);
+
+    if (_needToClose == true && !ghostsInBox()) {
+        this->addObject("Gate", normalGate, {10 * 3, 8 * 3})->getMovement().setBlocking(true);
+        _needToClose = false;
+        _needToOpen = false;
+    }
+    if (getObject("Gate") && _needToOpen) {
+        _gateSecondsRemaining -= delta;
+        if (_gateSecondsRemaining <= 0) {
+            _needToOpen = false;
+            _needToClose = true;
+            removeObject("Gate");
+        } else if (_gateSecondsRemaining <= 2 && !getObject("Gate")->getAnimation().isAnimated()) {
+            getObject("Gate")->getAnimation().changeSpriteSheet(animatedGate);
+            getObject("Gate")->getAnimation().setAnimationSpeed(0.1);
+            getObject("Gate")->getAnimation().setLoop(true);
+        }
+    }
+    ((Text *)getObject("Score"))->setText("Score: " + std::to_string(_score));
+    return delta;
 }

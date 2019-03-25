@@ -61,12 +61,12 @@ SpriteSheet pacmanUpSheet {
 
 
 Pacman::Pacman(Scene *parent)
-: Object("Pacman", pacmanRightSheet, {6.0, 3.0}), _parent(parent)
+: Object("Pacman", pacmanRightSheet, {10.0 * 3, 15.0 * 3}), _parent(parent)
 {
     this->movement.setFreeMoving(true);
     this->sprite.setLoop(true);
     this->sprite.setAnimationSpeed(0.3);
-    this->movement.setBlocking(true);
+    this->movement.setBlocking(false);
 }
 
 Pacman::~Pacman()
@@ -161,15 +161,39 @@ void Pacman::hitEvent(Object *other)
 {
     if (other->getName().find("Teleporter", 0) != std::string::npos)
         other->hitEvent(this);
-    if (other->getName().find("PacGum") == std::string::npos)
+    if (other->getName().find("Ghost", 0) != std::string::npos) {
+        if (_state == BEASTMODE && ((Ghost *)other)->isAlive()) {
+            ((Ghost *)other)->kill();
+            this->_beastMode.ghostKilled += 1;
+            ((PacmanScene *)_parent)->addScore(200 * this->_beastMode.ghostKilled);
+        } else if (_state != BEASTMODE) {
+            this->_alive = false;
+        }
+    }
+    if (other->getName().find("APacGum") == std::string::npos)
         return;
+    if (other->getName().find("APacGum", 0) == 0)
+        ((PacmanScene *)_parent)->addScore(10);
+    else {
+        ((PacmanScene *)_parent)->addScore(50);
+        this->_state = BEASTMODE;
+        this->_beastMode.lifeTime = 9;
+        this->_beastMode.ghostKilled = 0;
+        ((PacmanScene *)_parent)->affraidGhosts();
+    }
     this->_parent->removeObject(other->getName());
-    return;
 }
 
 float Pacman::update(IDisplayModule *display, std::map<std::string, Object *> &objects)
 {
     float delta = Object::update(display, objects);
 
+    if (this->_state == BEASTMODE) {
+        this->_beastMode.lifeTime -= delta;
+        if (this->_beastMode.lifeTime <= 0) {
+            this->_state = NORMAL;
+            ((PacmanScene *)_parent)->unaffraidGhosts();
+        }
+    }
     return delta;
 }
