@@ -19,19 +19,24 @@ SnakeModule::~SnakeModule()
 {
 }
 
-void SnakeModule::init()
+void SnakeModule::init(const std::string &playerName, const int &highScore)
 {
-
+    (void)playerName;
+    (void)highScore;
 }
 
 void SnakeModule::stop()
 {
-
 }
 
 const std::string &SnakeModule::getName() const
 {
     return _name;
+}
+
+int SnakeModule::getHighScore() const
+{
+    return 0;
 }
 
 void SnakeModule::run(IDisplayModule *library, std::map<Input, bool> &inputs)

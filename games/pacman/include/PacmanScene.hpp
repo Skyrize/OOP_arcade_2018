@@ -20,13 +20,14 @@ class PacmanScene : public Scene {
 		~PacmanScene();
 		float update(IDisplayModule *display) override;
 		void manageEvents(std::map<Input, bool> &inputs) override;
-		void addScore(int score) { _score += score; };
+		void addScore(int score);
 		int getScore() const { return _score; };
 		void affraidGhosts();
 		void unaffraidGhosts();
 		void setNeedToOpen(bool need) { _needToOpen = need; };
 		void initGame();
 		bool anyPacGumsLeft();
+		int getHighScore() const { return _highScore; };
 
 	private:
 		void initPacGums(void);
@@ -42,6 +43,7 @@ class PacmanScene : public Scene {
 		bool _startMenu = 1;
 		bool _endMenu = 0;
 		float _restartSecondsRemaining = 0;
+		int _highScore = 0;
 };
 
 #endif /* !PACMANSCENE_HPP_ */

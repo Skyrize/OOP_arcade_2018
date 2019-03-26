@@ -12,11 +12,11 @@
 PacmanScene::PacmanScene()
 : Scene("PacmanScene", none)
 {
-    Object *rightPacMan = this->addObject("PacmanRight", RightBigPacMan, {81, 27});
-    Object *leftPacMan = this->addObject("PacmanLeft", LeftBigPacMan, {10, 27});
+    Object *rightPacMan = this->addObject("PacmanRight", RightBigPacMan, {88, 27});
+    Object *leftPacMan = this->addObject("PacmanLeft", LeftBigPacMan, {3, 27});
     
-    this->addObject(new Text("PacmanTitle", "PacMan", 100, YELLOW, none, {37, 6}));
-    this->addObject(new Text("Info", "Press Enter to Start", 70, WHITE, none, {24, 27}));
+    this->addObject(new Text("PacmanTitle", "PacMan", 100, YELLOW, none, {35, 6}));
+    this->addObject(new Text("Info", "Press Enter to Start", 70, WHITE, none, {15, 27}));
     rightPacMan->getAnimation().setLoop(true);
     rightPacMan->getAnimation().setAnimationSpeed(0.1);
     leftPacMan->getAnimation().setLoop(true);
@@ -230,4 +230,11 @@ float PacmanScene::update(IDisplayModule *displays)
     updateGate(delta);
     ((Text *)getObject("Score"))->setText("Score: " + std::to_string(_score));
     return delta;
+}
+
+void PacmanScene::addScore(int score)
+{ 
+    _score += score;
+    if (_score > _highScore)
+        _highScore =_score;
 }

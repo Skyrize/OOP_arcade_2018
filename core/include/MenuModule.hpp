@@ -19,13 +19,12 @@ class MenuModule : public IGameModule {
 		MenuModule();
 		~MenuModule();
 
-        virtual void init();
+        virtual void init(const std::string &playerName, const int &highScore);
         virtual void stop();
         virtual const std::string &getName() const;
-
+        virtual int getHighScore() const;
+        
         virtual void run(IDisplayModule *library, std::map<Input, bool> &inputs);
-
-	protected:
 };
 
 #endif /* !MENUMODULE_HPP_ */

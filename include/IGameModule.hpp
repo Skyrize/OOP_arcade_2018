@@ -17,9 +17,10 @@ class IGameModule {
     public:
         virtual ~IGameModule() = default;
 
-        virtual void init() = 0;
+        virtual void init(const std::string &playerName, const int &highScore) = 0;
         virtual void stop() = 0;
         virtual const std::string &getName() const = 0;
+        virtual int getHighScore() const = 0;
 
         virtual void run(IDisplayModule *library, std::map<Input, bool> &inputs) = 0;
 };

@@ -9,6 +9,7 @@
 #define NCURSES_HPP_
 
 #include "IDisplayModule.hpp"
+#include "nCursesAlphabet.hpp"
 #include <ncurses.h>
 #include <ctime>
 #include <iostream>

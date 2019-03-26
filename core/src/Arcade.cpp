@@ -162,7 +162,7 @@ IGameModule *Arcade::changeGame(const size_t &index)
     }
     this->games[index]->init();
     this->game = this->games[index]->getInstance();
-    this->game->init();
+    this->game->init("", 0);
     this->actualGame = index;
     return this->game;
 }
@@ -175,6 +175,6 @@ IGameModule *Arcade::goToMainMenu()
     this->game->stop();
     delete(this->game);
     this->game = new MenuModule();
-    this->game->init();
+    this->game->init("", 0);
     return this->game;
 }

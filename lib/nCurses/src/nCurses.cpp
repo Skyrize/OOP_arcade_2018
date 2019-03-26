@@ -54,13 +54,46 @@ void DisplayModule::clear()
     wclear(_win);
 }
 
+static void replaceBlueColorInSprite(Sprite &sprite, Color color)
+{
+    for (auto &i: sprite) {
+        for (auto &j : i) {
+            if (j == BLUE)
+                j = color;
+        }
+    }
+}
+
 void DisplayModule::drawText(int x, int y, const std::string &name, int fontSize, Color color)
 {
-    (void)fontSize;
-    (void)color;
+    Sprite tmp;
+
     if (!_isOpen)
         return;
-    mvwprintw(_win, y, x * 2, name.c_str());
+    if (fontSize >= 90) {
+        for (auto &i : name) {
+            if (i == ' ') {
+                x += 3;
+                continue;
+            }
+            tmp = nCursesBigLetters[i];
+            replaceBlueColorInSprite(tmp, color);
+            drawShape(x, y, tmp);
+            x += 6;
+        }
+    } else if (fontSize >= 64) {
+        for (auto &i : name) {
+            if (i == ' ') {
+                x += 2;
+                continue;
+            }
+            tmp = nCursesSmallLetters[i];
+            replaceBlueColorInSprite(tmp, color);
+            drawShape(x, y, tmp);
+            x += 4;
+        }
+    } else
+        mvwprintw(_win, y, x * 2, name.c_str());
 }
 
 void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec)
