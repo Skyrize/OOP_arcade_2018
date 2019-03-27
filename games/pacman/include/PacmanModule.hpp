@@ -6,7 +6,7 @@
 */
 
 #ifndef PACMANMODULE_HPP_
-    #define PACMANMODULE_HPP_
+#define PACMANMODULE_HPP_
 
 #include "IGameModule.hpp"
 #include "PacmanScene.hpp"
@@ -24,7 +24,7 @@ class PacmanModule : public IGameModule {
         virtual void run(IDisplayModule *library, std::map<Input, bool> &inputs);
 
 	protected:
-        std::string _name = "PacmanModule";
+        std::string _name = "Pacman";
 		PacmanScene scene;
 };
 

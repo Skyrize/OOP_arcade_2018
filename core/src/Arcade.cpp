@@ -8,6 +8,7 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include "Arcade.hpp"
 
 Arcade::Arcade(char *baseDisplayModule)
@@ -17,6 +18,7 @@ Arcade::Arcade(char *baseDisplayModule)
 
     loadLibraries();
     loadGames();
+    loadHighScores();
     for (size_t i = 0; i != libraries.size(); i++)
         if (libraries[i]->getFileName() == bdmString || libraries[i]->getFileName() == "./" + bdmString)
             hasFind = i;
@@ -79,6 +81,33 @@ void Arcade::loadGames()
     }
 }
 
+void Arcade::loadHighScores()
+{
+    DIR *dir = opendir("highscores/");
+    struct dirent *file;
+    std::ifstream fileStream;
+    std::string line;
+    std::string fileName;
+
+    if (!dir) {
+        std::cerr << "Cannot open HighScores directory !" << std::endl;
+    } else {
+        while ((file = readdir(dir)) != NULL) {
+            fileName = std::string(file->d_name);
+            if (fileName.find(".txt") == std::string::npos)
+                continue;
+            fileStream.open("highscores/" + fileName, std::ifstream::in);
+            while (std::getline(fileStream, line)) {
+                if (line == "")
+                    break;
+                else
+                    highScores[fileName.substr(0, fileName.find(".txt"))][line.substr(0, 3)] = atoi(line.substr(3).c_str());
+            }
+            fileStream.close();
+        }
+    }
+}
+
 void Arcade::nextDisplay()
 {
     if (this->actualLib == this->libraries.size() - 1) {
@@ -136,6 +165,7 @@ void Arcade::event()
         this->display->stop();
     }
 }
+
 IDisplayModule *Arcade::changeDisplay(const size_t &index)
 {
     if (this->display) {
@@ -157,6 +187,8 @@ IGameModule *Arcade::changeGame(const size_t &index)
         return goToMainMenu();
     }
     if (this->game) {
+        if (this->game->getName() != "MainMenu" && this->game->getHighScore())
+            this->saveScore();
         this->game->stop();
         delete(game);
     }
@@ -172,9 +204,20 @@ IGameModule *Arcade::goToMainMenu()
     if (this->game->getName() == "MainMenu")
         return this->game;
     this->display->restartTime();
+    if (this->game->getName() != "MainMenu" && this->game->getHighScore())
+        this->saveScore();
     this->game->stop();
     delete(this->game);
     this->game = new MenuModule();
     this->game->init("", 0);
     return this->game;
+}
+
+void Arcade::saveScore()
+{
+    std::ofstream fileStream("highscores/" + this->game->getName() + ".txt",
+        std::ios_base::app | std::ios_base::out);
+    
+    this->highScores[this->game->getName()][this->playerName] = this->game->getHighScore();
+    fileStream << this->playerName << this->game->getHighScore() << std::endl;
 }

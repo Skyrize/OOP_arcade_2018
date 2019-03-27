@@ -409,6 +409,8 @@ void SnakeScene::addPoints()
     } else {
         scoreValue += 10;
     }
+    if (scoreValue > highScore)
+        highScore = scoreValue;
     score->setText("Score = " + std::to_string(scoreValue));
 }
 
@@ -444,4 +446,9 @@ void SnakeScene::launchSnake()
     addObject(fruit);
     replaceFruit();
     removeObject("StartMenu");
+}
+
+int SnakeScene::getHighScore() const
+{
+    return this->highScore;
 }

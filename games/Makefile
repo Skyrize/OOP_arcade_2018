@@ -16,16 +16,16 @@ all:	prepare_lib
 prepare_lib:
 	make -C pacman/
 	cp pacman/*.so ./
-	make -C snake/
-	cp snake/*.so ./
+	make -C nibbler/
+	cp nibbler/*.so ./
 
 clean:
 	make clean -C pacman/
-	make clean -C snake/
+	make clean -C nibbler/
 
 fclean:
 	make fclean -C pacman/
-	make fclean -C snake/
+	make fclean -C nibbler/
 	$(RM) ./*.so
 
 re:	fclean all

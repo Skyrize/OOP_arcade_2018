@@ -36,7 +36,7 @@ const std::string &SnakeModule::getName() const
 
 int SnakeModule::getHighScore() const
 {
-    return 0;
+    return this->scene.getHighScore();
 }
 
 void SnakeModule::run(IDisplayModule *library, std::map<Input, bool> &inputs)

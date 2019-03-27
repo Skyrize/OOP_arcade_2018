@@ -25,6 +25,9 @@ class Arcade {
                 IGameModule *game = nullptr;
 
                 std::map<Input, bool> inputs;
+                std::map<std::string, std::map<std::string, int> > highScores;
+
+                std::string playerName = "AAA";
 
 	public:
 		Arcade(char *baseDisplayModule);
@@ -33,6 +36,9 @@ class Arcade {
                 void launch();
                 void loadLibraries();
                 void loadGames();
+                void loadHighScores();
+
+                void saveScore();
 
                 IDisplayModule *changeDisplay(const size_t &index);
                 IGameModule *changeGame(const size_t &index);

@@ -30,12 +30,16 @@ class SnakeScene : public Scene {
 		void nextMap();
 		void unloadMap();
 		void loadMap();
+
+		int getHighScore() const;
+
 	protected:
 		Object *startMenu;
 		Object *endMenu;
 		Object *fruit;
 		Text *score;
 		int scoreValue = 0;
+		int highScore = 0;
 		Text *speedMode;
 		bool speedModeValue = false;
 

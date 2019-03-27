@@ -11,11 +11,16 @@
 int main(int ac, char **av)
 {
     if (ac != 2) {
-        std::cout << "Usage : rentre une lib stp frer" << std::endl;
+        std::cout << "Usage : Please enter a library path" << std::endl;
         return (0);
     }
-    Arcade arcade(av[1]);
-    srand(time(NULL));
-    arcade.launch();
+    try {
+        Arcade arcade(av[1]);
+        srand(time(NULL));
+        arcade.launch();
+    } catch (std::exception &e) {
+        std::cerr << "An error occured. Please restart the Arcade" << std::endl;
+        return 84;
+    }
     return 0;
 }

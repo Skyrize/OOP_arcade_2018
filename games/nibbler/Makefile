@@ -23,7 +23,7 @@ SRC			=	src/main.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 
-NAME		=	lib_arcade_snake.so
+NAME		=	lib_arcade_nibbler.so
 
 _END=$'\x1b[0m'
 _RED=$'\x1b[31m'
