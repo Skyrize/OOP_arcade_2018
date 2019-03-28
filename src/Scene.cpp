@@ -50,7 +50,7 @@ Object *Scene::getObject(const std::string &name)
 
 Object *Scene::addObject(Object *newObject)
 {
-	if (objects[newObject->getName()] != nullptr)
+	if (objects.find(newObject->getName()) != objects.end())
 		delete(objects[newObject->getName()]);
 	objects[newObject->getName()] = newObject;
     return newObject;
@@ -58,7 +58,7 @@ Object *Scene::addObject(Object *newObject)
 
 Object *Scene::addObject(const std::string &name, Sprite &sprite, std::pair<float, float> position)
 {
-	if (objects[name] != nullptr)
+	if (objects.find(name) != objects.end())
 		delete(objects[name]);
 	objects[name] = new Object(name, sprite, position);
     return objects[name];
@@ -66,7 +66,7 @@ Object *Scene::addObject(const std::string &name, Sprite &sprite, std::pair<floa
 
 Object *Scene::addObject(const std::string &name, SpriteSheet &spriteSheet, std::pair<float, float> position)
 {
-	if (objects[name] != nullptr)
+	if (objects.find(name) != objects.end())
 		delete(objects[name]);
 	objects[name] = new Object(name, spriteSheet, position);
     return objects[name];
@@ -74,22 +74,23 @@ Object *Scene::addObject(const std::string &name, SpriteSheet &spriteSheet, std:
 
 void Scene::removeObject(const std::string &name)
 {
-	if (objects[name] != nullptr) {
+	if (objects.find(name) != objects.end()) {
 		toRemove.push_back(objects[name]);
-		objects[name] = nullptr;
+		objects.erase(objects.find(name));
 	}
 }
 
 void Scene::removeAllObjects()
 {
 	for (auto &i: this->objects) {
-		toRemove.push_back(i.second);
-		i.second = nullptr;
+		removeObject(i.first);
 	}
 }
 
 void Scene::removeObjects()
 {
+	for (auto &e : toRemove)
+		delete(e);
 	this->toRemove.clear();
 }
 

@@ -5,6 +5,7 @@
 ** Arcade.cpp
 */
 
+#include <sys/types.h>
 #include <dirent.h>
 #include <stdio.h>
 #include <iostream>
@@ -61,6 +62,7 @@ void Arcade::loadLibraries()
             }
         }
     }
+    closedir(dir);
 }
 
 void Arcade::loadGames()
@@ -79,6 +81,7 @@ void Arcade::loadGames()
             }
         }
     }
+    closedir(dir);
 }
 
 void Arcade::loadHighScores()
