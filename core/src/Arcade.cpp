@@ -180,6 +180,31 @@ IDisplayModule *Arcade::changeDisplay(const size_t &index)
     return this->display;
 }
 
+static int getHighScoreOfGame(std::string gameName, std::map<std::string, std::map<std::string, int> > highScores)
+{
+    int highScore = 0;
+
+    for (auto &i: highScores[gameName]) {
+        if (i.second > highScore)
+            highScore = i.second;
+    }
+    return highScore;
+}
+
+static const std::string getPlayerHighScore(std::string gameName, std::map<std::string, std::map<std::string, int> > highScores)
+{
+    int highScore = 0;
+    std::string name;
+
+    for (auto &i: highScores[gameName]) {
+        if (i.second > highScore) {
+            name = i.first;
+            highScore = i.second;
+        }
+    }
+    return name;
+}
+
 IGameModule *Arcade::changeGame(const size_t &index)
 {
     this->display->restartTime();
@@ -194,7 +219,8 @@ IGameModule *Arcade::changeGame(const size_t &index)
     }
     this->games[index]->init();
     this->game = this->games[index]->getInstance();
-    this->game->init("", 0);
+    this->game->init(getPlayerHighScore(this->game->getName(), highScores),
+        getHighScoreOfGame(this->game->getName(), highScores));
     this->actualGame = index;
     return this->game;
 }
@@ -209,7 +235,8 @@ IGameModule *Arcade::goToMainMenu()
     this->game->stop();
     delete(this->game);
     this->game = new MenuModule();
-    this->game->init("", 0);
+    this->game->init(getPlayerHighScore(this->game->getName(), highScores),
+        getHighScoreOfGame(this->game->getName(), highScores));
     return this->game;
 }
 
