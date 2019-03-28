@@ -23,6 +23,9 @@ class DisplayModule : public IDisplayModule {
         void stop();
         const std::string &getName() const { return _name; };
 
+        void playMusic(std::string musicName);
+        void stopCurrentMusic();
+
         bool isOpen() { return _isOpen; };
         void clear();
         void display();
@@ -41,6 +44,8 @@ class DisplayModule : public IDisplayModule {
         SDL_Window *_win = nullptr;
         SDL_Renderer *_render = nullptr;
         TTF_Font *_font = nullptr;
+        SDL_Surface *_surface = nullptr;
+        SDL_Texture *_texture = nullptr;
 
 };
 

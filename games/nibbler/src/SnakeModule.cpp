@@ -44,3 +44,7 @@ void SnakeModule::run(IDisplayModule *library, std::map<Input, bool> &inputs)
     this->scene.update(library);
     this->scene.display(library);
 }
+
+void SnakeModule::restart() const
+{
+}

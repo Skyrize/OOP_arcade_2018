@@ -31,6 +31,9 @@ class DisplayModule : public IDisplayModule {
         void stop();
         const std::string &getName() const { return _name; };
 
+        void playMusic(std::string musicName);
+        void stopCurrentMusic();
+
         bool isOpen();
         void clear();
         void display();

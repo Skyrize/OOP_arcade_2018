@@ -19,10 +19,10 @@ class IGameModule {
 
         virtual void init(const std::string &playerName, const int &highScore) = 0;
         virtual void stop() = 0;
+        virtual void restart() const = 0;
+        virtual void run(IDisplayModule *library, std::map<Input, bool> &inputs) = 0;
         virtual const std::string &getName() const = 0;
         virtual int getHighScore() const = 0;
-
-        virtual void run(IDisplayModule *library, std::map<Input, bool> &inputs) = 0;
 };
 
 #endif /* IGAMEMODULE_HPP_ */

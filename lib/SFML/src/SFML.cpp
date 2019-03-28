@@ -195,3 +195,12 @@ void DisplayModule::restartTime()
     this->clock.restart();
     this->timer = clock.getElapsedTime();
 }
+
+void DisplayModule::playMusic(std::string musicName)
+{
+    (void)musicName;
+}
+
+void DisplayModule::stopCurrentMusic()
+{
+}

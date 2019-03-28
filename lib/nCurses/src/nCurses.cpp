@@ -150,3 +150,12 @@ void DisplayModule::restartTime()
 {
     _clock = std::chrono::steady_clock::now();
 }
+
+void DisplayModule::playMusic(std::string musicName)
+{
+    (void)musicName;
+}
+
+void DisplayModule::stopCurrentMusic()
+{
+}
