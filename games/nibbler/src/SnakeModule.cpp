@@ -21,8 +21,7 @@ SnakeModule::~SnakeModule()
 
 void SnakeModule::init(const std::string &playerName, const int &highScore)
 {
-    (void)playerName;
-    (void)highScore;
+    this->scene.init(playerName, highScore);
 }
 
 void SnakeModule::stop()

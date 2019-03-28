@@ -264,7 +264,7 @@ SnakeScene::SnakeScene()
 {
     score = new Text("Score", "Score = 0", 16, BLACK, none, std::pair<float, float>{15, 2});
     speedMode = new Text("Mode", "Speed mode : OFF", 16, BLACK, none, std::pair<float, float>{75, 2});
-    displayedMap = new Text("DisplayedMap", "Map : ", 16, BLACK, none, std::pair<float, float>{40, 2});
+    displayedMap = new Text("DisplayedMap", "Map : ", 16, BLACK, none, std::pair<float, float>{35, 2});
     endMenu = new EndPannel(this->scoreValue);
     startMenu = new StartPannel();
     fruit = new Object("SnakeFruit", fruitSpriteSheet);
@@ -433,6 +433,7 @@ void SnakeScene::killSnake()
     removeObject("Snake");
     addObject(this->endMenu);
     removeObject("SnakeFruit");
+    this->highScore = this->scoreValue;
 }
 
 void SnakeScene::launchSnake()
@@ -451,4 +452,11 @@ void SnakeScene::launchSnake()
 int SnakeScene::getHighScore() const
 {
     return this->highScore;
+}
+
+void SnakeScene::init(const std::string &playerName, const int &highScore)
+{
+    highestScore = new Text("highestScore", "Highest Score: " + playerName + " - " + std::to_string(highScore), 16, BLACK, none, std::pair<float, float>{50, 2});
+    std::cout << "Highest Score: " + playerName + " - " + std::to_string(highScore) << std::endl;
+    addObject(highestScore);
 }

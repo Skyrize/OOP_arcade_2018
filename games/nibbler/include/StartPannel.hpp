@@ -27,6 +27,7 @@ class StartPannel : public Object {
 		Text *text6;
 		Text *text7;
 		Text *text8;
+		Text *text9;
 	private:
 };
 

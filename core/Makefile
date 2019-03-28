@@ -17,9 +17,7 @@ SRC			=	src/main.cpp	\
 				src/ShootComponent.cpp	\
 				src/Projectile.cpp	\
 				src/Button.cpp	\
-				src/BackButton.cpp	\
-				src/NextButton.cpp	\
-				src/MainButton.cpp	\
+				src/MovingButton.cpp	\
 				src/Star.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)

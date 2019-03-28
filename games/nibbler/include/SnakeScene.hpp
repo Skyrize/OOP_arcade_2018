@@ -16,6 +16,7 @@ class SnakeScene : public Scene {
 		SnakeScene();
 		~SnakeScene();
 
+		void init(const std::string &playerName, const int &highScore);
 		virtual void manageEvents(std::map<Input, bool> &inputs);
 
 		void eventFruitEaten();
@@ -42,6 +43,7 @@ class SnakeScene : public Scene {
 		int highScore = 0;
 		Text *speedMode;
 		bool speedModeValue = false;
+		Text *highestScore = nullptr;
 
 		size_t actualMap = 0;
 		Text *displayedMap;

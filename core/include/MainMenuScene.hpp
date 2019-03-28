@@ -16,8 +16,7 @@ class MainMenuScene : public Scene {
 		~MainMenuScene();
         
 		virtual void manageEvents(std::map<Input, bool> &inputs);
-		void previousPannel();
-		void nextPannel();
+		void goToPannel(const int &index);
 		Scene *getActualPannel();
 
 		virtual void display(IDisplayModule *display);

@@ -8,7 +8,7 @@
 #include "Projectile.hpp"
 #include <iostream>
 
-SpriteSheet projectileSpriteSheet {
+static SpriteSheet projectileSpriteSheet {
     {
         {RED},
         {RED}
@@ -57,6 +57,8 @@ float Projectile::update(IDisplayModule *display, std::map<std::string, Object *
 
 void Projectile::eventHit(Object *other)
 {
+    if (other->getMovement().isBlocking() == false)
+        return;
     other->eventHit(this);
     space.removeObject(name);
 }
