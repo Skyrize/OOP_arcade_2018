@@ -25,7 +25,7 @@ class PacmanModule : public IGameModule {
         virtual void run(IDisplayModule *library, std::map<Input, bool> &inputs);
 
 	protected:
-        std::string _name = "Pacman";
+        std::string _name = "pacman";
 		PacmanScene scene;
 };
 

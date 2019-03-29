@@ -24,7 +24,7 @@ class SnakeModule : public IGameModule {
         virtual void run(IDisplayModule *library, std::map<Input, bool> &inputs);
 
 	protected:
-        std::string _name = "Nibbler";
+        std::string _name = "nibbler";
 		SnakeScene scene;
 	private:
 };
