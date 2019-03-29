@@ -7,6 +7,7 @@
 
 SRC			=	src/main.cpp	\
 				src/Arcade.cpp	\
+				src/DLLoader.cpp	\
 				src/MenuModule.cpp	\
 				src/MainMenuScene.cpp	\
 				../src/Scene.cpp	\

@@ -18,46 +18,14 @@ class DLLoader {
         std::string fileName;
     public:
     
-        DLLoader(const std::string &filename)
-        : fileName(filename)
-        {}
+        DLLoader(const std::string &filename);
 
-        ~DLLoader()
-        {
-        }
+        ~DLLoader();
 
-        void init()
-        {
-            this->handler = dlopen(fileName.c_str(), RTLD_LAZY);
-            if (!handler) {
-                std::cerr << "ERROR: Invalid filename '" + fileName + "'. Can't dlopen. (maybe need to throw)" << std::endl;
-            }
-            entryPointPtr = (T *(*)())dlsym(handler, "entryPoint");
-            if (!entryPointPtr) {
-                std::cerr << "ERROR: '" + fileName + "' has no method 'entryPoint'. (maybe need to throw)" << std::endl;
-            }
-        }
-
-        void stop()
-        {
-            if (this->handler)
-                dlclose(this->handler);
-            handler = nullptr;
-            entryPointPtr = nullptr;
-        }
-
-
-        T *getInstance()
-        {
-            if (!entryPointPtr)
-            std::cout << fileName << std::endl;
-            return this->entryPointPtr();
-        }
-
-        const std::string &getFileName()
-        {
-            return fileName;
-        }
+        void init();
+        void stop();
+        T *getInstance();
+        const std::string &getFileName();
 };
 
 #endif /* DLLOADER_HPP_ */

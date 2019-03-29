@@ -7,7 +7,7 @@
 
 #include "PacmanModule.hpp"
 
-extern "C" IGameModule *entryPoint(void)
+extern "C" IGameModule *entryPointGame(void)
 {
     return new PacmanModule();
 }

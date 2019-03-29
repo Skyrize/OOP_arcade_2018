@@ -7,7 +7,7 @@
 
 #include "SFML.hpp"
 
-extern "C" IDisplayModule *entryPoint(void)
+extern "C" IDisplayModule *entryPointDisplay(void)
 {
     return new DisplayModule();
 }
