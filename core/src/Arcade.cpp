@@ -29,7 +29,7 @@ Arcade::Arcade(char *baseDisplayModule)
     } else {
         changeDisplay(hasFind);
     }
-    this->game = new MenuModule;
+    this->game = new MenuModule(this->playerName);
 }
 
 Arcade::~Arcade()
@@ -240,7 +240,7 @@ IGameModule *Arcade::goToMainMenu()
         this->saveScore();
     this->game->stop();
     delete(this->game);
-    this->game = new MenuModule();
+    this->game = new MenuModule(playerName);
     this->game->init(getPlayerHighScore(this->game->getName(), highScores),
         getHighScoreOfGame(this->game->getName(), highScores));
     return this->game;

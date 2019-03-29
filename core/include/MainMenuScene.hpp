@@ -12,7 +12,7 @@
 
 class MainMenuScene : public Scene {
 	public:
-		MainMenuScene();
+		MainMenuScene(std::string &playerName);
 		~MainMenuScene();
         
 		virtual void manageEvents(std::map<Input, bool> &inputs);
@@ -28,7 +28,7 @@ class MainMenuScene : public Scene {
 		size_t actualPannel = 0;
 		std::vector<Scene *> pannels;
 
-		std::string playerName;
+		std::string &playerName;
 	private:
 };
 

@@ -27,9 +27,11 @@ SpriteSheet invaderSpriteSheet {
 };
 
 static const std::pair<float, float> lockPos0 = {11, 40};
-static const std::pair<float, float> lockPos1 = {46, 40};
-static const std::pair<float, float> lockPos2 = {81, 40};
-static const std::pair<float, float> lockPoses[3] = {lockPos0, lockPos1, lockPos2};
+static const std::pair<float, float> lockPos1 = {28, 40};
+static const std::pair<float, float> lockPos2 = {46, 40};
+static const std::pair<float, float> lockPos3 = {63, 40};
+static const std::pair<float, float> lockPos4 = {81, 40};
+static const std::pair<float, float> lockPoses[5] = {lockPos0, lockPos1, lockPos2, lockPos3, lockPos4};
 
 Invader::Invader(Scene &parent, const std::pair<float, float> &pos)
 : Object("SpaceInvader", invaderSpriteSheet, pos),
@@ -66,10 +68,10 @@ void Invader::manageEvents(std::map<Input, bool> &inputs)
     if (inputs[Input::LEFT_ARROW_KEY] == true || inputs[Input::RIGHT_ARROW_KEY] == true) {
         if (inputs[Input::LEFT_ARROW_KEY] == true && lockPos != 0) {
             lockPos--;
-            movement.setDestination(lockPoses[lockPos], 0.2);
-        } else if (inputs[Input::RIGHT_ARROW_KEY] == true && lockPos != 2) {
+            movement.setDestination(lockPoses[lockPos], 0.1);
+        } else if (inputs[Input::RIGHT_ARROW_KEY] == true && lockPos != 4) {
             lockPos++;
-            movement.setDestination(lockPoses[lockPos], 0.2);
+            movement.setDestination(lockPoses[lockPos], 0.1);
         }
     }
 }

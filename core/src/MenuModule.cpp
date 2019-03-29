@@ -7,7 +7,8 @@
 
 #include "MenuModule.hpp"
 
-MenuModule::MenuModule()
+MenuModule::MenuModule(std::string &playerName)
+: scene(playerName)
 {
 
 }

@@ -20,6 +20,7 @@ SRC			=	src/main.cpp	\
 				src/Projectile.cpp	\
 				src/Button.cpp	\
 				src/MovingButton.cpp	\
+				src/TextBox.cpp	\
 				src/Star.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)

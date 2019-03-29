@@ -12,6 +12,7 @@
 #include "Button.hpp"
 #include "Star.hpp"
 #include "Text.hpp"
+#include "TextBox.hpp"
 #include <iostream>
 
 #define NB_STARS 10
@@ -380,8 +381,9 @@ static SpriteSheet mainButtonSheet {
     },
 };
 
-MainMenuScene::MainMenuScene()
-: Scene("MainMenuScene", none)
+MainMenuScene::MainMenuScene(std::string &playerName)
+: Scene("MainMenuScene", none),
+playerName(playerName)
 {
     //addObject(new Object("BorderLeft", verticalBorderSprite))->getMovement().setBlocking(true);
     //addObject(new Object("BorderRight", verticalBorderSprite, std::pair<float, float>{99, 0}))->getMovement().setBlocking(true);
@@ -404,11 +406,17 @@ MainMenuScene::MainMenuScene()
     pannels[1]->addObject(new Text("ButtonText1", "BACK", 32, WHITE, none, std::pair<float, float>{5, 6}));
     pannels[1]->addObject(new MovingButton(*this, 2, 3, -3, "namePannel-NextButton", nextButtonSheet, std::pair<float, float>{76, 10}));
     pannels[1]->addObject(new Text("ButtonText2", "GAME SELECTION", 32, WHITE, none, std::pair<float, float>{75, 6}));
+    pannels[1]->addObject(new Text("ButtonText3", "ENTER YOUR NAME", 32, WHITE, none, std::pair<float, float>{37, 3}));
+    pannels[1]->addObject(new Text("Tips0", "A-Z letters only", 16, WHITE, none, std::pair<float, float>{75, 53}));
+    pannels[1]->addObject(new Text("Tips1", "Shoot for a random name", 16, WHITE, none, std::pair<float, float>{37, 53}));
+    pannels[1]->addObject(new TextBox(playerName, std::pair<float, float>{35, 7}));
 	this->pannels.push_back(new Scene("menuPannel", none));
     pannels[2]->addObject(new MovingButton(*this, 1, -3, 3, "menuPannel-BackButton", backButtonSheet, std::pair<float, float>{3, 10}));
+    pannels[2]->addObject(new Text("ButtonText1", "BACK", 32, WHITE, none, std::pair<float, float>{5, 6}));
     pannels[2]->addObject(new MovingButton(*this, 3, 3, -3, "menuPannel-NextButton", nextButtonSheet, std::pair<float, float>{76, 10}));
 	this->pannels.push_back(new Scene("scorePannel", none));
     pannels[3]->addObject(new MovingButton(*this, 0, 3, -3, "scorePannel-ScoreButton", nextButtonSheet, std::pair<float, float>{76, 10}));
+    pannels[3]->addObject(new Text("ButtonText1", "BACK", 32, WHITE, none, std::pair<float, float>{78, 6}));
 }
 
 MainMenuScene::~MainMenuScene()
@@ -443,6 +451,7 @@ float MainMenuScene::update(IDisplayModule *display)
 void MainMenuScene::manageEvents(std::map<Input, bool> &inputs)
 {
     this->objects["SpaceInvader"]->manageEvents(inputs);
+    this->pannels[actualPannel]->manageEvents(inputs);
 }
 
 Scene *MainMenuScene::getActualPannel()
@@ -452,8 +461,11 @@ Scene *MainMenuScene::getActualPannel()
 
 void MainMenuScene::goToPannel(const int &index)
 {
-    std::cout << std::endl;
     this->actualPannel = index;
+    if (actualPannel != 1 && playerName.empty() == true) {
+        for (int i = 0; i != 3; i++)
+            ((TextBox *)this->pannels[1]->getObjects()["textBox"])->addChar('A');
+    }
 }
 
 void MainMenuScene::eventButtonTriggered()

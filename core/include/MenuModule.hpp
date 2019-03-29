@@ -16,7 +16,7 @@ class MenuModule : public IGameModule {
         std::string _name = "MainMenu";
         MainMenuScene scene;
 	public:
-		MenuModule();
+		MenuModule(std::string &playerName);
 		~MenuModule();
 
         virtual void init(const std::string &playerName, const int &highScore);

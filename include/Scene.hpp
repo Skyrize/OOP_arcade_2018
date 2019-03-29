@@ -23,6 +23,7 @@ class Scene: public Object {
 
 		virtual void display(IDisplayModule *display);
 		virtual float update(IDisplayModule *display);
+		virtual void manageEvents(std::map<Input, bool> &inputs);
 		Object *getObject(const std::string &name);
 		Object *addObject(Object *newObject);
 		Object *addObject(const std::string &name, Sprite &sprite, std::pair<float, float> position = {0.0, 0.0});

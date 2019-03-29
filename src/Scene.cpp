@@ -43,6 +43,13 @@ float Scene::update(IDisplayModule *display)
 	return delta;
 }
 
+void Scene::manageEvents(std::map<Input, bool> &inputs)
+{
+	for (auto &e : objects)
+		if (e.second)
+			e.second->manageEvents(inputs);
+}
+
 Object *Scene::getObject(const std::string &name)
 {
 	return objects[name];
