@@ -26,12 +26,16 @@ SpriteSheet invaderSpriteSheet {
     },
 };
 
+static const std::pair<float, float> lockPos0 = {11, 40};
+static const std::pair<float, float> lockPos1 = {46, 40};
+static const std::pair<float, float> lockPos2 = {81, 40};
+static const std::pair<float, float> lockPoses[3] = {lockPos0, lockPos1, lockPos2};
+
 Invader::Invader(Scene &parent, const std::pair<float, float> &pos)
 : Object("SpaceInvader", invaderSpriteSheet, pos),
 parent(parent),
 gun(*this, true, 1, 200, 0.2, 0.5, 1)
 {
-    movement.setFreeMoving(true);
     movement.setBlocking(true);
     sprite.setAnimationSpeed(0.4);
     sprite.setLoop(true);
@@ -52,7 +56,6 @@ float Invader::update(IDisplayModule *display, std::map<std::string, Object *> &
             gun.setFireTimer(gun.getFireTimer() - delta);
         }
     }
-    moveTrick -= delta;
     return delta;
 }
 
@@ -60,31 +63,14 @@ void Invader::manageEvents(std::map<Input, bool> &inputs)
 {
     if (inputs[Input::SPACE_KEY] == true && gun.hasShot() == false)
         gun.shoot(std::pair<float, float>{0, -1}, std::pair<float, float>{movement.getPosition().first + 3, movement.getPosition().second - 2});
-    if (inputs[Input::UP_ARROW_KEY] == true || inputs[Input::LEFT_ARROW_KEY] == true || 
-    inputs[Input::DOWN_ARROW_KEY] == true || inputs[Input::RIGHT_ARROW_KEY] == true) {
-        if (inputs[Input::UP_ARROW_KEY] == true) {
-            movement.setSpeed(movement.getSpeed().first, -60);
-            moveTrick = 0.6;
-        } else if (inputs[Input::DOWN_ARROW_KEY] == true) {
-            movement.setSpeed(movement.getSpeed().first, 60);
-            moveTrick = 0.6;
-        } else {
-            movement.setSpeed(movement.getSpeed().first, 0);
-            moveTrick = 0.6;
+    if (inputs[Input::LEFT_ARROW_KEY] == true || inputs[Input::RIGHT_ARROW_KEY] == true) {
+        if (inputs[Input::LEFT_ARROW_KEY] == true && lockPos != 0) {
+            lockPos--;
+            movement.setDestination(lockPoses[lockPos], 0.2);
+        } else if (inputs[Input::RIGHT_ARROW_KEY] == true && lockPos != 2) {
+            lockPos++;
+            movement.setDestination(lockPoses[lockPos], 0.2);
         }
-        if (inputs[Input::LEFT_ARROW_KEY] == true) {
-            movement.setSpeed(-60, movement.getSpeed().second);
-            moveTrick = 0.6;
-        } else if (inputs[Input::RIGHT_ARROW_KEY] == true) {
-            movement.setSpeed(60, movement.getSpeed().second);
-            moveTrick = 0.6;
-        } else {
-            movement.setSpeed(0, movement.getSpeed().second);
-            moveTrick = 0.6;
-        }
-    } else {
-        if (moveTrick <= 0)
-            movement.setSpeed(0, 0);
     }
 }
 

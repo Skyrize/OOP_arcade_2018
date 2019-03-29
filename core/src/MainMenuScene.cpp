@@ -11,6 +11,7 @@
 #include "MovingButton.hpp"
 #include "Button.hpp"
 #include "Star.hpp"
+#include "Text.hpp"
 #include <iostream>
 
 #define NB_STARS 10
@@ -386,20 +387,28 @@ MainMenuScene::MainMenuScene()
     //addObject(new Object("BorderRight", verticalBorderSprite, std::pair<float, float>{99, 0}))->getMovement().setBlocking(true);
     //addObject(new Object("BorderTop", horizontalBorderSprite))->getMovement().setBlocking(true);
     //addObject(new Object("BorderBot", horizontalBorderSprite, std::pair<float, float>{0, 56}))->getMovement().setBlocking(true);
-    addObject(new Invader(*this, std::pair<float, float>{46, 50}));
+    addObject(new Invader(*this, std::pair<float, float>{46, 40}));
 
 
 	this->pannels.push_back(new Scene("mainPannel", none));
     pannels[0]->addObject(new Button(*this, 1, "mainPannel-MainButton", mainButtonSheet, std::pair<float, float>{34, 6}));
-    pannels[0]->addObject(new MovingButton(*this, 3, -3, 3, "mainPannel-ScoreButton", backButtonSheet, std::pair<float, float>{10, 10}));
+    pannels[0]->addObject(new MovingButton(*this, 3, -3, 3, "mainPannel-ScoreButton", backButtonSheet, std::pair<float, float>{3, 10}));
+    pannels[0]->addObject(new Text("ButtonText1", "HIGHSCORES", 32, WHITE, none, std::pair<float, float>{5, 6}));
+    pannels[0]->addObject(new MovingButton(*this, 1, 3, -3, "mainPannel-NextButton", nextButtonSheet, std::pair<float, float>{76, 10}));
+    pannels[0]->addObject(new Text("ButtonText2", "PLAYER NAME", 32, WHITE, none, std::pair<float, float>{78, 6}));
+    pannels[0]->addObject(new Text("Tips0", "Use SpaceBar to shoot buttons", 16, WHITE, none, std::pair<float, float>{75, 53}));
+    pannels[0]->addObject(new Text("Tips1", "Use '1' and '2' to switch display", 16, WHITE, none, std::pair<float, float>{37, 53}));
+    pannels[0]->addObject(new Text("Tips2", "Use '3' and '4 to switch game", 16, WHITE, none, std::pair<float, float>{3, 53}));
 	this->pannels.push_back(new Scene("namePannel", none));
-    pannels[1]->addObject(new MovingButton(*this, 0, -3, 3, "namePannel-BackButton", backButtonSheet, std::pair<float, float>{10, 10}));
-    pannels[1]->addObject(new MovingButton(*this, 2, 3, -3, "namePannel-NextButton", nextButtonSheet, std::pair<float, float>{70, 10}));
+    pannels[1]->addObject(new MovingButton(*this, 0, -3, 3, "namePannel-BackButton", backButtonSheet, std::pair<float, float>{3, 10}));
+    pannels[1]->addObject(new Text("ButtonText1", "BACK", 32, WHITE, none, std::pair<float, float>{5, 6}));
+    pannels[1]->addObject(new MovingButton(*this, 2, 3, -3, "namePannel-NextButton", nextButtonSheet, std::pair<float, float>{76, 10}));
+    pannels[1]->addObject(new Text("ButtonText2", "GAME SELECTION", 32, WHITE, none, std::pair<float, float>{75, 6}));
 	this->pannels.push_back(new Scene("menuPannel", none));
-    pannels[2]->addObject(new MovingButton(*this, 1, -3, 3, "menuPannel-BackButton", backButtonSheet, std::pair<float, float>{10, 10}));
-    pannels[2]->addObject(new MovingButton(*this, 3, 3, -3, "menuPannel-NextButton", nextButtonSheet, std::pair<float, float>{70, 10}));
+    pannels[2]->addObject(new MovingButton(*this, 1, -3, 3, "menuPannel-BackButton", backButtonSheet, std::pair<float, float>{3, 10}));
+    pannels[2]->addObject(new MovingButton(*this, 3, 3, -3, "menuPannel-NextButton", nextButtonSheet, std::pair<float, float>{76, 10}));
 	this->pannels.push_back(new Scene("scorePannel", none));
-    pannels[3]->addObject(new MovingButton(*this, 0, 3, -3, "scorePannel-ScoreButton", nextButtonSheet, std::pair<float, float>{10, 10}));
+    pannels[3]->addObject(new MovingButton(*this, 0, 3, -3, "scorePannel-ScoreButton", nextButtonSheet, std::pair<float, float>{76, 10}));
 }
 
 MainMenuScene::~MainMenuScene()
@@ -443,6 +452,7 @@ Scene *MainMenuScene::getActualPannel()
 
 void MainMenuScene::goToPannel(const int &index)
 {
+    std::cout << std::endl;
     this->actualPannel = index;
 }
 
@@ -450,16 +460,10 @@ void MainMenuScene::eventButtonTriggered()
 {
     std::map<std::string, Object *> &pannelObjects = pannels[actualPannel]->getObjects();    
 
-    for (auto &e : objects) {
-        if (e.second) {
-            e.second->getAnimation().setAnimationSpeed(0.1);
-            e.second->getAnimation().setNbLoop(4);
-        }
-    }
     for (auto &e : pannelObjects) {
         if (e.second) {
             e.second->getAnimation().setAnimationSpeed(0.1);
-            e.second->getAnimation().setNbLoop(4);
+            e.second->getAnimation().setNbLoop(2);
         }
     }
 }

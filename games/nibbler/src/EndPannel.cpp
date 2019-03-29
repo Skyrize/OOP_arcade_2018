@@ -57,7 +57,7 @@ scoreRef(scoreRef)
 {
     this->text1 = new Text("text1", "YOU LOSE !", 16, BLACK, none, std::pair<float, float>{38, 20});
     this->text2 = new Text("text2", "Your end score : ", 16, BLACK, none, std::pair<float, float>{42, 31});
-    this->text3 = new Text("text3", "PRESS START TO PLAY", 16, BLACK, none, std::pair<float, float>{45, 45});
+    this->text3 = new Text("text3", "PRESS SPACE TO CONTINUE", 16, BLACK, none, std::pair<float, float>{45, 45});
 }
 
 void EndPannel::display(IDisplayModule *display)

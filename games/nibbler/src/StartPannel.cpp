@@ -62,7 +62,7 @@ StartPannel::StartPannel()
     this->text6 = new Text("text5", "- eating a fruit gives you 10 points", 16, BLACK, none, std::pair<float, float>{39, 34});
     this->text7 = new Text("text5", "- a golden fruit give you 50 points", 16, BLACK, none, std::pair<float, float>{39, 37});
     this->text8 = new Text("text6", "- Do not hit walls or Snake, good luck!", 16, BLACK, none, std::pair<float, float>{39, 40});
-    this->text9 = new Text("text6", "PRESS START TO PLAY", 16, BLACK, none, std::pair<float, float>{45, 45});
+    this->text9 = new Text("text6", "PRESS SPACE TO START", 16, BLACK, none, std::pair<float, float>{45, 45});
 }
 
 void StartPannel::display(IDisplayModule *display)

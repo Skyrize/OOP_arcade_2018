@@ -25,7 +25,7 @@ class Invader : public Object{
         virtual Scene &getParent();
 	protected:
         Scene &parent;
-        float moveTrick = 0;
+        int lockPos = 1;
 
         class ShootComponent {
             protected:

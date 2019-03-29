@@ -53,12 +53,13 @@ void Arcade::loadLibraries()
 
     if (!dir) {
         std::cout << "Cannot open lib/ directory !" << std::endl;
+        exit(84);
     } else {
         while ((file = readdir(dir)) != NULL) {
             std::string fileName(file->d_name);
             if (fileName.find(".so") != std::string::npos) {
                 libraries.push_back(new DLLoader<IDisplayModule>("lib/" + fileName));
-                std::cout << "create lib loader for " + fileName << std::endl;
+                //std::cout << "create lib loader for " + fileName << std::endl;
             }
         }
     }
@@ -72,12 +73,13 @@ void Arcade::loadGames()
 
     if (!dir) {
         std::cout << "Cannot open games/ directory !" << std::endl;
+        exit(84);
     } else {
         while ((file = readdir(dir)) != NULL) {
             std::string fileName(file->d_name);
             if (fileName.find(".so") != std::string::npos) {
                 games.push_back(new DLLoader<IGameModule>("games/" + fileName));
-                std::cout << "create game loader for " + fileName << std::endl;
+                //std::cout << "create game loader for " + fileName << std::endl;
             }
         }
     }
@@ -94,6 +96,7 @@ void Arcade::loadHighScores()
 
     if (!dir) {
         std::cerr << "Cannot open HighScores directory !" << std::endl;
+        exit(84);
     } else {
         while ((file = readdir(dir)) != NULL) {
             fileName = std::string(file->d_name);
@@ -146,21 +149,21 @@ void Arcade::prevGame()
 void Arcade::event()
 {
     this->inputs = this->display->catchInput();
-    if (inputs[L_KEY] == true ||
-    inputs[O_KEY] == true ||
-    inputs[P_KEY] == true ||
-    inputs[K_KEY] == true ||
+    if (inputs[ONE_KEY] == true ||
+    inputs[TWO_KEY] == true ||
+    inputs[THREE_KEY] == true ||
+    inputs[FOUR_KEY] == true ||
     inputs[M_KEY] == true) {
-        if (inputs[L_KEY] == true) {
+        if (inputs[THREE_KEY] == true) {
             prevGame();
-        } else if (inputs[O_KEY] == true) {
+        } else if (inputs[FOUR_KEY] == true) {
             nextGame();
-        } else if (inputs[P_KEY] == true) {
+        } else if (inputs[M_KEY] == true) {
             goToMainMenu();
         }
-        if (inputs[K_KEY] == true) {
+        if (inputs[ONE_KEY] == true) {
             prevDisplay();
-        } else if (inputs[M_KEY] == true) {
+        } else if (inputs[TWO_KEY] == true) {
             nextDisplay();
         }
     }
