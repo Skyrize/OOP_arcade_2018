@@ -457,6 +457,5 @@ int SnakeScene::getHighScore() const
 void SnakeScene::init(const std::string &playerName, const int &highScore)
 {
     highestScore = new Text("highestScore", "Highest Score: " + playerName + " - " + std::to_string(highScore), 16, BLACK, none, std::pair<float, float>{50, 2});
-    std::cout << "Highest Score: " + playerName + " - " + std::to_string(highScore) << std::endl;
     addObject(highestScore);
 }
