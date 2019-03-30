@@ -112,6 +112,7 @@ void Arcade::loadHighScores()
                     vec.push_back({line.substr(0, 3), atoi(line.substr(3).c_str())});
             }
             highScores.push_back({fileName.substr(0, fileName.find(".txt")), vec});
+            vec.clear();
             fileStream.close();
         }
     }
