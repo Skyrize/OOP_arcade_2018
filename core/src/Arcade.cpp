@@ -266,6 +266,10 @@ std::string &Arcade::getPlayerName()
     return playerName;
 }
 
+const std::vector< std::pair< std::string, std::vector< std::pair< std::string, int > > > > &Arcade::getHighScores()
+{
+    return this->highScores;
+}
 std::vector<std::string> Arcade::getGameNames()
 {
     std::vector<std::string> names;

@@ -23,6 +23,8 @@ class Invader : public Object{
         virtual float update(IDisplayModule *display, std::map<std::string, Object *> &objects);
         virtual ShootComponent &getGun();
         virtual Scene &getParent();
+
+        void replaceCenter();
 	protected:
         Scene &parent;
         int lockPos = 2;

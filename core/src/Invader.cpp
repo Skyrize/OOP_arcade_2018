@@ -85,3 +85,9 @@ Scene &Invader::getParent()
 {
     return parent;
 }
+
+void Invader::replaceCenter()
+{
+    lockPos = 2;
+    movement.setPosition(GET_X(lockPos2), GET_Y(lockPos2));
+}

@@ -22,6 +22,7 @@ SRC			=	src/main.cpp	\
 				src/TextBox.cpp	\
 				src/Star.cpp	\
 				src/ScoreBoard.cpp	\
+				src/ScoreButton.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 

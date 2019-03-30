@@ -24,7 +24,7 @@ targetPannelIndex(targetPannelIndex)
 
 void Button::eventHit(Object *other)
 {
-    if (other->getName().find("AStar") != std::string::npos || other->getName() == "mainPannel-MainButton")
+    if (other->getName().find("Bullet") == std::string::npos)
         return;
     parent.eventButtonTriggered();
     this->hit = true;

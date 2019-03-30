@@ -418,8 +418,12 @@ playerName(arcade.getPlayerName())
     pannels[2]->addObject(new Text("ButtonText3", "SELECT GAME / SELECT DISPLAY", 32, WHITE, none, std::pair<float, float>{28, 3}));
 	this->pannels.push_back(new Scene("scorePannel", none));
     pannels[3]->addObject(new MovingButton(*this, 0, 3, -3, "scorePannel-ScoreButton", nextButtonSheet, std::pair<float, float>{76, 10}));
-    pannels[3]->addObject(new Text("ButtonText1", "BACK", 32, WHITE, none, std::pair<float, float>{78, 6}));
-    //pannels[3]->addObject(new ScoreBoard(highScores, std::pair<float, float>{76, 10}));
+    pannels[3]->addObject(new Text("ButtonText1", "BACK", 32, WHITE, none, std::pair<float, float>{81, 6}));
+    pannels[3]->addObject(new Text("buttonText2", "Score", 16, BLACK, none, std::pair<float, float>{47, 19}));
+    pannels[3]->addObject(new Text("buttonText3", "Down", 16, BLACK, none, std::pair<float, float>{47, 21}));
+    pannels[3]->addObject(new Text("buttonText4", "Change", 16, BLACK, none, std::pair<float, float>{64, 19}));
+    pannels[3]->addObject(new Text("buttonText5", "Game", 16, BLACK, none, std::pair<float, float>{64, 21}));
+    pannels[3]->addObject(new ScoreBoard(*pannels[3], arcade.getHighScores(), std::pair<float, float>{2, 2}));
 }
 
 MenuModule::~MenuModule()
@@ -480,6 +484,9 @@ float MenuModule::update(IDisplayModule *display)
         addObject(new Star("AStar-" + std::to_string(nbStars)));
         nbStars++;
     }
+    for (size_t i = 0; i != 4; i++)
+        if (i != actualPannel)
+            pannels[actualPannel]->update(display);
 	return delta;
 }
 
@@ -501,6 +508,7 @@ void MenuModule::goToPannel(const int &index)
         for (int i = 0; i != 3; i++)
             ((TextBox *)this->pannels[1]->getObjects()["textBox"])->addChar('A');
     }
+    static_cast<Invader *>(objects["SpaceInvader"])->replaceCenter();
 }
 
 void MenuModule::eventButtonTriggered()

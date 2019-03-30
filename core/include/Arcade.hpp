@@ -52,6 +52,7 @@ class Arcade {
                 void prevGame();
 
                 std::string &getPlayerName();
+                const std::vector< std::pair< std::string, std::vector< std::pair< std::string, int > > > > &getHighScores();
                 std::vector<std::string> getGameNames();
                 std::vector<std::string> getLibNames();
                 size_t getActualGame();
