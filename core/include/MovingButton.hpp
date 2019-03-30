@@ -12,8 +12,8 @@
 
 class MovingButton : public Button {
 	public:
-		MovingButton(MainMenuScene &parent, const int &targetPannelIndex, const int &startOffset, const int &endOffset, const std::string &name, SpriteSheet &spriteSheet, const std::pair<float, float> &position = {0.0, 0.0});
-		MovingButton(MainMenuScene &parent, const int &targetPannelIndex, const int &startOffset, const int &endOffset, const std::string &name, Sprite &sprite, const std::pair<float, float> &position = {0.0, 0.0});
+		MovingButton(MenuModule &parent, const int &targetPannelIndex, const int &startOffset, const int &endOffset, const std::string &name, SpriteSheet &spriteSheet, const std::pair<float, float> &position = {0.0, 0.0});
+		MovingButton(MenuModule &parent, const int &targetPannelIndex, const int &startOffset, const int &endOffset, const std::string &name, Sprite &sprite, const std::pair<float, float> &position = {0.0, 0.0});
 
 		virtual ~MovingButton() = default;
         void eventReachedDestination();

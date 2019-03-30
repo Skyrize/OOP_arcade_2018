@@ -8,14 +8,14 @@
 #include "Button.hpp"
 #include <iostream>
 
-Button::Button(MainMenuScene &parent, const int &targetPannelIndex, const std::string &name, SpriteSheet &spriteSheet, const std::pair<float, float> &position)
+Button::Button(MenuModule &parent, const int &targetPannelIndex, const std::string &name, SpriteSheet &spriteSheet, const std::pair<float, float> &position)
 : Object(name, spriteSheet, position), parent(parent),
 targetPannelIndex(targetPannelIndex)
 {
     this->movement.setBlocking(true);
 }
 
-Button::Button(MainMenuScene &parent, const int &targetPannelIndex, const std::string &name, Sprite &sprite, const std::pair<float, float> &position)
+Button::Button(MenuModule &parent, const int &targetPannelIndex, const std::string &name, Sprite &sprite, const std::pair<float, float> &position)
 : Object(name, sprite, position), parent(parent),
 targetPannelIndex(targetPannelIndex)
 {

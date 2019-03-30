@@ -9,7 +9,6 @@ SRC			=	src/main.cpp	\
 				src/Arcade.cpp	\
 				src/DLLoader.cpp	\
 				src/MenuModule.cpp	\
-				src/MainMenuScene.cpp	\
 				../src/Scene.cpp	\
 				../src/Object.cpp	\
 				../src/Text.cpp	\
@@ -22,6 +21,7 @@ SRC			=	src/main.cpp	\
 				src/MovingButton.cpp	\
 				src/TextBox.cpp	\
 				src/Star.cpp	\
+				src/ScoreBoard.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 

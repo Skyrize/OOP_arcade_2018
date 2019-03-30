@@ -7,7 +7,7 @@
 
 #include "MovingButton.hpp"
 
-MovingButton::MovingButton(MainMenuScene &parent, const int &targetPannelIndex, const int &startOffset, const int &endOffset, const std::string &name, SpriteSheet &spriteSheet, const std::pair<float, float> &position)
+MovingButton::MovingButton(MenuModule &parent, const int &targetPannelIndex, const int &startOffset, const int &endOffset, const std::string &name, SpriteSheet &spriteSheet, const std::pair<float, float> &position)
 : Button(parent, targetPannelIndex, name, spriteSheet, position),
 startOffset(startOffset),
 endOffset(endOffset)
@@ -19,7 +19,7 @@ endOffset(endOffset)
     movement.setDestination(nextPos, 0.25);
 }
 
-MovingButton::MovingButton(MainMenuScene &parent, const int &targetPannelIndex, const int &startOffset, const int &endOffset, const std::string &name, Sprite &sprite, const std::pair<float, float> &position)
+MovingButton::MovingButton(MenuModule &parent, const int &targetPannelIndex, const int &startOffset, const int &endOffset, const std::string &name, Sprite &sprite, const std::pair<float, float> &position)
 : Button(parent, targetPannelIndex, name, sprite, position),
 startOffset(startOffset),
 endOffset(endOffset)

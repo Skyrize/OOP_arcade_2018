@@ -29,7 +29,7 @@ Arcade::Arcade(char *baseDisplayModule)
     } else {
         changeDisplay(hasFind);
     }
-    this->game = new MenuModule(this->playerName);
+    this->game = new MenuModule(*this);
 }
 
 Arcade::~Arcade()
@@ -240,7 +240,7 @@ IGameModule *Arcade::goToMainMenu()
         this->saveScore();
     this->game->stop();
     delete(this->game);
-    this->game = new MenuModule(playerName);
+    this->game = new MenuModule(*this);
     this->game->init(getPlayerHighScore(this->game->getName(), highScores),
         getHighScoreOfGame(this->game->getName(), highScores));
     return this->game;
@@ -253,4 +253,40 @@ void Arcade::saveScore()
     
     this->highScores[this->game->getName()][this->playerName] = this->game->getHighScore();
     fileStream << this->playerName << this->game->getHighScore() << std::endl;
+}
+
+std::string &Arcade::getPlayerName()
+{
+    return playerName;
+}
+
+std::vector<std::string> Arcade::getGameNames()
+{
+    std::vector<std::string> names;
+
+    for (auto &e : this->games) {
+        names.push_back(e->getFileName().substr(11, e->getFileName().size() - 14));
+    }
+    return names;
+}
+
+std::vector<std::string> Arcade::getLibNames()
+{
+    std::vector<std::string> names;
+
+    for (auto &e : this->libraries) {
+        names.push_back(e->getFileName().substr(11, e->getFileName().size() - 14));
+    }
+    return names;
+
+}
+
+size_t Arcade::getActualGame()
+{
+    return actualGame;
+}
+
+size_t Arcade::getActualLib()
+{
+    return actualLib;
 }
