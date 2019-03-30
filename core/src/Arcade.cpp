@@ -93,7 +93,9 @@ void Arcade::loadHighScores()
     std::ifstream fileStream;
     std::string line;
     std::string fileName;
+    std::vector<std::pair<std::string, int>> vec;
 
+    highScores.clear();
     if (!dir) {
         std::cerr << "Cannot open HighScores directory !" << std::endl;
         exit(84);
@@ -107,8 +109,9 @@ void Arcade::loadHighScores()
                 if (line == "")
                     break;
                 else
-                    highScores[fileName.substr(0, fileName.find(".txt"))][line.substr(0, 3)] = atoi(line.substr(3).c_str());
+                    vec.push_back({line.substr(0, 3), atoi(line.substr(3).c_str())});
             }
+            highScores.push_back({fileName.substr(0, fileName.find(".txt")), vec});
             fileStream.close();
         }
     }
@@ -168,6 +171,9 @@ void Arcade::event()
         }
     }
     if (inputs[ESCAPE_KEY] == true) {
+        if (this->game->getName() != "MainMenu" && this->game->getHighScore())
+            this->saveScore();
+        this->game->stop();
         this->display->stop();
     }
 }
@@ -186,33 +192,31 @@ IDisplayModule *Arcade::changeDisplay(const size_t &index)
     return this->display;
 }
 
-static int getHighScoreOfGame(std::string gameName, std::map<std::string, std::map<std::string, int> > highScores)
+static std::pair<std::string, int> getHighScoreOfGame(std::string gameName,
+    std::vector< std::pair< std::string, std::vector< std::pair< std::string, int > > > > highScores)
 {
-    int highScore = 0;
+    std::pair<std::string, int> highScore = {"", 0};
+    std::vector<std::pair<std::string, int>> gameHighScores;
 
-    for (auto &i: highScores[gameName]) {
-        if (i.second > highScore)
-            highScore = i.second;
+    for (auto &i: highScores) {
+        if (i.first == gameName) {
+            gameHighScores = i.second;
+            break;
+        }
+    }
+    for (auto &i: gameHighScores) {
+        if (i.second > highScore.second) {
+            highScore.first = i.first;
+            highScore.second = i.second;
+        }
     }
     return highScore;
 }
 
-static const std::string getPlayerHighScore(std::string gameName, std::map<std::string, std::map<std::string, int> > highScores)
-{
-    int highScore = 0;
-    std::string name;
-
-    for (auto &i: highScores[gameName]) {
-        if (i.second > highScore) {
-            name = i.first;
-            highScore = i.second;
-        }
-    }
-    return name;
-}
-
 IGameModule *Arcade::changeGame(const size_t &index)
 {
+    std::pair<std::string, int> pair;
+
     this->display->restartTime();
     if (this->games.size() == 0) {
         return goToMainMenu();
@@ -225,14 +229,16 @@ IGameModule *Arcade::changeGame(const size_t &index)
     }
     this->games[index]->init();
     this->game = this->games[index]->getInstance();
-    this->game->init(getPlayerHighScore(this->game->getName(), highScores),
-        getHighScoreOfGame(this->game->getName(), highScores));
+    pair = getHighScoreOfGame(this->game->getName(), highScores);
+    this->game->init(pair.first, pair.second);
     this->actualGame = index;
     return this->game;
 }
 
 IGameModule *Arcade::goToMainMenu()
 {
+    std::pair<std::string, int> pair;
+
     if (this->game->getName() == "MainMenu")
         return this->game;
     this->display->restartTime();
@@ -241,8 +247,8 @@ IGameModule *Arcade::goToMainMenu()
     this->game->stop();
     delete(this->game);
     this->game = new MenuModule(playerName);
-    this->game->init(getPlayerHighScore(this->game->getName(), highScores),
-        getHighScoreOfGame(this->game->getName(), highScores));
+    pair = getHighScoreOfGame(this->game->getName(), highScores);
+    this->game->init(pair.first, pair.second);
     return this->game;
 }
 
@@ -251,6 +257,6 @@ void Arcade::saveScore()
     std::ofstream fileStream("highscores/" + this->game->getName() + ".txt",
         std::ios_base::app | std::ios_base::out);
     
-    this->highScores[this->game->getName()][this->playerName] = this->game->getHighScore();
     fileStream << this->playerName << this->game->getHighScore() << std::endl;
+    loadHighScores();
 }
