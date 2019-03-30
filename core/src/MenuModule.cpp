@@ -484,9 +484,10 @@ float MenuModule::update(IDisplayModule *display)
         addObject(new Star("AStar-" + std::to_string(nbStars)));
         nbStars++;
     }
-    for (size_t i = 0; i != 4; i++)
+    for (size_t i = 0; i != 4; i++) {
         if (i != actualPannel)
             pannels[actualPannel]->update(display);
+    }
 	return delta;
 }
 
