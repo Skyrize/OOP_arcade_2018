@@ -54,27 +54,21 @@ static Sprite none {{}};
 StartPannel::StartPannel()
 : Object("StartMenu", startMenuSprite, std::pair<float, float>{30, 13})
 {
-    this->text1 = new Text("text1", "WELCOME TO MY NIBBLER", 16, BLACK, none, std::pair<float, float>{35, 17});
-    this->text2 = new Text("text2", "- use arrows to move the snake", 16, BLACK, none, std::pair<float, float>{39, 22});
-    this->text3 = new Text("text3", "- use 'A' and 'E' to change map", 16, BLACK, none, std::pair<float, float>{39, 25});
-    this->text4 = new Text("text4", "- press spacebar to boost you up", 16, BLACK, none, std::pair<float, float>{39, 28});
-    this->text5 = new Text("text5", "- press 's' to toggle speed mode", 16, BLACK, none, std::pair<float, float>{39, 31});
-    this->text6 = new Text("text5", "- eating a fruit gives you 10 points", 16, BLACK, none, std::pair<float, float>{39, 34});
-    this->text7 = new Text("text5", "- a golden fruit give you 50 points", 16, BLACK, none, std::pair<float, float>{39, 37});
-    this->text8 = new Text("text6", "- Do not hit walls or Snake, good luck!", 16, BLACK, none, std::pair<float, float>{39, 40});
-    this->text9 = new Text("text6", "PRESS SPACE TO START", 16, BLACK, none, std::pair<float, float>{45, 45});
+    texts.push_back(new Text("text1", "WELCOME TO MY NIBBLER", 16, BLACK, none, std::pair<float, float>{35, 17}));
+    texts.push_back(new Text("text2", "- use arrows to move the snake", 16, BLACK, none, std::pair<float, float>{39, 22}));
+    texts.push_back(new Text("text3", "- use 'A' and 'E' to change map", 16, BLACK, none, std::pair<float, float>{39, 25}));
+    texts.push_back(new Text("text4", "- press SPACEBAR to boost you up", 16, BLACK, none, std::pair<float, float>{39, 28}));
+    texts.push_back(new Text("text5", "- press 'S' to toggle speed mode", 16, BLACK, none, std::pair<float, float>{39, 31}));
+    texts.push_back(new Text("text5", "- eating a fruit gives you 10 points", 16, BLACK, none, std::pair<float, float>{39, 34}));
+    texts.push_back(new Text("text5", "- a golden fruit give you 50 points", 16, BLACK, none, std::pair<float, float>{39, 37}));
+    texts.push_back(new Text("text6", "- Do not hit walls or Snake, good luck!", 16, BLACK, none, std::pair<float, float>{39, 40}));
+    texts.push_back(new Text("text6", "- Use 'R' to reset", 16, BLACK, none, std::pair<float, float>{39, 43}));
+    texts.push_back(new Text("text6", "PRESS SPACE TO START", 16, BLACK, none, std::pair<float, float>{43, 47}));
 }
 
 void StartPannel::display(IDisplayModule *display)
 {
     Object::display(display);
-    this->text1->display(display);
-    this->text2->display(display);
-    this->text3->display(display);
-    this->text4->display(display);
-    this->text5->display(display);
-    this->text6->display(display);
-    this->text7->display(display);
-    this->text8->display(display);
-    this->text9->display(display);
+    for (auto &e : texts)
+        e->display(display);
 }

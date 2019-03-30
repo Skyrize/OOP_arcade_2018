@@ -315,8 +315,9 @@ SnakeScene::~SnakeScene()
 
 void SnakeScene::manageEvents(std::map<Input, bool> &inputs)
 {
-    if (objects["Snake"])
+    if (objects["Snake"]) {
         objects["Snake"]->manageEvents(inputs);
+    }
     if (inputs[SPACE_KEY] == true) {
         if (objects["StartMenu"]) {
             removeObject("StartMenu");
@@ -452,6 +453,13 @@ void SnakeScene::launchSnake()
 int SnakeScene::getHighScore() const
 {
     return this->highScore;
+}
+
+void SnakeScene::restartGame()
+{
+    removeObject("Snake");
+    removeObject("SnakeFruit");
+    launchSnake();
 }
 
 void SnakeScene::init(const std::string &playerName, const int &highScore)

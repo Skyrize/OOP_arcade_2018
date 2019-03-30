@@ -39,6 +39,7 @@ class Snake : public Object {
 		void setSprite(int index);
 		void setSpeedMode(bool state);
 		//bool fullyInBlock();
+		void clearBody();
 
 	protected:
 		std::pair<float, float> oldPos;

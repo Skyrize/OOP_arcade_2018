@@ -321,5 +321,14 @@ void Snake::manageEvents(std::map<Input, bool> &inputs)
             boostTimer = BOOST_TIMER;
             setAnimation(0.2, -1);
         }
+        if (inputs[R_KEY] == true)
+            clearBody();
     }
+}
+
+void Snake::clearBody()
+{
+    for (auto &e : this->body)
+        parent.removeObject(e->getName());
+    parent.restartGame();
 }

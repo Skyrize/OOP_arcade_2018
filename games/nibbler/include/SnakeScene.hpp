@@ -31,6 +31,7 @@ class SnakeScene : public Scene {
 		void nextMap();
 		void unloadMap();
 		void loadMap();
+		void restartGame();
 
 		int getHighScore() const;
 
