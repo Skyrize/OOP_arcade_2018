@@ -83,8 +83,8 @@ void PacmanScene::initGame()
     this->addObject(new Teleporter("Teleporter2", blackSquare, {-1, 27}, {63, 27})); 
     initPacGums();
     initGhosts();
-    this->addObject(new Text("Score", "Score: " + std::to_string(_score), 40, WHITE, none, {22 * 3, 3 * 3}));
     this->addObject("Gate", normalGate, {10 * 3, 8 * 3})->getMovement().setBlocking(true);
+    this->addObject(new ScorePannel({66, 3}, this));
     _gateSecondsRemaining = 5;
 }
 
@@ -106,6 +106,12 @@ void PacmanScene::manageEvents(std::map<Input, bool> &inputs)
             _score = 0;
             initGame();
         }
+    }
+    if (inputs[R_KEY]) {
+        _endMenu = false;
+        _needToOpen = true;
+        _score = 0;
+        initGame();
     }
 }
 
@@ -216,6 +222,7 @@ float PacmanScene::update(IDisplayModule *displays)
         ((Scene *)this->getObject("EndMenu"))->update(displays);
         return delta;
     }
+    ((Scene *)this->getObject("ScorePannel"))->update(displays);
     if (_restartSecondsRemaining > 0) {
         _restartSecondsRemaining -= delta;
         return delta;
@@ -228,13 +235,12 @@ float PacmanScene::update(IDisplayModule *displays)
     }
     updateRestart(delta);
     updateGate(delta);
-    ((Text *)getObject("Score"))->setText("Score: " + std::to_string(_score));
     return delta;
 }
 
 void PacmanScene::addScore(int score)
-{ 
+{
     _score += score;
-    if (_score > _highScore)
-        _highScore =_score;
+    if (_score > _actualHighScore)
+        _actualHighScore =_score;
 }

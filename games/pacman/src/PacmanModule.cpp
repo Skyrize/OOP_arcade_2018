@@ -9,8 +9,6 @@
 #include "PacmanModule.hpp"
 #include "Pacman.hpp"
 
-Sprite none;
-
 PacmanModule::PacmanModule()
 {
 }
@@ -21,8 +19,7 @@ PacmanModule::~PacmanModule()
 
 void PacmanModule::init(const std::string &playerName, const int &highScore)
 {
-    (void)playerName;
-    (void)highScore;
+    this->scene.setHighScore({playerName, highScore});
 }
 
 void PacmanModule::stop()
@@ -36,7 +33,7 @@ const std::string &PacmanModule::getName() const
 
 int PacmanModule::getHighScore() const
 {
-    return this->scene.getHighScore();
+    return this->scene.getActualHighScore();
 }
 
 void PacmanModule::run(IDisplayModule *library, std::map<Input, bool> &inputs)

@@ -25,7 +25,7 @@ class Arcade {
                 IGameModule *game = nullptr;
 
                 std::map<Input, bool> inputs;
-                std::map<std::string, std::map<std::string, int> > highScores;
+                std::vector< std::pair< std::string, std::vector< std::pair< std::string, int > > > > highScores;
 
                 std::string playerName = "AAA";
 

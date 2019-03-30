@@ -13,6 +13,7 @@
 #include "Pacman.hpp"
 #include "Ghost.hpp"
 #include "Text.hpp"
+#include "ScorePannel.hpp"
 
 class PacmanScene : public Scene {
 	public:
@@ -27,7 +28,10 @@ class PacmanScene : public Scene {
 		void setNeedToOpen(bool need) { _needToOpen = need; };
 		void initGame();
 		bool anyPacGumsLeft();
-		int getHighScore() const { return _highScore; };
+
+		int getActualHighScore() const { return _actualHighScore; };
+		void setHighScore(std::pair<std::string, int> highScore) { _highScore = highScore; };
+		std::pair<std::string, int> getHighScore() const { return _highScore; };
 
 	private:
 		void initPacGums(void);
@@ -43,7 +47,8 @@ class PacmanScene : public Scene {
 		bool _startMenu = 1;
 		bool _endMenu = 0;
 		float _restartSecondsRemaining = 0;
-		int _highScore = 0;
+		int _actualHighScore = 0;
+		std::pair<std::string, int> _highScore;
 };
 
 #endif /* !PACMANSCENE_HPP_ */
