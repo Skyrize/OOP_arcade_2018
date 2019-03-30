@@ -12,7 +12,7 @@ int main(int ac, char **av)
 {
     if (ac != 2) {
         std::cout << "Usage : Please enter a library path" << std::endl;
-        return (0);
+        return 84;
     }
     try {
         Arcade arcade(av[1]);
