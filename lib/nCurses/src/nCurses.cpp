@@ -21,7 +21,7 @@ void DisplayModule::init()
     keypad(_win, TRUE);
     _isOpen = true;
     start_color();
-    init_pair(0, COLOR_BLACK, COLOR_WHITE);
+    init_pair(8, COLOR_BLACK, COLOR_WHITE);
     init_pair(1, COLOR_RED, COLOR_BLACK);
     init_pair(2, COLOR_GREEN, COLOR_BLACK);
     init_pair(3, COLOR_YELLOW, COLOR_BLACK);
@@ -92,8 +92,11 @@ void DisplayModule::drawText(int x, int y, const std::string &name, int fontSize
             drawShape(x, y, tmp);
             x += 4;
         }
-    } else
+    } else {
+        wattron(_win, COLOR_PAIR(color == 0 ? 8 : color) | A_NORMAL);
         mvwprintw(_win, y, x * 2, name.c_str());
+        wattroff(_win, COLOR_PAIR(color == 0 ? 8 : color) | A_NORMAL);
+    }
 }
 
 void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec)
@@ -110,9 +113,9 @@ void DisplayModule::drawShape(int x, int y, std::vector<std::vector<Color> > vec
                 x += 2;
                 continue;
             }
-            wattron(_win, COLOR_PAIR(j) | A_STANDOUT);
+            wattron(_win, COLOR_PAIR(j == 0 ? 8 : j) | A_STANDOUT);
             mvwprintw(_win, y, x, "  ");
-            wattroff(_win, COLOR_PAIR(j) | A_STANDOUT);
+            wattroff(_win, COLOR_PAIR(j == 0 ? 8 : j) | A_STANDOUT);
             x += 2;
         }
         y += 1;
