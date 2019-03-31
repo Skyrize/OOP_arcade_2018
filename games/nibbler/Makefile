@@ -15,11 +15,11 @@ SRC			=	src/main.cpp	\
 				src/SnakeModule.cpp	\
 				src/StartPannel.cpp	\
 				src/EndPannel.cpp	\
-				../../src/Object.cpp	\
-				../../src/Text.cpp	\
-				../../src/AnimationComponent.cpp	\
-				../../src/MovementComponent.cpp	\
-				../../src/Scene.cpp	\
+				src/Object.cpp	\
+				src/Text.cpp	\
+				src/AnimationComponent.cpp	\
+				src/MovementComponent.cpp	\
+				src/Scene.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 

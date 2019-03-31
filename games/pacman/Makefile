@@ -16,11 +16,11 @@ SRC			=	src/main.cpp						\
 				src/PacmanScene.cpp					\
 				src/EndMenu.cpp						\
 				src/ScorePannel.cpp					\
-				../../src/Object.cpp				\
-				../../src/AnimationComponent.cpp	\
-				../../src/MovementComponent.cpp		\
-				../../src/Scene.cpp					\
-				../../src/Text.cpp					\
+				src/Object.cpp						\
+				src/AnimationComponent.cpp			\
+				src/MovementComponent.cpp			\
+				src/Scene.cpp						\
+				src/Text.cpp						\
 				
 
 OBJ			=	$(SRC:.cpp=.o)
