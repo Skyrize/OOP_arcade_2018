@@ -96,8 +96,8 @@ void Scene::removeAllObjects()
 
 void Scene::removeObjects()
 {
-	for (auto &e : toRemove)
-		delete(e);
+	for (size_t i = 0; i != toRemove.size(); i++)
+		delete(toRemove[i]);
 	this->toRemove.clear();
 }
 
