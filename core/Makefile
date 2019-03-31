@@ -9,11 +9,11 @@ SRC			=	src/main.cpp	\
 				src/Arcade.cpp	\
 				src/DLLoader.cpp	\
 				src/MenuModule.cpp	\
-				../src/Scene.cpp	\
-				../src/Object.cpp	\
-				../src/Text.cpp	\
-				../src/MovementComponent.cpp	\
-				../src/AnimationComponent.cpp	\
+				src/Scene.cpp	\
+				src/Object.cpp	\
+				src/Text.cpp	\
+				src/MovementComponent.cpp	\
+				src/AnimationComponent.cpp	\
 				src/Invader.cpp	\
 				src/ShootComponent.cpp	\
 				src/Projectile.cpp	\
