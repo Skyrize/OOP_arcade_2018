@@ -2,10 +2,10 @@
 ** EPITECH PROJECT, 2019
 ** OOP_arcade_2018
 ** File description:
-** GameSelector
+** LibSelector
 */
 
-#include "GameSelector.hpp"
+#include "LibSelector.hpp"
 
 static SpriteSheet selectorSheet {
     {
@@ -86,37 +86,38 @@ static SpriteSheet selectorSheet {
 };
 
 const static std::pair<float, float> textPositions[5] = {
-    {32, 18},
-    {31, 25},
-    {31, 28},
-    {31, 31},
-    {31, 34},
+    {57, 18},
+    {56, 25},
+    {56, 28},
+    {56, 31},
+    {56, 34},
 };
 
 static Sprite none;
 
-GameSelector::GameSelector(Arcade &arcade)
-: Object("gameSelector", selectorSheet, std::pair<float, float>{27, 15}),
+LibSelector::LibSelector(MenuModule &parent, Arcade &arcade)
+: Object("alibSelector", selectorSheet, std::pair<float, float>{52, 15}),
 parent(parent),
 arcade(arcade)
 {
-    std::vector<std::string> names = arcade.getGameNames();
+    std::vector<std::string> names = arcade.getLibNames();
+
     this->movement.setBlocking(true);
     for (size_t i = 0; i != names.size(); i++) {
         if (i < 5)
-            games.push_back(new Text("text", names[i], 32, BLACK, none, textPositions[i]));
+            libs.push_back(new Text("text", names[i], 32, BLACK, none, textPositions[i]));
         else
-            games.push_back(new Text("text", names[i], 32, BLACK, none));
+            libs.push_back(new Text("text", names[i], 32, BLACK, none));
     }
-    while (names[arcade.getActualGame()] != games[0]->getText())
+    while (names[arcade.getActualLib()] != libs[0]->getText())
         updatePositions();
 }
 
-GameSelector::~GameSelector()
+LibSelector::~LibSelector()
 {
 }
 
-void GameSelector::eventHit(Object *other)
+void LibSelector::eventHit(Object *other)
 {
     if (other && other->getName().find("Bullet") == std::string::npos)
         return;
@@ -124,28 +125,29 @@ void GameSelector::eventHit(Object *other)
     this->hit = true;
 }
 
-void GameSelector::buttonEvent()
+void LibSelector::buttonEvent()
 {
-    arcade.getActualGame()++;
-    if (arcade.getGameNames().size() == arcade.getActualGame())
-        arcade.getActualGame() = 0;
+    arcade.getActualLib()++;
+    if (arcade.getLibNames().size() == arcade.getActualLib())
+        arcade.getActualLib() = 0;
     updatePositions();
+    parent.changeLib();
 }
 
-void GameSelector::display(IDisplayModule *display)
+void LibSelector::display(IDisplayModule *display)
 {
     Object::display(display);
 
-    for (size_t i = 0; i != games.size() && i != 5; i++) {
-        games[i]->display(display);
+    for (size_t i = 0; i != libs.size() && i != 5; i++) {
+        libs[i]->display(display);
     }
 }
 
-void GameSelector::updatePositions()
+void LibSelector::updatePositions()
 {
-    std::string tmp = games[0]->getText();
+    std::string tmp = libs[0]->getText();
 
-    for (size_t i = 0; i != games.size() - 1; i++)
-        games[i]->setText(games[i + 1]->getText());
-    games[games.size() - 1]->setText(tmp);
+    for (size_t i = 0; i != libs.size() - 1; i++)
+        libs[i]->setText(libs[i + 1]->getText());
+    libs[libs.size() - 1]->setText(tmp);
 }

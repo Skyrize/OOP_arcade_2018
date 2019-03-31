@@ -25,6 +25,8 @@ class MenuModule : public IGameModule, public Scene {
 		int nbStars = 0;
 		size_t actualPannel = 0;
 		std::vector<Scene *> pannels;
+		bool exiting = false;
+		bool changer = false;
 
 	public:
 		MenuModule(Arcade &arcade);
@@ -48,6 +50,8 @@ class MenuModule : public IGameModule, public Scene {
 		virtual void display(IDisplayModule *display);
 		virtual float update(IDisplayModule *display);
 		void eventButtonTriggered();
+		void exitModule();
+		void changeLib();
 };
 
 #endif /* !MENUMODULE_HPP_ */

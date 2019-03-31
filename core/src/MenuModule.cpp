@@ -14,6 +14,9 @@
 #include "Text.hpp"
 #include "TextBox.hpp"
 #include "ScoreBoard.hpp"
+#include "StartButton.hpp"
+#include "GameSelector.hpp"
+#include "LibSelector.hpp"
 #include <iostream>
 
 #define NB_STARS 10
@@ -415,7 +418,11 @@ playerName(arcade.getPlayerName())
     pannels[2]->addObject(new MovingButton(*this, 1, -3, 3, "menuPannel-BackButton", backButtonSheet, std::pair<float, float>{3, 10}));
     pannels[2]->addObject(new Text("ButtonText1", "BACK", 32, WHITE, none, std::pair<float, float>{5, 6}));
     pannels[2]->addObject(new MovingButton(*this, 3, 3, -3, "menuPannel-NextButton", nextButtonSheet, std::pair<float, float>{76, 10}));
+    pannels[2]->addObject(new StartButton(*this, arcade));
+    pannels[2]->addObject(new GameSelector(arcade));
+    pannels[2]->addObject(new LibSelector(*this, arcade));
     pannels[2]->addObject(new Text("ButtonText3", "SELECT GAME / SELECT DISPLAY", 32, WHITE, none, std::pair<float, float>{28, 3}));
+    pannels[2]->addObject(new Text("ButtonText2", "SCORES", 32, WHITE, none, std::pair<float, float>{81, 6}));
 	this->pannels.push_back(new Scene("scorePannel", none));
     pannels[3]->addObject(new MovingButton(*this, 0, 3, -3, "scorePannel-ScoreButton", nextButtonSheet, std::pair<float, float>{76, 10}));
     pannels[3]->addObject(new Text("ButtonText1", "BACK", 32, WHITE, none, std::pair<float, float>{81, 6}));
@@ -456,6 +463,12 @@ void MenuModule::run(IDisplayModule *library, std::map<Input, bool> &inputs)
     manageEvents(inputs);
     update(library);
     display(library);
+    if (changer == true) {
+        arcade.changeDisplay(arcade.getActualLib());
+        changer = false;
+    }
+    if (exiting == true)
+        arcade.changeGame(arcade.getActualGame());
 }
 
 void MenuModule::restart() const
@@ -522,4 +535,14 @@ void MenuModule::eventButtonTriggered()
             e.second->getAnimation().setNbLoop(2);
         }
     }
+}
+
+void MenuModule::exitModule()
+{
+    this->exiting = true;
+}
+
+void MenuModule::changeLib()
+{
+    this->changer = true;
 }

@@ -18,7 +18,10 @@ class Text : public Object {
         virtual void display(IDisplayModule *display);
         virtual void setText(const std::string &newText);
 
+        const std::string &getText();
+
 	protected:
+        std::pair<float, float> textPos;
         std::string text;
         int fontSize;
         Color color;

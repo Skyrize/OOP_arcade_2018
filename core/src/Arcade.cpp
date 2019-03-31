@@ -276,7 +276,7 @@ std::vector<std::string> Arcade::getGameNames()
     std::vector<std::string> names;
 
     for (auto &e : this->games) {
-        names.push_back(e->getFileName().substr(11, e->getFileName().size() - 14));
+        names.push_back(e->getFileName().substr(17, e->getFileName().size() - 20));
     }
     return names;
 }
@@ -286,18 +286,18 @@ std::vector<std::string> Arcade::getLibNames()
     std::vector<std::string> names;
 
     for (auto &e : this->libraries) {
-        names.push_back(e->getFileName().substr(11, e->getFileName().size() - 14));
+        names.push_back(e->getFileName().substr(15, e->getFileName().size() - 18));
     }
     return names;
 
 }
 
-size_t Arcade::getActualGame()
+size_t &Arcade::getActualGame()
 {
     return actualGame;
 }
 
-size_t Arcade::getActualLib()
+size_t &Arcade::getActualLib()
 {
     return actualLib;
 }

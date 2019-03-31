@@ -23,6 +23,9 @@ SRC			=	src/main.cpp	\
 				src/Star.cpp	\
 				src/ScoreBoard.cpp	\
 				src/ScoreButton.cpp	\
+				src/StartButton.cpp	\
+				src/GameSelector.cpp	\
+				src/LibSelector.cpp	\
 
 OBJ			=	$(SRC:.cpp=.o)
 

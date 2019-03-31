@@ -2,30 +2,31 @@
 ** EPITECH PROJECT, 2019
 ** OOP_arcade_2018
 ** File description:
-** GameSelector
+** LibSelector
 */
 
-#ifndef GAMESELECTOR_HPP_
-    #define GAMESELECTOR_HPP_
+#ifndef LIBSELECTOR_HPP_
+    #define LIBSELECTOR_HPP_
 
 #include "Text.hpp"
 #include "Arcade.hpp"
 
-class GameSelector : public Object {
+class LibSelector : public Object {
 	public:
-		GameSelector(Arcade &arcade);
-		~GameSelector();
+		LibSelector(MenuModule &parent, Arcade &arcade);
+		~LibSelector();
 
 		void eventHit(Object *other);
 		virtual void buttonEvent();
 		virtual void display(IDisplayModule *display);
+
 		void updatePositions();
 	protected:
 		MenuModule &parent;
         Arcade &arcade;
-        std::vector<Text *> games;
+        std::vector<Text *> libs;
 		bool hit = false;
 	private:
 };
 
-#endif /* !GAMESELECTOR_HPP_ */
+#endif /* !LIBSELECTOR_HPP_ */
