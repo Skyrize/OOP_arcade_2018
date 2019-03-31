@@ -184,6 +184,7 @@ playerName(playerName)
 
 TextBox::~TextBox()
 {
+    delete(this->text);
 }
 
 void TextBox::manageEvents(std::map<Input, bool> &inputs)

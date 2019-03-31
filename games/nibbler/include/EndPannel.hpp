@@ -14,7 +14,7 @@
 class EndPannel : public Object {
 	public:
 		EndPannel(const int &scoreRef);
-		~EndPannel() = default;
+		~EndPannel();
 
 		virtual void display(IDisplayModule *display);
 	protected:

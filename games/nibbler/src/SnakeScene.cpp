@@ -311,6 +311,13 @@ SnakeScene::SnakeScene()
 
 SnakeScene::~SnakeScene()
 {
+    for (size_t i = 1; i != 3; i++)
+        if (i != actualMap) {
+            for (size_t j = 0; j != maps[i].size(); j++)
+                delete(maps[i][j]);
+                maps[i].clear();
+        }
+    maps.clear();
 }
 
 void SnakeScene::manageEvents(std::map<Input, bool> &inputs)

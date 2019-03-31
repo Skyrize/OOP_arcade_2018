@@ -135,6 +135,19 @@ parent(parent)
 
 ScoreBoard::~ScoreBoard()
 {
+    for (size_t i = 0; i != highscores.size(); i++)
+        delete(highscores[i]);
+    highscores.clear();
+    for (size_t i = 0; i != games.size(); i++)
+        delete(games[i]);
+    games.clear();
+    for (size_t i = 0; i != scores.size(); i++) {
+        for (size_t j = 0; j != scores[i].size(); j++) {
+            delete(scores[i][j]);
+        }
+        scores[i].clear();
+    }
+    scores.clear();
 }
 
 void ScoreBoard::nextGame()
@@ -148,8 +161,6 @@ void ScoreBoard::nextGame()
 void ScoreBoard::display(IDisplayModule *display)
 {
     Object::display(display);
-    gameButton->display(display);
-    scoreButton->display(display);
     games[actualGame]->display(display);
     for (size_t i = actualScore; i != scores[actualGame].size() && i != actualScore + 10; i++)
         scores[actualGame][i]->display(display);

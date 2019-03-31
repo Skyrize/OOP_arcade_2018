@@ -14,7 +14,7 @@
 class StartPannel : public Object {
 	public:
 		StartPannel();
-		~StartPannel() = default;
+		~StartPannel();
 
 		virtual void display(IDisplayModule *display);
 

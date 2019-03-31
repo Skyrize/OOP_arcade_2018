@@ -113,6 +113,9 @@ arcade(arcade)
 
 GameSelector::~GameSelector()
 {
+    for (size_t i = 0; i != this->games.size(); i++)
+        delete(this->games[i]);
+    this->games.clear();
 }
 
 void GameSelector::eventHit(Object *other)

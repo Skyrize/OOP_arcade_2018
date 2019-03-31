@@ -115,6 +115,9 @@ arcade(arcade)
 
 LibSelector::~LibSelector()
 {
+    for (size_t i = 0; i != libs.size(); i++)
+        delete(libs[i]);
+    libs.clear();
 }
 
 void LibSelector::eventHit(Object *other)

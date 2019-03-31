@@ -60,6 +60,13 @@ scoreRef(scoreRef)
     this->text3 = new Text("text3", "PRESS SPACE TO CONTINUE", 16, BLACK, none, std::pair<float, float>{45, 45});
 }
 
+EndPannel::~EndPannel()
+{
+    delete(text1);
+    delete(text2);
+    delete(text3);
+}
+
 void EndPannel::display(IDisplayModule *display)
 {
     Object::display(display);

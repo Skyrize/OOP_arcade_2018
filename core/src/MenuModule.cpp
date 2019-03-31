@@ -435,7 +435,9 @@ playerName(arcade.getPlayerName())
 
 MenuModule::~MenuModule()
 {
-
+    for (size_t i = 0; i != pannels.size(); i++)
+        delete(pannels[i]);
+    pannels.clear();
 }
 
 void MenuModule::init(const std::string &playerName, const int &highScore)

@@ -34,6 +34,13 @@ Arcade::Arcade(char *baseDisplayModule)
 
 Arcade::~Arcade()
 {
+    for (size_t i = 0; i != libraries.size(); i++)
+        delete(libraries[i]);
+    libraries.clear();
+    for (size_t i = 0; i != games.size(); i++)
+        delete(games[i]);
+    games.clear();
+    highScores.clear();
 }
 
 void Arcade::launch()

@@ -66,6 +66,13 @@ StartPannel::StartPannel()
     texts.push_back(new Text("text6", "PRESS SPACE TO START", 16, BLACK, none, std::pair<float, float>{43, 47}));
 }
 
+StartPannel::~StartPannel()
+{
+    for (size_t i = 0; i != texts.size(); i++)
+        delete(texts[i]);
+    texts.clear();
+}
+
 void StartPannel::display(IDisplayModule *display)
 {
     Object::display(display);
