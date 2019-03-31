@@ -136,8 +136,11 @@ void LibSelector::buttonEvent()
 
 void LibSelector::display(IDisplayModule *display)
 {
-    Object::display(display);
+    std::vector<std::string> names = arcade.getLibNames();
 
+    Object::display(display);
+    while (names[arcade.getActualLib()] != libs[0]->getText())
+        updatePositions();
     for (size_t i = 0; i != libs.size() && i != 5; i++) {
         libs[i]->display(display);
     }

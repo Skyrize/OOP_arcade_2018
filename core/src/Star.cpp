@@ -28,8 +28,9 @@ Star::Star(const std::string &name)
 void Star::respawn()
 {
     float randomPos = rand() % 100;
+    float randY = rand() % 10;
 
-    this->movement.setPosition(randomPos, -1);
+    this->movement.setPosition(randomPos, -randY);
     this->movement.setDestination(std::pair<float, float>{randomPos, 58}, 0.5);
 }
 
