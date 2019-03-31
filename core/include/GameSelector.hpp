@@ -21,7 +21,6 @@ class GameSelector : public Object {
 		virtual void display(IDisplayModule *display);
 		void updatePositions();
 	protected:
-		MenuModule &parent;
         Arcade &arcade;
         std::vector<Text *> games;
 		bool hit = false;

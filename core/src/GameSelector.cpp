@@ -97,7 +97,6 @@ static Sprite none;
 
 GameSelector::GameSelector(Arcade &arcade)
 : Object("gameSelector", selectorSheet, std::pair<float, float>{27, 15}),
-parent(parent),
 arcade(arcade)
 {
     std::vector<std::string> names = arcade.getGameNames();
