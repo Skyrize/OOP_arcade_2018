@@ -33,9 +33,11 @@ typedef std::vector<std::vector<Color>> Sprite;
 typedef std::vector<Sprite> SpriteSheet;
 
 class Object {
-	public:
-		class MovementComponent; /*predefine*/
+	protected:
 		class AnimationComponent;
+		class MovementComponent;
+
+	public:
 		Object(const std::string &name, SpriteSheet &spriteSheet, const std::pair<float, float> &position = {0.0, 0.0});
 		Object(const std::string &name, Sprite &sprite, const std::pair<float, float> &position = {0.0, 0.0});
 		virtual ~Object();

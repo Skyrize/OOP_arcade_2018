@@ -13,7 +13,8 @@
 #include "Scene.hpp"
 
 class Invader : public Object{
-    class ShootComponent;
+    protected:
+        class ShootComponent;
 
 	public:
 		Invader(Scene &parent, const std::pair<float, float> &pos);

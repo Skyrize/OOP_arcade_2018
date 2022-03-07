@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-CXXFLAGS	=	--std=c++11 -shared -W -Wall -Wextra -Werror -I../../include -I./include  -g3 -fPIC -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-system
+CXXFLAGS	=	--std=c++11 -shared -W -Wall -Wextra -I../../include -I./include  -g3 -fPIC -lsfml-window -lsfml-graphics -lsfml-audio -lsfml-system
 CC 			= 	g++
 
 SRC			=	src/main.cpp	\

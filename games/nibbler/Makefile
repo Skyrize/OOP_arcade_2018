@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-CXXFLAGS	=	--std=c++11 -shared -W -Wall -Wextra -Werror -I../../include -I./include -fPIC -g3
+CXXFLAGS	=	--std=c++11 -shared -W -Wall -Wextra -I../../include -I./include -fPIC -g3
 
 CC 			= 	g++
 

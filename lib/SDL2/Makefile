@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-CXXFLAGS	=	--std=c++11 -shared -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_mixer -W -Wall -Wextra -Werror -I../../include -I./include  -g3 -fPIC 
+CXXFLAGS	=	--std=c++11 -shared -lSDL2main -lSDL2 -lSDL2_ttf -lSDL2_mixer -W -Wall -Wextra -I../../include -I./include  -g3 -fPIC 
 CC 			= 	g++
 
 SRC			=	src/main.cpp	\
