@@ -89,9 +89,7 @@ void Scene::removeObject(const std::string &name)
 
 void Scene::removeAllObjects()
 {
-	for (auto &i: this->objects) {
-		removeObject(i.first);
-	}
+	this->objects.clear();
 }
 
 void Scene::removeObjects()
